@@ -1,0 +1,62 @@
+@CHARSET "UTF-8";
+
+* {
+	font-family: Calibri, "Trebuchet MS", sans-serif;
+	font-size: 12px;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	margin: 5;
+	padding: 0;
+	font-family: geneva, arial, helvetica, sans-serif;
+	font-size: 80%;
+	width: 100%
+}
+
+p {
+	margin-top: 5px;
+}
+
+a {
+	color: #0066B3;
+	background: inherit;
+	text-decoration: none;
+}
+
+img.left {
+	background: #FAFAFA;
+	border: 1px solid #E4E4E4;
+	padding: 8px;
+	float: left;
+	margin: 0px 10px 0 0;
+}
+
+.logo-impressonhos {
+	padding-top: 15px;
+	padding-left: 15px;
+}
+
+#footer {
+	clear: both;
+	background: white url(../resources/img/footer.jpg) repeat-x;
+	height: 46px;
+	margin-left: 8px;
+	margin-right: 8px;
+	font-size: 75%;
+	color: #666;
+}
+
+#footer .cside {
+	text-align: center;
+}
+
+#footer p {
+	padding: 5px;
+}
+
+.dotted-line {
+	background: url(../resources/img/dotted-line.jpg) repeat-x left bottom;
+	margin-bottom: 9px;
+}
