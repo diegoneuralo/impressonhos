@@ -25,6 +25,13 @@ a {
 	text-decoration: none;
 }
 
+h2 {
+	font-size: 18px;
+	font: Calibri, Arial, Arial, Sans-Serif;
+	padding: 0;
+	margin: 0;
+}
+
 img.left {
 	background: #FAFAFA;
 	border: 1px solid #E4E4E4;
@@ -59,4 +66,84 @@ img.left {
 .dotted-line {
 	background: url(../resources/img/dotted-line.jpg) repeat-x left bottom;
 	margin-bottom: 9px;
+	color: white;
+}
+
+#wrap {
+	margin: 0 auto;
+	width: 95%
+}
+
+#top {
+	margin: 0 auto;
+	padding: 0;
+	color: #666;
+	background: white url(../resources/img/top.jpg) repeat-x top;
+	height: 81px;
+}
+
+#top h1 {
+	padding: 10px 0 0 25px;
+	color: #FFF;
+	font-size: 160%;
+	background: transparent;
+}
+
+#top h2 {
+	padding: 0px 0 0 25px;
+	color: #aaa;
+	font-size: 80%;
+	background: transparent;
+}
+
+#top .padding {
+	padding-top: 5px;
+}
+
+#top .right-top {
+	background: transparent url(../resources/img/topr.jpg) no-repeat right;
+	float: right;
+	height: 81px;
+	width: 398px;
+}
+
+#top .right-top p {
+	text-align: right;
+	color: white;
+	padding-right: 25px;
+}
+
+#top .left-top {
+	background: transparent url(../resources/img/topl.jpg) no-repeat left;
+	height: 81px;
+	padding-left: 15px;
+}
+
+.textoMenu {
+	margin: 2px;
+	padding: 3px;
+	color: #484848;
+	background-color: transparent;
+	text-align: left;
+	font-family: Calibri, Helvetica, sans-serif, Arial;
+	font-weight: bold;
+	font-size: 13px;
+}
+
+#wrapmenu {
+	margin: 0 auto;
+	width: 95%
+}
+
+.login {
+	position: relative;
+	top: 30px;
+	left: 50%;
+	width: 460px;
+	height: 250px;
+	margin-left: -230px;
+}
+
+.login h2.title {
+	height: 30px;
 }

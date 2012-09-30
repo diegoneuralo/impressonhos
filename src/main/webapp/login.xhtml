@@ -1,47 +1,52 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <ui:composition 
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:h="http://java.sun.com/jsf/html">
-
-	<h:panelGroup id="panelPrincipal">
-		<h:form prependId="false" rendered="#{not identity.loggedIn}">
-			<p:growl id="growl" life="5000" showSummary="true" showDetail="false" />
-			<div class="login">
-				
-				<div class="dotted-line">
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/template.xhtml">
+	<ui:define name="body">
+		<h:panelGroup id="panelPrincipal">
+			<h:form prependId="false" rendered="#{not identity.loggedIn}">
+				<p:growl id="growl" life="5000" showSummary="true" showDetail="false" />
+				<div class="login">
 					<h2 class="title"><h:outputText value="#{msg['area.restrita']}" /></h2>
-				</div>
-				<h:panelGrid cellspacing="5" cellpadding="7" border="0" columns="2">
-					<h:panelGroup>
-						<img src="./css/images/logon.jpg" class="left"/>				
-					</h:panelGroup>
+					<div class="dotted-line">.</div>
+					<h:panelGrid cellspacing="5" cellpadding="7" border="0" columns="2">
+						<h:panelGroup>
+							<h:graphicImage name="logon.jpg" library="img" styleClass="left" />
+						</h:panelGroup>
 	
-					<h:panelGroup>
-						<h:panelGrid cellspacing="3" cellpadding="3" border="0" columns="3">
-							<h:outputLabel value="#{msg['user']}"/>
-							<h:outputLabel value=":"/>
-							<p:inputText value="#{credentials.username}" required="true" requiredMessage="#{msg['required.username']}">						
-								<f:validateLength minimum="4" maximum="12"/>
-							</p:inputText>
+						<h:panelGroup>
+							<h:panelGrid cellspacing="3" cellpadding="3" border="0" columns="3">
+								<h:outputLabel value="#{msg['user']}"/>
+								<h:outputLabel value=":"/>
+								<p:inputText 
+									value="#{credentials.username}" 
+									size="20"
+									required="true" 
+									requiredMessage="#{msg['required.username']}">						
+									<f:validateLength minimum="4" maximum="12"/>
+								</p:inputText>
 
-							<h:outputLabel value="#{msg['password']}"/>
-							<h:outputLabel value=":"/>
-							<p:password value="#{credentials.password}" redisplay="true" level="0" size="18" required="true" requiredMessage="#{msg['required.password']}" />
-						</h:panelGrid>
+								<h:outputLabel value="#{msg['password']}"/>
+								<h:outputLabel value=":"/>
+								<p:password 
+									value="#{credentials.password}" 
+									redisplay="true" 
+									level="0" 
+									size="20"
+									required="true" 
+									requiredMessage="#{msg['required.password']}" />
+							</h:panelGrid>
 							
-						<div class="linha">
-							<h1 class="title"></h1>
-						</div>
-						<p:commandButton ajax="false" value="#{msg['acessar']}" action="#{authenticationMB.authenticate()}" style="margin-right:20px;" />								
-					</h:panelGroup>
-				</h:panelGrid>
-				<div class="dotted-line">&nbsp;</div>
-			</div>
-		</h:form>
-	</h:panelGroup>
+							<div class="dotted-line">.</div>
+							<p:commandButton ajax="false" value="#{msg['acessar']}" action="#{authenticationMB.authenticate()}" style="margin-right:20px;" />								
+						</h:panelGroup>
+					</h:panelGrid>
+					<div class="dotted-line">.</div>
+				</div>
+			</h:form>
+		</h:panelGroup>
+	</ui:define>
 </ui:composition>

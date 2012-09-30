@@ -1,10 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html	xmlns:h="http://java.sun.com/jsf/html"
-		xmlns:ui="http://java.sun.com/jsf/facelets"
-		xmlns:p="http://primefaces.org/ui"
-		xmlns:f="http://java.sun.com/jsf/core">
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<f:loadBundle basename="br.com.impressonhos.resources.messages" var="msg"/>
 	<h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
 		<meta http-equiv="content-language" content="pt-BR"/>
@@ -13,30 +15,29 @@
 		<meta http-equiv="expires" content="-1"/>
 		<meta name="keywords" content=""/>
 		<meta name="description" content=""/>
-		<f:loadBundle basename="br.com.impressonhos.resources.messages" var="msg"/>
     	<title>#{msg['sistema.impressonhos']}</title>
 		<h:outputStylesheet name="default.css" library="css" />
 		<h:outputScript library="js" name="locale_PT.js" />
 	</h:head>
         
-	<h:body>					
+	<h:body>
 		<p:ajaxStatus onstart="statusDialog.show();" onerror="statusDialog.hide();" onsuccess="statusDialog.hide();"/>  
 		<p:dialog closable="false" resizable="false" modal="true" widgetVar="statusDialog" header="#{msg['mensagem']}" hideEffect="clip" draggable="true">   
 			<h:panelGrid cellspacing="3" cellpadding="3" border="0" columns="2">
-				<h:graphicImage value="ajax-loader.gif" library="img" styleClass="imagem" />
+				<h:graphicImage name="ajax-loader.gif" library="img" styleClass="imagem" />
 				<h:outputText value="#{msg['carregando']}"/>
 			</h:panelGrid>
 		</p:dialog> 
-
+		
 		<div id="wrap">		
 			<div id="top">
-				<div class="rights">
+				<div class="right-top">
 					<!-- Espaço reservado para exibição dos dados do usuário -->
 					<p><h:outputText value="#{msg['sistema.impressonhos']}" /></p>
 					<p><i><!-- Nome do usário vai aqui --></i></p>
 				</div>
-				<div class="lefts">
-					<h:graphicImage value="logo.png" library="img" styleClass="logo-impressonhos" />
+				<div class="left-top">
+					<h:graphicImage name="logo.png" library="img" styleClass="logo-impressonhos" />
 				</div>
 			</div>
 
@@ -46,7 +47,7 @@
 		
 			<div id="main">
 				<ui:insert name="body">
-					<ui:include src="/login.xhtml" />
+
 				</ui:insert>
 			</div>		
 
@@ -54,7 +55,7 @@
 			<div id="footer">
 				<div class="cside">
 					<p> Copyright © 2010 - Todos os direitos reservados</p>
-					<p><a href="http://www.impressonhos.com.br" target="_blank"></a>Impressonhos</p>
+					<p><a href="http://www.impressonhos.com.br" target="_blank">Impressonhos Ltda.</a></p>
 				</div>
 			</div>
 		</div>		
