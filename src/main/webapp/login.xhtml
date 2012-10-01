@@ -33,7 +33,6 @@
 								<h:outputLabel value=":"/>
 								<p:password 
 									value="#{credentials.password}" 
-									redisplay="true" 
 									level="0" 
 									size="20"
 									required="true" 
@@ -41,7 +40,11 @@
 							</h:panelGrid>
 							
 							<div class="dotted-line">.</div>
-							<p:commandButton ajax="false" value="#{msg['acessar']}" action="#{authenticationMB.authenticate()}" style="margin-right:20px;" />								
+							<p:commandButton 
+								ajax="false" 
+								value="#{msg['acessar']}" 
+								action="#{authentication.authenticate}" 
+								style="margin-right:20px;" />								
 						</h:panelGroup>
 					</h:panelGrid>
 					<div class="dotted-line">.</div>

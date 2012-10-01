@@ -5,7 +5,7 @@ public final class Const {
 	/**
 	 * representa o nome do schema do banco de dados
 	 */
-	public static final String SCHEMA = "scrum";		
+	public static final String SCHEMA = "impressonhos";		
 	
 	/**
 	 * página principal do sistema 

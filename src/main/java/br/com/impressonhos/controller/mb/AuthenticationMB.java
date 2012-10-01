@@ -23,7 +23,7 @@ import org.picketlink.idm.impl.api.model.SimpleUser;
 import br.com.impressonhos.entity.User;
 import br.com.impressonhos.service.UserService;
 
-@Named
+@Named("authentication")
 @SessionScoped
 public class AuthenticationMB extends BaseAuthenticator implements Authenticator, Serializable 
 {	
@@ -49,7 +49,7 @@ public class AuthenticationMB extends BaseAuthenticator implements Authenticator
 			return;
 		}
 		setStatus(AuthenticationStatus.FAILURE);
-		addLoginErrorMessage("Use not found");
+		addLoginErrorMessage("User not found");
 		redirectToLoginIfNotLoggedIn();
 	}
 

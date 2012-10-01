@@ -1,0 +1,35 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form id="formMenu" prependId="false">
+		<p:menubar>
+			<p:submenu label="#{msg['clientes']}" icon="ui-icon-person">
+					<p:menuitem
+						immediate="true"
+						value="#{msg['novo.prospect']}" 
+						url="#" />
+					<p:menuitem
+						immediate="true"
+						value="#{msg['listar.prospects']}"
+						url="#" />
+					<p:separator/>
+					<p:menuitem
+						immediate="true"
+						value="#{msg['novo.cliente']}"
+						url="#" />
+					<p:menuitem
+						immediate="true"
+						value="#{msg['buscar.cliente']}"
+						url="#" />	
+					<p:menuitem
+						immediate="true"
+						value="#{msg['listar.clientes']}"
+						url="#" />
+			</p:submenu>
+		</p:menubar>
+	</h:form>
+</ui:composition>
