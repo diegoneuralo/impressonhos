@@ -12,50 +12,59 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import br.com.impressonhos.enums.Const;
 
 @Entity
-@Table(name = "ENDERECO", schema = Const.SCHEMA)
+@Table(
+		name = "ENDERECO", 
+		schema = Const.SCHEMA, 
+		uniqueConstraints={
+				@UniqueConstraint(columnNames = { "CEP", "PESSOA_ID", "TIPO_ENDERECO" })
+			})
 @NamedQueries({ 
 	@NamedQuery(
-			name = "Endereco.getByPessoa", 
+			name = "Endereco.getByPessoaAndTipoEndereco", 
 			query = "from Endereco e where e.pessoa.id = ?"),
 	})
 public class Endereco implements Serializable {
 
-	private static final long serialVersionUID = -2829484707862037622L;
+	private static final long serialVersionUID = -2501830203794768999L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ENDERECO_ID")
 	private long id;
 	
-	@Column(name = "LOGRADOURO", length = 60)
+	@Column(name = "LOGRADOURO", length = 60, nullable=false)
 	private String logradouro;
 	
 	/**
 	 * O tipo do logradouro refere-se ao tipo padrão dos correios, como por exemplo: 
 	 * rua, avenida, travessa, etc..
 	 */
-	@Column(name = "TIPO_LOGRADOURO", length = 2)
+	@Column(name = "TIPO_LOGRADOURO", length = 2, nullable=false)
 	private int tipoLogradouro;
 	
-	@Column(name = "NUMERO", length = 10)
+	@Column(name = "NUMERO", length = 10, nullable=false)
 	private int numero;
 	
-	@Column(name = "BAIRRO", length = 60)
+	@Column(name = "CEP", length = 9, nullable=false)
+	private String cep;
+	
+	@Column(name = "BAIRRO", length = 60, nullable=false)
 	private String bairro;
 	
-	@Column(name = "CIDADE", length = 60)
+	@Column(name = "CIDADE", length = 60, nullable=false)
 	private String cidade;
 	
 	@ManyToOne
-	@JoinColumn(name = "UF_ID", referencedColumnName = "UF_ID")	
+	@JoinColumn(name = "UF_ID", referencedColumnName = "UF_ID", nullable=false)	
 	private Uf uf;
 	
 	@ManyToOne
-	@JoinColumn(name = "PESSOAID_ID", referencedColumnName = "PESSOAID_ID")	
+	@JoinColumn(name = "PESSOAID_ID", referencedColumnName = "PESSOAID_ID", nullable=false)	
 	private Pessoa pessoa;
 	
 	/**
@@ -67,7 +76,7 @@ public class Endereco implements Serializable {
 	 * 	<li>Comercial</li>
 	 * </ul>
 	 */
-	@Column(name = "TIPO_ENDERECO", length = 1)
+	@Column(name = "TIPO_ENDERECO", length = 1, nullable=false)
 	private String tipoEndereco;
 
 	// ------------------------------------------------------------------------------- //
@@ -102,6 +111,14 @@ public class Endereco implements Serializable {
 
 	public void setNumero(int numero) {
 		this.numero = numero;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 
 	public String getBairro() {
@@ -148,10 +165,8 @@ public class Endereco implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result
-				+ ((logradouro == null) ? 0 : logradouro.hashCode());
-		result = prime * result + numero;
 		result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
 		result = prime * result
 				+ ((tipoEndereco == null) ? 0 : tipoEndereco.hashCode());
@@ -167,14 +182,12 @@ public class Endereco implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Endereco other = (Endereco) obj;
-		if (id != other.id)
-			return false;
-		if (logradouro == null) {
-			if (other.logradouro != null)
+		if (cep == null) {
+			if (other.cep != null)
 				return false;
-		} else if (!logradouro.equals(other.logradouro))
+		} else if (!cep.equals(other.cep))
 			return false;
-		if (numero != other.numero)
+		if (id != other.id)
 			return false;
 		if (pessoa == null) {
 			if (other.pessoa != null)
@@ -192,10 +205,10 @@ public class Endereco implements Serializable {
 	@Override
 	public String toString() {
 		return "Endereco [id=" + id + ", logradouro=" + logradouro
-				+ ", numero=" + numero + ", bairro=" + bairro + ", cidade="
-				+ cidade + ", uf=" + uf + ", pessoa=(id:" +pessoa.getId() 
-				+ ") - " + pessoa.getNome() + ", tipoEndereco=" 
-				+ tipoEndereco + "]";
+				+ ", numero=" + numero + ", cep=" + cep + "bairro=" 
+				+ bairro + ", cidade=" + cidade + ", uf=" + uf 
+				+ ", pessoa=(id:" +pessoa.getId() + ") - " 
+				+ pessoa.getNome() + ", tipoEndereco=" + tipoEndereco + "]";
 	}
 	
 	

@@ -18,16 +18,26 @@ import javax.persistence.UniqueConstraint;
 
 import br.com.impressonhos.enums.Const;
 
+/**
+ * @TODO Perguntar para o rafael como faço para "pegar" o endereço e o telefone de uma pessoa através
+ * da própria entidade Pessoa - acho que é um @OneToMany - mas não tenho certeza de como funciona isso.
+ */
+
 @Entity
-@Table(name = "PESSOA", schema = Const.SCHEMA, uniqueConstraints = { @UniqueConstraint(columnNames = { "NOME", "RG" }) })
+@Table(
+		name = "PESSOA", 
+		schema = Const.SCHEMA, 
+		uniqueConstraints = { 
+				@UniqueConstraint(columnNames = { "NOME", "RG" }) 
+			})
 @NamedQueries({ 
 	@NamedQuery(
 			name = "Pessoa.getByNameAndRg", 
 			query = "from Pessoa p where trim(upper(p.nome)) like upper('%?%') and trim(p.rg) = ?"),
 	})
 public class Pessoa implements Serializable {
-	
-	private static final long serialVersionUID = -5431036179408590375L;
+
+	private static final long serialVersionUID = 6520982559086979944L;
 
 	public Pessoa() {
 	}
@@ -40,9 +50,15 @@ public class Pessoa implements Serializable {
 	@Column(name = "NOME", nullable = false, length = 60)
 	private String nome;
 
-	@Column(name = "RG", nullable = true)
+	@Column(name = "RG", nullable = false)
 	private String rg;
 
+	/**
+	 * Tipo da Pessoa: Física ou Jurídica?
+	 */
+	@Column(name = "TIPO", nullable = true)
+	private String tipo;
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DATA_CADASTRO", nullable = false)
 	private Date dataCadastro;
@@ -51,10 +67,6 @@ public class Pessoa implements Serializable {
 	
 	public Long getId() {
 		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getNome() {
@@ -71,6 +83,14 @@ public class Pessoa implements Serializable {
 
 	public void setRg(String rg) {
 		this.rg = rg;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	public Date getDataCadastro() {

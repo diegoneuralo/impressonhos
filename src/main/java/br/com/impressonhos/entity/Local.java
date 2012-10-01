@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -14,51 +16,49 @@ import javax.persistence.Table;
 import br.com.impressonhos.enums.Const;
 
 @Entity
-@Table(name = "UF", schema = Const.SCHEMA)
+@Table(name = "LOCAL", schema = Const.SCHEMA)
 @NamedQueries({ 
 	@NamedQuery(
-			name = "Uf.getBySigla", 
-			query = "from Estado e where trim(upper(e.UF)) = upper(?)"),
+			name = "Local.getByPessoa", 
+			query = "from Local l where l.pessoa.id = ?"),
 	})
-public class Uf implements Serializable {
+public class Local implements Serializable {
 
-	private static final long serialVersionUID = -4049989234630618528L;
+	private static final long serialVersionUID = -3715285845202749905L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "UF_ID")
+	@Column(name = "LOCAL_ID")
 	private long id;
 	
-	@Column(name = "SIGLA", length = 2, nullable=false)
-	private String sigla;
+	@ManyToOne
+	@JoinColumn(name = "PESSOA_ID", referencedColumnName = "PESSOA_ID", nullable=false)	
+	private Pessoa pessoa;
 	
-	@Column(name = "ESTADO", length = 30, nullable=false)
-	private int estado;
-
+	@ManyToOne
+	@JoinColumn(name = "CONTATO_ID", referencedColumnName = "CONTATO_ID", nullable=false)	
+	private Pessoa contato;
+	
 	// ------------------------------------------------------------------------------- //
 	
 	public Long getId() {
 		return id;
 	}
 
-	public String getSigla() {
-		return sigla;
+	public Pessoa getPessoa() {
+		return pessoa;
 	}
 
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
-	public int getEstado() {
-		return estado;
+	public Pessoa getContato() {
+		return contato;
 	}
 
-	public void setEstado(int estado) {
-		this.estado = estado;
-	}
-
-	public void setId(long id) {
-		this.id = id;
+	public void setContato(Pessoa contato) {
+		this.contato = contato;
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class Uf implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((sigla == null) ? 0 : sigla.hashCode());
+		result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
 		return result;
 	}
 
@@ -78,20 +78,20 @@ public class Uf implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Uf other = (Uf) obj;
+		Local other = (Local) obj;
 		if (id != other.id)
 			return false;
-		if (sigla == null) {
-			if (other.sigla != null)
+		if (pessoa == null) {
+			if (other.pessoa != null)
 				return false;
-		} else if (!sigla.equals(other.sigla))
+		} else if (!pessoa.equals(other.pessoa))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Estado [id=" + id + ", sigla=" + sigla + "]";
+		return "Local [id=" + id + ", pessoa=" + pessoa.getNome() 
+				+ ", contato=" + contato.getNome() + "]";
 	}
-	
 }

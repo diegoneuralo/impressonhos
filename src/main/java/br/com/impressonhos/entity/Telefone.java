@@ -53,17 +53,13 @@ public class Telefone implements Serializable {
 	private int tipo;
 	
 	@ManyToOne
-	@JoinColumn(name = "PESSOAID_ID", referencedColumnName = "PESSOAID_ID")	
+	@JoinColumn(name = "PESSOAID_ID", referencedColumnName = "PESSOAID_ID", nullable=false)	
 	private Pessoa pessoa;
 
 	// ------------------------------------------------------------------------------- //
 	
 	public Long getId() {
 		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getCodArea() {
@@ -104,10 +100,6 @@ public class Telefone implements Serializable {
 
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	@Override
