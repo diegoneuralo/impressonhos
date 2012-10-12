@@ -15,9 +15,6 @@
 		<jta-data-source>java:jboss/datasources/postgresDS</jta-data-source> 
 
 		<class>br.com.impressonhos.entity.User</class>
-		<class>br.com.impressonhos.entity.Project</class>
-		<class>br.com.impressonhos.entity.Sprint</class>
-		<class>br.com.impressonhos.entity.Task</class>
 
 		<properties>
 			<!-- never comment -->

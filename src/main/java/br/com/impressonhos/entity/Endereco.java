@@ -30,7 +30,7 @@ import br.com.impressonhos.enums.Const;
 	})
 public class Endereco implements Serializable {
 
-	private static final long serialVersionUID = -2501830203794768999L;
+	private static final long serialVersionUID = -4515865467470156329L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -85,10 +85,6 @@ public class Endereco implements Serializable {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
 	public String getLogradouro() {
 		return logradouro;
 	}

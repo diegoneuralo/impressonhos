@@ -21,6 +21,9 @@ import br.com.impressonhos.enums.Const;
 	@NamedQuery(
 			name = "Contratante.getByPessoa", 
 			query = "from Contratante c where c.pessoa.id = ?"),
+	@NamedQuery(
+			name = "Contratante.getByCpfCnjp", 
+			query = "from Contratante c where trim(cpfCnpj) = ?"),
 	})
 public class Contratante implements Serializable {
 

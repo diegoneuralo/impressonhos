@@ -28,12 +28,13 @@ import br.com.impressonhos.enums.Const;
 		name = "PESSOA", 
 		schema = Const.SCHEMA, 
 		uniqueConstraints = { 
-				@UniqueConstraint(columnNames = { "NOME", "RG" }) 
-			})
+				@UniqueConstraint(columnNames = { "NOME", "RG" }),
+				@UniqueConstraint(columnNames = { "EMAIL" })
+		})
 @NamedQueries({ 
 	@NamedQuery(
 			name = "Pessoa.getByNameAndRg", 
-			query = "from Pessoa p where trim(upper(p.nome)) like upper('%?%') and trim(p.rg) = ?"),
+			query = "from Pessoa p where trim(upper(p.nome)) like upper('%?%') and trim(p.rg) = ?")
 	})
 public class Pessoa implements Serializable {
 
@@ -52,6 +53,9 @@ public class Pessoa implements Serializable {
 
 	@Column(name = "RG", nullable = false)
 	private String rg;
+	
+	@Column(name = "EMAIL", nullable = true)
+	private String email;
 
 	/**
 	 * Tipo da Pessoa: Física ou Jurídica?
@@ -91,6 +95,14 @@ public class Pessoa implements Serializable {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Date getDataCadastro() {
