@@ -8,21 +8,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import br.com.impressonhos.enums.Const;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "UF", schema = Const.SCHEMA)
 @NamedQueries({ 
-	@NamedQuery(
-			name = "Uf.getBySigla", 
-			query = "from Estado e where trim(upper(e.UF)) = upper(?)"),
+	// Estado nao esta mapeado
+//	@NamedQuery(
+//			name = "Uf.getBySigla", 
+//			query = "from Estado e where trim(upper(e.UF)) = upper(?)"),
 	})
 public class Uf implements Serializable {
-
-	private static final long serialVersionUID = 5557128728600039073L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +35,9 @@ public class Uf implements Serializable {
 	private int estado;
 
 	// ------------------------------------------------------------------------------- //
+	
+	public Uf()
+	{}
 	
 	public Long getId() {
 		return id;
@@ -62,7 +64,6 @@ public class Uf implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((sigla == null) ? 0 : sigla.hashCode());
 		return result;
 	}
 
@@ -76,11 +77,6 @@ public class Uf implements Serializable {
 			return false;
 		Uf other = (Uf) obj;
 		if (id != other.id)
-			return false;
-		if (sigla == null) {
-			if (other.sigla != null)
-				return false;
-		} else if (!sigla.equals(other.sigla))
 			return false;
 		return true;
 	}

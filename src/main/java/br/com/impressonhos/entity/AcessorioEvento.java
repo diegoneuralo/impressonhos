@@ -29,7 +29,7 @@ public class AcessorioEvento implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ITEM_EVENTO_ID")
+	@Column(name = "ACESSORIO_EVENTO_ID")
 	private long id;
 	
 	@Column(name = "ITEM_EVENTO_ID", nullable=false)
@@ -92,9 +92,6 @@ public class AcessorioEvento implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((acessorio == null) ? 0 : acessorio.hashCode());
-		result = prime * result + ((evento == null) ? 0 : evento.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
@@ -108,16 +105,6 @@ public class AcessorioEvento implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		AcessorioEvento other = (AcessorioEvento) obj;
-		if (acessorio == null) {
-			if (other.acessorio != null)
-				return false;
-		} else if (!acessorio.equals(other.acessorio))
-			return false;
-		if (evento == null) {
-			if (other.evento != null)
-				return false;
-		} else if (!evento.equals(other.evento))
-			return false;
 		if (id != other.id)
 			return false;
 		return true;

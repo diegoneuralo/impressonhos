@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import br.com.impressonhos.enums.Const;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "CONTRATANTE", schema = Const.SCHEMA)
 @NamedQueries({ 
@@ -26,8 +27,6 @@ import br.com.impressonhos.enums.Const;
 			query = "from Contratante c where trim(cpfCnpj) = ?"),
 	})
 public class Contratante implements Serializable {
-
-	private static final long serialVersionUID = 7589623023631406700L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +40,7 @@ public class Contratante implements Serializable {
 	private String comoChegou;
 	
 	@ManyToOne
-	@JoinColumn(name = "PESSOAID_ID", referencedColumnName = "PESSOAID_ID", nullable=false)	
+	@JoinColumn(name = "PESSOA_ID", referencedColumnName = "PESSOA_ID", nullable=false)	
 	private Pessoa pessoa;
 
 	// ------------------------------------------------------------------------------- //
@@ -78,9 +77,7 @@ public class Contratante implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cpfCnpj == null) ? 0 : cpfCnpj.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
 		return result;
 	}
 
@@ -93,26 +90,14 @@ public class Contratante implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Contratante other = (Contratante) obj;
-		if (cpfCnpj == null) {
-			if (other.cpfCnpj != null)
-				return false;
-		} else if (!cpfCnpj.equals(other.cpfCnpj))
-			return false;
 		if (id != other.id)
-			return false;
-		if (pessoa == null) {
-			if (other.pessoa != null)
-				return false;
-		} else if (!pessoa.equals(other.pessoa))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Contratante [id=" + id + ", cpfCnpj=" + cpfCnpj 
-				+ ", pessoa=(id: "+pessoa.getId() + ") " + pessoa.getNome() + "]";
+		return "Contratante [id=" + id + "]";
 	}
-
 	
 }

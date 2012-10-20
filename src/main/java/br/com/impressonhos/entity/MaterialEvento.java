@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import br.com.impressonhos.enums.Const;
 import br.com.impressonhos.enums.StatusMaterialEvento;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "MATERIAL_EVENTO", schema = Const.SCHEMA)
 @NamedQueries({ 
@@ -23,11 +24,9 @@ import br.com.impressonhos.enums.StatusMaterialEvento;
 	})
 public class MaterialEvento implements Serializable {
 
-	private static final long serialVersionUID = 4295449154153838896L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ITEM_EVENTO_ID")
+	@Column(name = "MATERIAL_EVENTO_ID")
 	private long id;
 	
 	@Column(name = "ITEM_EVENTO_ID", nullable=false)
@@ -43,6 +42,9 @@ public class MaterialEvento implements Serializable {
 	private Evento evento;
 
 	// ------------------------------------------------------------------------------- //
+	
+	public MaterialEvento() 
+	{}
 	
 	public Long getId() {
 		return id;
@@ -84,10 +86,7 @@ public class MaterialEvento implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((evento == null) ? 0 : evento.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result
-				+ ((material == null) ? 0 : material.hashCode());
 		return result;
 	}
 
@@ -100,17 +99,7 @@ public class MaterialEvento implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		MaterialEvento other = (MaterialEvento) obj;
-		if (evento == null) {
-			if (other.evento != null)
-				return false;
-		} else if (!evento.equals(other.evento))
-			return false;
 		if (id != other.id)
-			return false;
-		if (material == null) {
-			if (other.material != null)
-				return false;
-		} else if (!material.equals(other.material))
 			return false;
 		return true;
 	}

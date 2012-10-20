@@ -15,10 +15,26 @@
 		<jta-data-source>java:jboss/datasources/postgresDS</jta-data-source> 
 
 		<class>br.com.impressonhos.entity.User</class>
+		<class>br.com.impressonhos.entity.Sprint</class>
+		<class>br.com.impressonhos.entity.Project</class>
+		<class>br.com.impressonhos.entity.Task</class>
+		<class>br.com.impressonhos.entity.Address</class>
+		<class>br.com.impressonhos.entity.Uf</class>
+		<class>br.com.impressonhos.entity.Telefone</class>
+		<class>br.com.impressonhos.entity.Pessoa</class>
+		<class>br.com.impressonhos.entity.MaterialEvento</class>
+		<class>br.com.impressonhos.entity.Local</class>
+		<class>br.com.impressonhos.entity.ItemEvento</class>
+		<class>br.com.impressonhos.entity.Evento</class>
+		<class>br.com.impressonhos.entity.Endereco</class>
+		<class>br.com.impressonhos.entity.Contrato</class>
+		<class>br.com.impressonhos.entity.Contratante</class>
+		<class>br.com.impressonhos.entity.ClienteEvento</class>
+		<class>br.com.impressonhos.entity.AcessorioEvento</class>
 
 		<properties>
 			<!-- never comment -->
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.show_sql" value="true" />
 			
@@ -27,10 +43,7 @@
 			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/postgres" /> 
 			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
 			<property name="hibernate.connection.username" value="postgres" />
-			<property name="hibernate.connection.password" value="root" />
-			<!-- <property name="hibernate.transaction.flush_before_completion" value="true" />
-			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider" />
-			<property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform" /> -->   
+			<property name="hibernate.connection.password" value="root" />			
 		</properties>
 
 	</persistence-unit>
