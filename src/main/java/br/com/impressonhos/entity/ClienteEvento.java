@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,10 +37,12 @@ public class ClienteEvento implements Serializable {
 	@JoinColumn(name = "PESSOA_ID", referencedColumnName = "PESSOA_ID", nullable=false)
 	private Pessoa pessoa;
 	
+	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "TIPO", length = 2, nullable=false)
 	private TipoClienteEvento tipo;
 	
-	@Column(name = "EVENTO_ID", nullable=false)
+	@ManyToOne
+	@JoinColumn(name = "EVENTO_ID", referencedColumnName = "EVENTO_ID", nullable=false)	
 	private Evento evento;
 	
 	public ClienteEvento()

@@ -32,7 +32,7 @@ public class Uf implements Serializable {
 	private String sigla;
 	
 	@Column(name = "ESTADO", length = 30, nullable=false)
-	private int estado;
+	private String estado;
 
 	// ------------------------------------------------------------------------------- //
 	
@@ -51,11 +51,11 @@ public class Uf implements Serializable {
 		this.sigla = sigla;
 	}
 
-	public int getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(int estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 

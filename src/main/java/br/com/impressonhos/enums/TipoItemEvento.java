@@ -11,14 +11,16 @@ package br.com.impressonhos.enums;
  *
  */
 public enum TipoItemEvento {
-	ACABAMENTO(0),
-	MATERIAL(1),
-	ACESSORIOS(2);
+	ACABAMENTO(0, "ACABAMENTO"),
+	MATERIAL(1, "MATERIAL"),
+	ACESSORIOS(2, "ACESSÓRIOS");
 	
 	private Integer tipo;
+	private String descricao;
 	
-	TipoItemEvento(Integer tipo){
+	TipoItemEvento(Integer tipo, String descricao){
 		this.tipo = tipo;
+		this.descricao = descricao;
 	}
 
 	public Integer getTipo() {
@@ -27,5 +29,31 @@ public enum TipoItemEvento {
 
 	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
+	public int toInt() {
+		return this.tipo;
+	}
+	
+	public static TipoItemEvento valueOf(int i) {
+		switch (i) {
+			case 0: return ACABAMENTO;
+			case 1: return MATERIAL;
+			case 2: return ACESSORIOS;
+			default: return null;
+		}
+	}
+
+	@Override
+	public String toString() {
+		return descricao;
 	}
 }

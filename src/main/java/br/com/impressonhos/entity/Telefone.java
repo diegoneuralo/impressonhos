@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +16,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import br.com.impressonhos.enums.Const;
+import br.com.impressonhos.enums.TipoTelefone;
 
 @SuppressWarnings("serial")
 @Entity
@@ -39,17 +42,9 @@ public class Telefone implements Serializable {
 	@Column(name = "RAMAL", length = 5, nullable=true)
 	private int numero;
 	
-	/**
-	 * Define o tipo do telefone, respeitando uma das opções abaixo
-	 * <ul>
-	 * 	<li>Residêncial</li>
-	 * 	<li>Celular</li>	
-	 * 	<li>Comercial</li>
-	 * 	<li>Recados</li>
-	 * </ul> 
-	 */
+	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "TIPO", length = 1, nullable=false)
-	private int tipo;
+	private TipoTelefone tipo;
 	
 	@ManyToOne
 	@JoinColumn(name = "PESSOA_ID", referencedColumnName = "PESSOA_ID", nullable=false)	
@@ -88,11 +83,11 @@ public class Telefone implements Serializable {
 		this.numero = numero;
 	}
 
-	public int getTipo() {
+	public TipoTelefone getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(int tipo) {
+	public void setTipo(TipoTelefone tipo) {
 		this.tipo = tipo;
 	}
 
@@ -103,7 +98,7 @@ public class Telefone implements Serializable {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

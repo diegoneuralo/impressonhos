@@ -1,24 +1,26 @@
 package br.com.impressonhos.enums;
 
 /**
- * Enum responsável pelos possíveis tipos de evento. Ex.:
+ * Enum responsável pelos possíveis tipos do endereço. Opções.:
  * <ul>
- * 	<li>CASAMENTO</li>
- * 	<li>CORPORATIVO</li>
- * 	<li>FESTA_15_ANOS</li>
+ * 	<li>RECEPTIVO</li>
+ * 	<li>CERIMONIAL</li>
+ * 	<li>RESIDENCIAL</li>
+ * 	<li>COMERCIAL</li>
  * </ul>
  * @author riccardof
  *
  */
-public enum TipoEvento {
-	CASAMENTO(0, "CASAMENTO"),
-	CORPORATIVO(1, "CORPORATIVO"),
-	FESTA_15_ANOS(2, "FESTA DE 15 ANOS");
+public enum TipoEndereco {
+	RECEPTIVO(0, "RECEPTIVO"),
+	CERIMONIAL(1, "CERIMONIAL"),
+	RESIDENCIAL(2, "RESIDENCIAL"),
+	COMERCIAL(2, "COMERCIAL");
 	
 	private Integer tipo;
 	private String descricao;
 	
-	TipoEvento(Integer tipo, String descricao){
+	TipoEndereco(Integer tipo, String descricao){
 		this.tipo = tipo;
 		this.descricao = descricao;
 	}
@@ -38,16 +40,17 @@ public enum TipoEvento {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
+
 	public int toInt() {
 		return this.tipo;
 	}
 	
-	public static TipoEvento valueOf(int i) {
+	public static TipoEndereco valueOf(int i) {
 		switch (i) {
-			case 0: return CASAMENTO;
-			case 1: return CORPORATIVO;
-			case 2: return FESTA_15_ANOS;
+			case 0: return RECEPTIVO;
+			case 1: return CERIMONIAL;
+			case 2: return RESIDENCIAL;
+			case 3: return COMERCIAL;
 			default: return null;
 		}
 	}

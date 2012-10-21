@@ -6,6 +6,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,19 +47,20 @@ public class Evento implements Serializable {
 	@Column(name = "EVENTO_ID")
 	private Long id;
 
+	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "TIPO", nullable = false)
 	private TipoEvento tipo;
 	
 	@ManyToOne
-	@JoinColumn(name = "LOCAL_ID", referencedColumnName = "LOCAL_ID", nullable = false)
+	@JoinColumn(name = "LOCAL_ID", referencedColumnName = "LOCAL_ID", nullable=false)	
 	private Local local;
 	
 	@ManyToOne
-	@JoinColumn(name = "CONTRATANTE_ID", referencedColumnName = "CONTRATANTE_ID", nullable = false)
+	@JoinColumn(name = "CONTRATANTE_ID", referencedColumnName = "CONTRATANTE_ID", nullable=false)
 	private Contratante contratante;
 	
 	@ManyToOne
-	@JoinColumn(name = "CERIMONIALISTA_ID", referencedColumnName = "PESSOA_ID")
+	@JoinColumn(name = "CERIMONIALISTA_ID", referencedColumnName = "CERIMONIALISTA_ID", nullable=true)
 	private Pessoa cerimonialista;
 	
 	@Temporal(TemporalType.DATE)
