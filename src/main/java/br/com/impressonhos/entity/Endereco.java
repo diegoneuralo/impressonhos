@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import br.com.impressonhos.enums.Const;
+import br.com.impressonhos.enums.TipoEndereco;
 
 @Entity
 @Table(
@@ -30,7 +33,7 @@ import br.com.impressonhos.enums.Const;
 	})
 public class Endereco implements Serializable {
 
-	private static final long serialVersionUID = -4515865467470156329L;
+	private static final long serialVersionUID = -4777990306121506701L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,8 +79,9 @@ public class Endereco implements Serializable {
 	 * 	<li>Comercial</li>
 	 * </ul>
 	 */
+	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "TIPO_ENDERECO", length = 1, nullable=false)
-	private String tipoEndereco;
+	private TipoEndereco tipoEndereco;
 
 	// ------------------------------------------------------------------------------- //
 	
@@ -141,11 +145,11 @@ public class Endereco implements Serializable {
 		this.uf = uf;
 	}
 
-	public String getTipoEndereco() {
+	public TipoEndereco getTipoEndereco() {
 		return tipoEndereco;
 	}
 
-	public void setTipoEndereco(String tipoEndereco) {
+	public void setTipoEndereco(TipoEndereco tipoEndereco) {
 		this.tipoEndereco = tipoEndereco;
 	}
 

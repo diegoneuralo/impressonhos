@@ -4,15 +4,20 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import br.com.impressonhos.enums.Const;
 import br.com.impressonhos.enums.StatusMaterialEvento;
+import br.com.impressonhos.enums.TipoMaterialEvento;
 
 @Entity
 @Table(name = "MATERIAL_EVENTO", schema = Const.SCHEMA)
@@ -23,23 +28,30 @@ import br.com.impressonhos.enums.StatusMaterialEvento;
 	})
 public class MaterialEvento implements Serializable {
 
-	private static final long serialVersionUID = 4295449154153838896L;
+	private static final long serialVersionUID = -4802943729185805857L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ITEM_EVENTO_ID")
 	private long id;
 	
-	@Column(name = "ITEM_EVENTO_ID", nullable=false)
+	@ManyToOne
+	@JoinColumn(name = "ITEM_EVENTO_ID", referencedColumnName = "ITEM_EVENTO_ID", nullable=false)	
 	private ItemEvento material;
 	
 	@Column(name = "QTD", length = 5, nullable=false)
 	private Integer quantidade;
 	
+	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "STATUS", length = 1, nullable=false)
 	private StatusMaterialEvento status;
 	
-	@Column(name = "EVENTO_ID", nullable=false)
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "TIPO", length = 1, nullable=false)
+	private TipoMaterialEvento tipo;
+	
+	@ManyToOne
+	@JoinColumn(name = "EVENTO_ID", referencedColumnName = "EVENTO_ID", nullable=false)	
 	private Evento evento;
 
 	// ------------------------------------------------------------------------------- //
@@ -72,6 +84,14 @@ public class MaterialEvento implements Serializable {
 		this.status = status;
 	}
 
+	public TipoMaterialEvento getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoMaterialEvento tipo) {
+		this.tipo = tipo;
+	}
+
 	public Evento getEvento() {
 		return evento;
 	}
@@ -80,6 +100,7 @@ public class MaterialEvento implements Serializable {
 		this.evento = evento;
 	}
 
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -88,6 +109,7 @@ public class MaterialEvento implements Serializable {
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result
 				+ ((material == null) ? 0 : material.hashCode());
+		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		return result;
 	}
 
@@ -112,6 +134,8 @@ public class MaterialEvento implements Serializable {
 				return false;
 		} else if (!material.equals(other.material))
 			return false;
+		if (tipo != other.tipo)
+			return false;
 		return true;
 	}
 
@@ -119,6 +143,6 @@ public class MaterialEvento implements Serializable {
 	public String toString() {
 		return "MaterialEvento [id=" + id + ", material=" + material
 				+ ", quantidade=" + quantidade + ", status=" + status
-				+ ", evento=" + evento + "]";
+				+ ", tipo =" + tipo + ", evento=" + evento + "]";
 	}	
 }

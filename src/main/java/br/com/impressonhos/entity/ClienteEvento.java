@@ -4,9 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -23,7 +27,7 @@ import br.com.impressonhos.enums.TipoClienteEvento;
 	})
 public class ClienteEvento implements Serializable {
 
-	private static final long serialVersionUID = 6181579214347069338L;
+	private static final long serialVersionUID = 2202272318785874622L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,10 +37,12 @@ public class ClienteEvento implements Serializable {
 	@Column(name = "PESSOA_ID", nullable=false)
 	private Pessoa pessoa;
 	
+	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "TIPO", length = 2, nullable=false)
 	private TipoClienteEvento tipo;
 	
-	@Column(name = "EVENTO_ID", nullable=false)
+	@ManyToOne
+	@JoinColumn(name = "EVENTO_ID", referencedColumnName = "EVENTO_ID", nullable=false)	
 	private Evento evento;
 
 	// ------------------------------------------------------------------------------- //

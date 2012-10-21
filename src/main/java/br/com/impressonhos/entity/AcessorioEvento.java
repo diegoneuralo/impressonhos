@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -41,7 +43,8 @@ public class AcessorioEvento implements Serializable {
 	@Column(name = "VALOR_UN", nullable=false)
 	private BigDecimal valor;
 	
-	@Column(name = "EVENTO_ID", nullable=false)
+	@ManyToOne
+	@JoinColumn(name = "EVENTO_ID", referencedColumnName = "EVENTO_ID", nullable=false)	
 	private Evento evento;
 
 	// ------------------------------------------------------------------------------- //

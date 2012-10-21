@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +16,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import br.com.impressonhos.enums.Const;
+import br.com.impressonhos.enums.TipoTelefone;
 
 @Entity
 @Table(name = "TELEFONE", schema = Const.SCHEMA)
@@ -24,7 +27,7 @@ import br.com.impressonhos.enums.Const;
 	})
 public class Telefone implements Serializable {
 
-	private static final long serialVersionUID = -4009151363117100319L;
+	private static final long serialVersionUID = 5509438594833124517L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,17 +43,9 @@ public class Telefone implements Serializable {
 	@Column(name = "RAMAL", length = 5, nullable=true)
 	private int numero;
 	
-	/**
-	 * Define o tipo do telefone, respeitando uma das opções abaixo
-	 * <ul>
-	 * 	<li>Residêncial</li>
-	 * 	<li>Celular</li>	
-	 * 	<li>Comercial</li>
-	 * 	<li>Recados</li>
-	 * </ul> 
-	 */
+	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "TIPO", length = 1, nullable=false)
-	private int tipo;
+	private TipoTelefone tipo;
 	
 	@ManyToOne
 	@JoinColumn(name = "PESSOAID_ID", referencedColumnName = "PESSOAID_ID", nullable=false)	
@@ -86,11 +81,11 @@ public class Telefone implements Serializable {
 		this.numero = numero;
 	}
 
-	public int getTipo() {
+	public TipoTelefone getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(int tipo) {
+	public void setTipo(TipoTelefone tipo) {
 		this.tipo = tipo;
 	}
 
@@ -109,7 +104,7 @@ public class Telefone implements Serializable {
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + numero;
 		result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
-		result = prime * result + tipo;
+		result = prime * result + tipo.toInt();
 		return result;
 	}
 

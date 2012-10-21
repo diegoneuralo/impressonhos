@@ -1,24 +1,23 @@
 package br.com.impressonhos.enums;
 
 /**
- * Enum responsável pelos possíveis tipos de evento. Ex.:
+ * Enum que define o tipo do material no evento - se o mesmo é referente a um agregado,
+ * como por exemplo guardanapos ou canecas personalizadas, ou ao convite do evento. Opções:
  * <ul>
- * 	<li>CASAMENTO</li>
- * 	<li>CORPORATIVO</li>
- * 	<li>FESTA_15_ANOS</li>
+ * 	<li>AGREGADO</li>
+ * 	<li>CONVITE</li>
  * </ul>
  * @author riccardof
  *
  */
-public enum TipoEvento {
-	CASAMENTO(0, "CASAMENTO"),
-	CORPORATIVO(1, "CORPORATIVO"),
-	FESTA_15_ANOS(2, "FESTA DE 15 ANOS");
+public enum TipoMaterialEvento {
+	AGREGADO(0, "AGREGADO"),
+	CONVITE(1, "CONVITE");
 	
 	private Integer tipo;
 	private String descricao;
 	
-	TipoEvento(Integer tipo, String descricao){
+	TipoMaterialEvento(Integer tipo, String descricao){
 		this.tipo = tipo;
 		this.descricao = descricao;
 	}
@@ -30,7 +29,7 @@ public enum TipoEvento {
 	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
 	}
-	
+
 	public String getDescricao() {
 		return descricao;
 	}
@@ -43,11 +42,10 @@ public enum TipoEvento {
 		return this.tipo;
 	}
 	
-	public static TipoEvento valueOf(int i) {
+	public static TipoMaterialEvento valueOf(int i) {
 		switch (i) {
-			case 0: return CASAMENTO;
-			case 1: return CORPORATIVO;
-			case 2: return FESTA_15_ANOS;
+			case 0: return AGREGADO;
+			case 1: return CONVITE;
 			default: return null;
 		}
 	}

@@ -4,33 +4,29 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import br.com.impressonhos.enums.Const;
-import br.com.impressonhos.enums.TipoItemEvento;
 
 @Entity
-@Table(name = "ITEM_EVENTO", schema = Const.SCHEMA)
-public class ItemEvento implements Serializable {
+@Table(name = "MODELO_CONVITE", schema = Const.SCHEMA)
+public class ModeloConvite implements Serializable {
 
-	private static final long serialVersionUID = 8270631621811922656L;
+	private static final long serialVersionUID = -5584048707427792359L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ITEM_EVENTO_ID")
+	@Column(name = "MODELO_CONVITE_ID")
 	private long id;
 	
 	@Column(name = "NOME", nullable=false)
 	private String nome;
 	
-	@Enumerated(EnumType.ORDINAL)
-	@Column(name = "TIPO", length = 2, nullable=false)
-	private TipoItemEvento tipo;
+	@Column(name = "DESCRICAO", length = 255, nullable=false)
+	private String descricao;
 
 	// ------------------------------------------------------------------------------- //
 	
@@ -46,12 +42,12 @@ public class ItemEvento implements Serializable {
 		this.nome = nome;
 	}
 
-	public TipoItemEvento getTipo() {
-		return tipo;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setTipo(TipoItemEvento tipo) {
-		this.tipo = tipo;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	@Override
@@ -60,7 +56,6 @@ public class ItemEvento implements Serializable {
 		int result = 1;
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		return result;
 	}
 
@@ -72,7 +67,7 @@ public class ItemEvento implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ItemEvento other = (ItemEvento) obj;
+		ModeloConvite other = (ModeloConvite) obj;
 		if (id != other.id)
 			return false;
 		if (nome == null) {
@@ -80,14 +75,12 @@ public class ItemEvento implements Serializable {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (tipo != other.tipo)
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "ItemEvento [id=" + id + ", nome=" + nome + ", tipo=" + tipo
-				+ "]";
-	}	
+		return "ModeloConvite [id=" + id + ", nome=" + nome + ", descricao="
+				+ descricao + "]";
+	}
 }

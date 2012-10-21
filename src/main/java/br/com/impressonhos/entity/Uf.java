@@ -22,7 +22,7 @@ import br.com.impressonhos.enums.Const;
 	})
 public class Uf implements Serializable {
 
-	private static final long serialVersionUID = 5557128728600039073L;
+	private static final long serialVersionUID = -3660576804157028913L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public class Uf implements Serializable {
 	private String sigla;
 	
 	@Column(name = "ESTADO", length = 30, nullable=false)
-	private int estado;
+	private String estado;
 
 	// ------------------------------------------------------------------------------- //
 	
@@ -49,11 +49,11 @@ public class Uf implements Serializable {
 		this.sigla = sigla;
 	}
 
-	public int getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(int estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 
