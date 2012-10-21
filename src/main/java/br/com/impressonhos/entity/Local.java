@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import br.com.impressonhos.enums.Const;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "LOCAL", schema = Const.SCHEMA)
 @NamedQueries({ 
@@ -26,8 +27,6 @@ import br.com.impressonhos.enums.Const;
 			query = "from Local l where trim(l.cpfCnpj) = ?")
 	})
 public class Local implements Serializable {
-
-	private static final long serialVersionUID = 1063842641446809160L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,11 +40,15 @@ public class Local implements Serializable {
 	@Column(name = "CPF_CNPJ", nullable = true, length = 14)
 	private String cpfCnpj;
 	
-	@ManyToOne
-	@JoinColumn(name = "CONTATO_ID", referencedColumnName = "CONTATO_ID", nullable = false)	
-	private Pessoa contato;
+	// contato_id nao existe em pessoa
+//	@ManyToOne
+//	@JoinColumn(name = "CONTATO_ID", referencedColumnName = "CONTATO_ID", nullable = false)	
+//	private Pessoa contato;
 	
 	// ------------------------------------------------------------------------------- //
+	
+	public Local()
+	{}
 	
 	public Long getId() {
 		return id;
@@ -66,21 +69,20 @@ public class Local implements Serializable {
 	public void setCpfCnpj(String cpfCnpj) {
 		this.cpfCnpj = cpfCnpj;
 	}
-
-	public Pessoa getContato() {
-		return contato;
-	}
-
-	public void setContato(Pessoa contato) {
-		this.contato = contato;
-	}
+	
+//	public Pessoa getContato() {
+//		return contato;
+//	}
+//
+//	public void setContato(Pessoa contato) {
+//		this.contato = contato;
+//	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
 		return result;
 	}
 
@@ -95,17 +97,12 @@ public class Local implements Serializable {
 		Local other = (Local) obj;
 		if (id != other.id)
 			return false;
-		if (pessoa == null) {
-			if (other.pessoa != null)
-				return false;
-		} else if (!pessoa.equals(other.pessoa))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Local [id=" + id + ", pessoa=" + pessoa.getNome() 
-				+ ", contato=" + contato.getNome() + "]";
+		return "Local [id=" + id + "]";
 	}
+	
 }

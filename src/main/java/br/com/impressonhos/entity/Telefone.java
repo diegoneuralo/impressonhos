@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import br.com.impressonhos.enums.Const;
 import br.com.impressonhos.enums.TipoTelefone;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "TELEFONE", schema = Const.SCHEMA)
 @NamedQueries({ 
@@ -26,8 +27,6 @@ import br.com.impressonhos.enums.TipoTelefone;
 			query = "from Telefone t where t.pessoa.id = ?"),
 	})
 public class Telefone implements Serializable {
-
-	private static final long serialVersionUID = 5509438594833124517L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,10 +47,13 @@ public class Telefone implements Serializable {
 	private TipoTelefone tipo;
 	
 	@ManyToOne
-	@JoinColumn(name = "PESSOAID_ID", referencedColumnName = "PESSOAID_ID", nullable=false)	
+	@JoinColumn(name = "PESSOA_ID", referencedColumnName = "PESSOA_ID", nullable=false)	
 	private Pessoa pessoa;
 
 	// ------------------------------------------------------------------------------- //
+	
+	public Telefone() 
+	{}
 	
 	public Long getId() {
 		return id;
@@ -96,15 +98,12 @@ public class Telefone implements Serializable {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + numero;
-		result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
-		result = prime * result + tipo.toInt();
 		return result;
 	}
 
@@ -119,15 +118,6 @@ public class Telefone implements Serializable {
 		Telefone other = (Telefone) obj;
 		if (id != other.id)
 			return false;
-		if (numero != other.numero)
-			return false;
-		if (pessoa == null) {
-			if (other.pessoa != null)
-				return false;
-		} else if (!pessoa.equals(other.pessoa))
-			return false;
-		if (tipo != other.tipo)
-			return false;
 		return true;
 	}
 
@@ -137,6 +127,4 @@ public class Telefone implements Serializable {
 				+ telefone + ", numero=" + numero + ", tipo=" + tipo
 				+ ", pessoa=(id:" + pessoa.getId() + ") " + pessoa.getNome() + "]";
 	}
-	
-	
 }

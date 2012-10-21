@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import br.com.impressonhos.enums.Const;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "CONTRATO", schema = Const.SCHEMA)
 @NamedQueries({ 
@@ -29,8 +30,6 @@ import br.com.impressonhos.enums.Const;
 			query = "from Contrato c where c.contratante.id = ?")
 	})
 public class Contrato implements Serializable {
-
-	private static final long serialVersionUID = 5852155257603780968L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,7 +48,13 @@ public class Contrato implements Serializable {
 	private Evento evento;
 	
 	// ------------------------------------------------------------------------------- //
+	public Contrato()
+	{}
 	
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -70,16 +75,19 @@ public class Contrato implements Serializable {
 		this.contratante = contratante;
 	}
 
+	public Evento getEvento() {
+		return evento;
+	}
+
+	public void setEvento(Evento evento) {
+		this.evento = evento;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((contratante == null) ? 0 : contratante.hashCode());
-		result = prime * result + ((evento == null) ? 0 : evento.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result
-				+ (int) (numeroContrato ^ (numeroContrato >>> 32));
 		return result;
 	}
 
@@ -92,26 +100,14 @@ public class Contrato implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Contrato other = (Contrato) obj;
-		if (contratante == null) {
-			if (other.contratante != null)
-				return false;
-		} else if (!contratante.equals(other.contratante))
-			return false;
-		if (evento == null) {
-			if (other.evento != null)
-				return false;
-		} else if (!evento.equals(other.evento))
-			return false;
 		if (id != other.id)
-			return false;
-		if (numeroContrato != other.numeroContrato)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Contrato [id=" + id + ", numeroContrato=" + numeroContrato
-				+ ", contratante=" + contratante + ", evento=" + evento + "]";
+		return "Contrato [id=" + id + "]";
 	}
+	
 }

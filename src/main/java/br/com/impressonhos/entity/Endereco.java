@@ -67,7 +67,7 @@ public class Endereco implements Serializable {
 	private Uf uf;
 	
 	@ManyToOne
-	@JoinColumn(name = "PESSOAID_ID", referencedColumnName = "PESSOAID_ID", nullable=false)	
+	@JoinColumn(name = "PESSOA_ID", referencedColumnName = "PESSOA_ID", nullable=false)	
 	private Pessoa pessoa;
 	
 	/**
@@ -160,16 +160,12 @@ public class Endereco implements Serializable {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
-		result = prime * result
-				+ ((tipoEndereco == null) ? 0 : tipoEndereco.hashCode());
 		return result;
 	}
 
@@ -182,22 +178,7 @@ public class Endereco implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Endereco other = (Endereco) obj;
-		if (cep == null) {
-			if (other.cep != null)
-				return false;
-		} else if (!cep.equals(other.cep))
-			return false;
 		if (id != other.id)
-			return false;
-		if (pessoa == null) {
-			if (other.pessoa != null)
-				return false;
-		} else if (!pessoa.equals(other.pessoa))
-			return false;
-		if (tipoEndereco == null) {
-			if (other.tipoEndereco != null)
-				return false;
-		} else if (!tipoEndereco.equals(other.tipoEndereco))
 			return false;
 		return true;
 	}
@@ -210,6 +191,4 @@ public class Endereco implements Serializable {
 				+ ", pessoa=(id:" +pessoa.getId() + ") - " 
 				+ pessoa.getNome() + ", tipoEndereco=" + tipoEndereco + "]";
 	}
-	
-	
 }
