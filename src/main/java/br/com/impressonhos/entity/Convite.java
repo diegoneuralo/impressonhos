@@ -82,7 +82,7 @@ public class Convite implements Serializable {
 		this.status = StatusConvite.AGUARDANDO_ITENS;
 	}
 	
-	// TODO Conversar com o Dani sobre o tipo do papel.. o que significa isso?? as opções encontradas foram: Envelope, Interno e Forro.
+	// TODO Conversar com o Dani sobre o tipo do papel.. o que significa isso?? não me lembro mais.. ¬¬  - As opções encontradas foram: Envelope, Interno e Forro.
 	
 	// ------------------------------------------------------------------------------- //
 	

@@ -38,10 +38,7 @@ import br.com.impressonhos.enums.Const;
 	})
 public class Pessoa implements Serializable {
 
-	private static final long serialVersionUID = 6520982559086979944L;
-
-	public Pessoa() {
-	}
+	private static final long serialVersionUID = 5015962732440974008L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

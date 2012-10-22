@@ -15,7 +15,6 @@ import javax.persistence.Table;
 
 import br.com.impressonhos.enums.Const;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "LOCAL", schema = Const.SCHEMA)
 @NamedQueries({ 
@@ -27,6 +26,8 @@ import br.com.impressonhos.enums.Const;
 			query = "from Local l where trim(l.cpfCnpj) = ?")
 	})
 public class Local implements Serializable {
+
+	private static final long serialVersionUID = -2469735721077878505L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,10 +41,9 @@ public class Local implements Serializable {
 	@Column(name = "CPF_CNPJ", nullable = true, length = 14)
 	private String cpfCnpj;
 	
-	// contato_id nao existe em pessoa
-//	@ManyToOne
-//	@JoinColumn(name = "CONTATO_ID", referencedColumnName = "CONTATO_ID", nullable = false)	
-//	private Pessoa contato;
+	@ManyToOne
+	@JoinColumn(name = "CONTATO_ID", referencedColumnName = "PESSOA_ID", nullable = false)	
+	private Pessoa contato;
 	
 	// ------------------------------------------------------------------------------- //
 	

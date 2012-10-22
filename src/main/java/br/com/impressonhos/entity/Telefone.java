@@ -18,7 +18,6 @@ import javax.persistence.Table;
 import br.com.impressonhos.enums.Const;
 import br.com.impressonhos.enums.TipoTelefone;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "TELEFONE", schema = Const.SCHEMA)
 @NamedQueries({ 
@@ -27,6 +26,8 @@ import br.com.impressonhos.enums.TipoTelefone;
 			query = "from Telefone t where t.pessoa.id = ?"),
 	})
 public class Telefone implements Serializable {
+
+	private static final long serialVersionUID = 5509438594833124517L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,9 +52,6 @@ public class Telefone implements Serializable {
 	private Pessoa pessoa;
 
 	// ------------------------------------------------------------------------------- //
-	
-	public Telefone() 
-	{}
 	
 	public Long getId() {
 		return id;

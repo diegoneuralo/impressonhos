@@ -19,7 +19,6 @@ import br.com.impressonhos.enums.Const;
 import br.com.impressonhos.enums.StatusMaterialEvento;
 import br.com.impressonhos.enums.TipoMaterialEvento;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "MATERIAL_EVENTO", schema = Const.SCHEMA)
 @NamedQueries({ 
@@ -28,6 +27,8 @@ import br.com.impressonhos.enums.TipoMaterialEvento;
 			query = "from MaterialEvento me where me.evento.id = ?")
 	})
 public class MaterialEvento implements Serializable {
+
+	private static final long serialVersionUID = -4802943729185805857L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,9 +1,9 @@
 package br.com.impressonhos.enums;
 
 /**
- * Enum responsável pelos status atual do convite. Opções:
+ * Enum responsável pelos status atual do cardapio. Opções:
  * <ul>
- * 	<li>AGUARDANDO_ITENS</li>
+ * 	<li>AGUARDANDO_INFOS</li>
  * 	<li>EM_PRODUCAO</li>
  * 	<li>PRODUZIDO</li>
  * 	<li>ENVIADO</li>
@@ -11,16 +11,16 @@ package br.com.impressonhos.enums;
  * @author riccardof
  *
  */
-public enum StatusConvite {
-	AGUARDANDO_ITENS(0, "AGUARDANDO ITENS"),
-	EM_PRODUCAO(1, "EM PRODUÇÃO"),
+public enum StatusCardapio {
+	AGUARDANDO_INFOS(0, "AGUARDANDO INFORMAÇÕES"),
+	EM_PRODUCAO(1, "EM_PRODUÇÃO"),
 	PRODUZIDO(2, "PRODUZIDO"),
 	ENVIADO(3, "ENVIADO");
 	
 	private Integer tipo;
 	private String descricao;
 	
-	StatusConvite(Integer tipo, String descricao){
+	StatusCardapio(Integer tipo, String descricao){
 		this.tipo = tipo;
 	}
 
@@ -36,9 +36,9 @@ public enum StatusConvite {
 		return this.tipo;
 	}
 	
-	public static StatusConvite valueOf(int i) {
+	public static StatusCardapio valueOf(int i) {
 		switch (i) {
-			case 0: return AGUARDANDO_ITENS;
+			case 0: return AGUARDANDO_INFOS;
 			case 1: return EM_PRODUCAO;
 			case 2: return PRODUZIDO;
 			case 3: return ENVIADO;

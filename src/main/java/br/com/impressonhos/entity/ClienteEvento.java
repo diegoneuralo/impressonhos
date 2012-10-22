@@ -18,7 +18,6 @@ import javax.persistence.Table;
 import br.com.impressonhos.enums.Const;
 import br.com.impressonhos.enums.TipoClienteEvento;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "CLIENTE_EVENTO", schema = Const.SCHEMA)
 @NamedQueries({ 
@@ -27,6 +26,8 @@ import br.com.impressonhos.enums.TipoClienteEvento;
 			query = "from ClienteEvento ce where ce.pessoa.id = ?")
 	})
 public class ClienteEvento implements Serializable {
+
+	private static final long serialVersionUID = 2202272318785874622L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,9 +45,8 @@ public class ClienteEvento implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "EVENTO_ID", referencedColumnName = "EVENTO_ID", nullable=false)	
 	private Evento evento;
-	
-	public ClienteEvento()
-	{}
+
+	// ------------------------------------------------------------------------------- //
 
 	public Long getId() {
 		return id;
@@ -58,10 +58,6 @@ public class ClienteEvento implements Serializable {
 
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public TipoClienteEvento getTipo() {

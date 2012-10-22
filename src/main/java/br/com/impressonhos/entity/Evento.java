@@ -24,7 +24,6 @@ import javax.persistence.UniqueConstraint;
 import br.com.impressonhos.enums.Const;
 import br.com.impressonhos.enums.TipoEvento;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(
 		name = "EVENTO", 
@@ -41,6 +40,8 @@ import br.com.impressonhos.enums.TipoEvento;
 			query = "from Evento e where e.dataEvento >= ? and e.dataEvento <= ? ")
 	})
 public class Evento implements Serializable {
+	
+	private static final long serialVersionUID = -5850569767575201551L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,7 +61,7 @@ public class Evento implements Serializable {
 	private Contratante contratante;
 	
 	@ManyToOne
-	@JoinColumn(name = "CERIMONIALISTA_ID", referencedColumnName = "CERIMONIALISTA_ID", nullable=true)
+	@JoinColumn(name = "CERIMONIALISTA_ID", referencedColumnName = "PESSOA_ID", nullable=true)
 	private Pessoa cerimonialista;
 	
 	@Temporal(TemporalType.DATE)
@@ -70,7 +71,13 @@ public class Evento implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DATA_EVENTO", nullable = false)
 	private Date dataEvento;
-
+	
+	@Column(name = "TEM_LISTA_CONVIDADOS", nullable=false)
+	private boolean hasListaConvidados;
+	
+	@Column(name = "TEM_CARDAPIO", nullable=false)
+	private boolean hasCardapio;
+	
 	@Lob
 	@Column(name = "OBSERVACOES", nullable = true, length=500)
 	private String observacoes;
@@ -127,6 +134,22 @@ public class Evento implements Serializable {
 
 	public void setDataEvento(Date dataEvento) {
 		this.dataEvento = dataEvento;
+	}
+	
+	public boolean getHasListaConvidados() {
+		return hasListaConvidados;
+	}
+
+	public void setHasListaConvidados(boolean hasListaConvidados) {
+		this.hasListaConvidados = hasListaConvidados;
+	}
+
+	public boolean getHasCardapio() {
+		return hasCardapio;
+	}
+
+	public void setHasCardapio(boolean hasCardapio) {
+		this.hasCardapio = hasCardapio;
 	}
 
 	public String getObservacoes() {

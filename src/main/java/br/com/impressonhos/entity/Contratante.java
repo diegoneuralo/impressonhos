@@ -15,7 +15,6 @@ import javax.persistence.Table;
 
 import br.com.impressonhos.enums.Const;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "CONTRATANTE", schema = Const.SCHEMA)
 @NamedQueries({ 
@@ -27,6 +26,8 @@ import br.com.impressonhos.enums.Const;
 			query = "from Contratante c where trim(cpfCnpj) = ?"),
 	})
 public class Contratante implements Serializable {
+
+	private static final long serialVersionUID = 7589623023631406700L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
