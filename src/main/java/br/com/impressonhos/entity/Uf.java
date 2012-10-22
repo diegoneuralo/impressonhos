@@ -18,7 +18,7 @@ import br.com.impressonhos.enums.Const;
 @NamedQueries({ 
 	@NamedQuery(
 			name = "Uf.getBySigla", 
-			query = "from Estado e where trim(upper(e.UF)) = upper(?)")
+			query = "from Uf u where trim(upper(u.sigla)) = upper(?)")
 	})
 public class Uf implements Serializable {
 
