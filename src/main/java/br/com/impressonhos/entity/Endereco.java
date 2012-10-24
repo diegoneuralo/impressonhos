@@ -29,7 +29,7 @@ import br.com.impressonhos.enums.TipoEndereco;
 @NamedQueries({ 
 	@NamedQuery(
 			name = "Endereco.getByPessoaAndTipoEndereco", 
-			query = "from Endereco e where e.pessoa.id = ?"),
+			query = "from Endereco e where e.pessoa.id = ? and e.tipoEndereco = ?"),
 	})
 public class Endereco implements Serializable {
 

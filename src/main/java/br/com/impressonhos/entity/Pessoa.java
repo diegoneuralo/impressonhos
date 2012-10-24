@@ -73,6 +73,12 @@ public class Pessoa implements Serializable {
 
 	// ------------------------------------------------------------------------------- //
 	
+	public Pessoa() {
+		this.dataCadastro = new Date(System.currentTimeMillis());
+	}
+	
+	// ------------------------------------------------------------------------------- //
+	
 	public Long getId() {
 		return id;
 	}
