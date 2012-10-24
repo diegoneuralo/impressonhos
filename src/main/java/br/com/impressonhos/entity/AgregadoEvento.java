@@ -26,7 +26,7 @@ import br.com.impressonhos.enums.Const;
 @NamedQueries({ 
 	@NamedQuery(
 			name = "AgregadoEvento.getByEvento", 
-			query = "from AcessorioEvento me where me.evento.id = ?")
+			query = "from AgregadoEvento me where me.evento.id = ?")
 	})
 public class AgregadoEvento implements Serializable {
 
