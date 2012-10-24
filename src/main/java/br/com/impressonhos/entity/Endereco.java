@@ -33,15 +33,16 @@ import br.com.impressonhos.enums.TipoEndereco;
 	})
 public class Endereco implements Serializable {
 
-	private static final long serialVersionUID = -4777990306121506701L;
+	private static final long serialVersionUID = 1838886045788653243L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ENDERECO_ID")
 	private long id;
 	
-	@Column(name = "LOGRADOURO", length = 60, nullable=false)
-	private String logradouro;
+	@ManyToOne
+	@JoinColumn(name = "LOGRADOURO_ID", referencedColumnName = "LOGRADOURO_ID", nullable = false)
+	private Logradouro logradouro;
 	
 	/**
 	 * O tipo do logradouro refere-se ao tipo padrão dos correios, como por exemplo: 
@@ -89,11 +90,11 @@ public class Endereco implements Serializable {
 		return id;
 	}
 
-	public String getLogradouro() {
+	public Logradouro getLogradouro() {
 		return logradouro;
 	}
 
-	public void setLogradouro(String logradouro) {
+	public void setLogradouro(Logradouro logradouro) {
 		this.logradouro = logradouro;
 	}
 
@@ -185,7 +186,7 @@ public class Endereco implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Endereco [id=" + id + ", logradouro=" + logradouro
+		return "Endereco [id=" + id + ", logradouro=" + logradouro.getLogradouro()
 				+ ", numero=" + numero + ", cep=" + cep + "bairro=" 
 				+ bairro + ", cidade=" + cidade + ", uf=" + uf 
 				+ ", pessoa=(id:" +pessoa.getId() + ") - " 
