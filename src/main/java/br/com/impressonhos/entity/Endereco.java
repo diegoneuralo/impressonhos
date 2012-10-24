@@ -33,23 +33,23 @@ import br.com.impressonhos.enums.TipoEndereco;
 	})
 public class Endereco implements Serializable {
 
-	private static final long serialVersionUID = 1838886045788653243L;
+	private static final long serialVersionUID = -1908918372813761039L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ENDERECO_ID")
 	private long id;
 	
-	@ManyToOne
-	@JoinColumn(name = "LOGRADOURO_ID", referencedColumnName = "LOGRADOURO_ID", nullable = false)
-	private Logradouro logradouro;
+	@Column(name = "LOGRADOURO", length = 255, nullable = false)
+	private String logradouro;
 	
 	/**
 	 * O tipo do logradouro refere-se ao tipo padrão dos correios, como por exemplo: 
 	 * rua, avenida, travessa, etc..
 	 */
-	@Column(name = "TIPO_LOGRADOURO", length = 2, nullable=false)
-	private int tipoLogradouro;
+	@ManyToOne
+	@JoinColumn(name = "LOGRADOURO_ID", referencedColumnName = "LOGRADOURO_ID", nullable = false)
+	private TipoLogradouro tipoLogradouro;
 	
 	@Column(name = "NUMERO", length = 10, nullable=false)
 	private int numero;
@@ -71,15 +71,6 @@ public class Endereco implements Serializable {
 	@JoinColumn(name = "PESSOA_ID", referencedColumnName = "PESSOA_ID", nullable=false)	
 	private Pessoa pessoa;
 	
-	/**
-	 * O tipo do endereço refere-se uma das seguintes opçoes:
-	 * <ul>
-	 * 	<li>Receptivo</li>
-	 * 	<li>Cerimonial</li>
-	 * 	<li>Residêncial</li>
-	 * 	<li>Comercial</li>
-	 * </ul>
-	 */
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "TIPO_ENDERECO", length = 1, nullable=false)
 	private TipoEndereco tipoEndereco;
@@ -90,19 +81,19 @@ public class Endereco implements Serializable {
 		return id;
 	}
 
-	public Logradouro getLogradouro() {
+	public String getLogradouro() {
 		return logradouro;
 	}
 
-	public void setLogradouro(Logradouro logradouro) {
+	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
 	}
 
-	public int getTipoLogradouro() {
+	public TipoLogradouro getTipoLogradouro() {
 		return tipoLogradouro;
 	}
 
-	public void setTipoLogradouro(int tipoLogradouro) {
+	public void setTipoLogradouro(TipoLogradouro tipoLogradouro) {
 		this.tipoLogradouro = tipoLogradouro;
 	}
 
@@ -186,7 +177,7 @@ public class Endereco implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Endereco [id=" + id + ", logradouro=" + logradouro.getLogradouro()
+		return "Endereco [id=" + id + ", logradouro=" + logradouro
 				+ ", numero=" + numero + ", cep=" + cep + "bairro=" 
 				+ bairro + ", cidade=" + cidade + ", uf=" + uf 
 				+ ", pessoa=(id:" +pessoa.getId() + ") - " 

@@ -25,7 +25,7 @@
 		<class>br.com.impressonhos.entity.Evento</class>
 		<class>br.com.impressonhos.entity.ItemEvento</class>
 		<class>br.com.impressonhos.entity.Local</class>
-		<class>br.com.impressonhos.entity.Logradouro</class>
+		<class>br.com.impressonhos.entity.TipoLogradouro</class>
 		<class>br.com.impressonhos.entity.MaterialEvento</class>
 		<class>br.com.impressonhos.entity.ModeloConvite</class>
 		<class>br.com.impressonhos.entity.Pessoa</class>
