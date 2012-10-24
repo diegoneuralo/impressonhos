@@ -6,6 +6,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +19,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 import br.com.impressonhos.enums.Const;
+import br.com.impressonhos.enums.TipoPessoa;
 
 /**
  * @TODO Perguntar para o rafael como faço para "pegar" o endereço e o telefone de uma pessoa através
@@ -34,11 +37,14 @@ import br.com.impressonhos.enums.Const;
 @NamedQueries({ 
 	@NamedQuery(
 			name = "Pessoa.getByNameAndRg", 
-			query = "from Pessoa p where trim(upper(p.nome)) like upper('%?%') and trim(p.rg) = ?")
+			query = "from Pessoa p where trim(upper(p.nome)) like upper('%?%') and trim(p.rg) = ?"),
+	@NamedQuery(
+			name = "Pessoa.getByEmail", 
+			query = "from Pessoa p where trim(p.email) like trim('%?%')")
 	})
 public class Pessoa implements Serializable {
 
-	private static final long serialVersionUID = 5015962732440974008L;
+	private static final long serialVersionUID = -6454216118392800347L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,8 +63,9 @@ public class Pessoa implements Serializable {
 	/**
 	 * Tipo da Pessoa: Física ou Jurídica?
 	 */
-	@Column(name = "TIPO", nullable = true)
-	private String tipo;
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "TIPO", nullable = false)
+	private TipoPessoa tipo;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DATA_CADASTRO", nullable = false)
@@ -86,11 +93,11 @@ public class Pessoa implements Serializable {
 		this.rg = rg;
 	}
 
-	public String getTipo() {
+	public TipoPessoa getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(TipoPessoa tipo) {
 		this.tipo = tipo;
 	}
 

@@ -14,7 +14,7 @@
 		<!-- comment this when openshift is being used -->
 		<jta-data-source>java:jboss/datasources/postgresDS</jta-data-source> 
 
-		<class>br.com.impressonhos.entity.AcessorioEvento</class>
+		<class>br.com.impressonhos.entity.AgregadoEvento</class>
 		<class>br.com.impressonhos.entity.Cardapio</class>
 		<class>br.com.impressonhos.entity.ClienteEvento</class>
 		<class>br.com.impressonhos.entity.Contratante</class>
