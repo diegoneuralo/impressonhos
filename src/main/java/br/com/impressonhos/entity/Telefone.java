@@ -27,7 +27,7 @@ import br.com.impressonhos.enums.TipoTelefone;
 	})
 public class Telefone implements Serializable {
 
-	private static final long serialVersionUID = 5509438594833124517L;
+	private static final long serialVersionUID = 303092565208772363L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,11 +37,11 @@ public class Telefone implements Serializable {
 	@Column(name = "COD_AREA", length = 2, nullable=false)
 	private String codArea;
 	
-	@Column(name = "TELEFONE", length = 8, nullable=false)
+	@Column(name = "TELEFONE", length = 9, nullable=false)
 	private int telefone;
 	
 	@Column(name = "RAMAL", length = 5, nullable=true)
-	private int numero;
+	private int ramal;
 	
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "TIPO", length = 1, nullable=false)
@@ -73,12 +73,12 @@ public class Telefone implements Serializable {
 		this.telefone = telefone;
 	}
 
-	public int getNumero() {
-		return numero;
+	public int getRamal() {
+		return ramal;
 	}
 
-	public void setNumero(int numero) {
-		this.numero = numero;
+	public void setRamal(int ramal) {
+		this.ramal = ramal;
 	}
 
 	public TipoTelefone getTipo() {
@@ -96,12 +96,14 @@ public class Telefone implements Serializable {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((codArea == null) ? 0 : codArea.hashCode());
+		result = prime * result + ramal;
+		result = prime * result + telefone;
 		return result;
 	}
 
@@ -114,7 +116,14 @@ public class Telefone implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Telefone other = (Telefone) obj;
-		if (id != other.id)
+		if (codArea == null) {
+			if (other.codArea != null)
+				return false;
+		} else if (!codArea.equals(other.codArea))
+			return false;
+		if (ramal != other.ramal)
+			return false;
+		if (telefone != other.telefone)
 			return false;
 		return true;
 	}
@@ -122,7 +131,7 @@ public class Telefone implements Serializable {
 	@Override
 	public String toString() {
 		return "Telefone [id=" + id + ", codArea=" + codArea + ", telefone="
-				+ telefone + ", numero=" + numero + ", tipo=" + tipo
+				+ telefone + ", ramal=" + ramal + ", tipo=" + tipo
 				+ ", pessoa=(id:" + pessoa.getId() + ") " + pessoa.getNome() + "]";
 	}
 }

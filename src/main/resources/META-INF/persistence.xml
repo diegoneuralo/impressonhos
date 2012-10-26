@@ -19,7 +19,6 @@
 		<class>br.com.impressonhos.entity.ClienteEvento</class>
 		<class>br.com.impressonhos.entity.Contratante</class>
 		<class>br.com.impressonhos.entity.Contrato</class>
-		<class>br.com.impressonhos.entity.Convidado</class>
 		<class>br.com.impressonhos.entity.Convite</class>
 		<class>br.com.impressonhos.entity.Endereco</class>
 		<class>br.com.impressonhos.entity.Evento</class>

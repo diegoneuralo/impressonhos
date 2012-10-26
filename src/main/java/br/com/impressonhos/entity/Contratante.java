@@ -37,7 +37,7 @@ public class Contratante implements Serializable {
 	@Column(name = "CPF_CNPJ", length = 14, nullable=false)
 	private String cpfCnpj;
 	
-	@Column(name = "COMO_CHEGOU", length = 30, nullable=false)
+	@Column(name = "COMO_CHEGOU", length = 255, nullable=false)
 	private String comoChegou;
 	
 	@ManyToOne

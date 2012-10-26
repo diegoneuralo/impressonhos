@@ -1,6 +1,7 @@
 package br.com.impressonhos.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import br.com.impressonhos.enums.Const;
 import br.com.impressonhos.enums.StatusCardapio;
@@ -28,7 +31,7 @@ import br.com.impressonhos.enums.StatusCardapio;
 	})
 public class Cardapio implements Serializable {
 
-	private static final long serialVersionUID = -6520088557567064888L;
+	private static final long serialVersionUID = -6328680727564136582L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,6 +58,10 @@ public class Cardapio implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "EVENTO_ID", referencedColumnName = "EVENTO_ID", nullable=false)	
 	private Evento evento;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "DATA_ENTREGA")
+	private Date dataEntrega;
 	
 	// ------------------------------------------------------------------------------- //
 
@@ -108,6 +115,14 @@ public class Cardapio implements Serializable {
 
 	public void setEvento(Evento evento) {
 		this.evento = evento;
+	}
+
+	public Date getDataEntrega() {
+		return dataEntrega;
+	}
+
+	public void setDataEntrega(Date dataEntrega) {
+		this.dataEntrega = dataEntrega;
 	}
 
 	@Override

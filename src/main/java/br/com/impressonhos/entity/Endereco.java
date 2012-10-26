@@ -2,6 +2,7 @@ package br.com.impressonhos.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -67,7 +68,7 @@ public class Endereco implements Serializable {
 	@JoinColumn(name = "UF_ID", referencedColumnName = "UF_ID", nullable=false)	
 	private Uf uf;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "PESSOA_ID", referencedColumnName = "PESSOA_ID", nullable=false)	
 	private Pessoa pessoa;
 	
@@ -152,12 +153,13 @@ public class Endereco implements Serializable {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
+		result = prime * result + numero;
 		return result;
 	}
 
@@ -170,7 +172,12 @@ public class Endereco implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Endereco other = (Endereco) obj;
-		if (id != other.id)
+		if (cep == null) {
+			if (other.cep != null)
+				return false;
+		} else if (!cep.equals(other.cep))
+			return false;
+		if (numero != other.numero)
 			return false;
 		return true;
 	}

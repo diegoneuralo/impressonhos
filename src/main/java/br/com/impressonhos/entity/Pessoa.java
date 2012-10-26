@@ -3,16 +3,22 @@ package br.com.impressonhos.entity;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NoResultException;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,6 +26,7 @@ import javax.persistence.UniqueConstraint;
 
 import br.com.impressonhos.enums.Const;
 import br.com.impressonhos.enums.TipoPessoa;
+import br.com.impressonhos.util.exception.ObjectAlreadyExistsException;
 
 /**
  * @TODO Perguntar para o rafael como faço para "pegar" o endereço e o telefone de uma pessoa através
@@ -39,12 +46,15 @@ import br.com.impressonhos.enums.TipoPessoa;
 			name = "Pessoa.getByNameAndRg", 
 			query = "from Pessoa p where trim(upper(p.nome)) like upper('%?%') and trim(p.rg) = ?"),
 	@NamedQuery(
+			name = "Pessoa.getByNameAndEmail", 
+			query = "from Pessoa p where trim(upper(p.nome)) like upper('%?%') and trim(p.email) = lower('%?%')"),
+	@NamedQuery(
 			name = "Pessoa.getByEmail", 
 			query = "from Pessoa p where trim(p.email) like trim('%?%')")
 	})
 public class Pessoa implements Serializable {
-
-	private static final long serialVersionUID = -6454216118392800347L;
+	
+	private static final long serialVersionUID = 3279306335617207095L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,10 +64,10 @@ public class Pessoa implements Serializable {
 	@Column(name = "NOME", nullable = false, length = 60)
 	private String nome;
 
-	@Column(name = "RG", nullable = false)
+	@Column(name = "RG", nullable = true)
 	private String rg;
 	
-	@Column(name = "EMAIL", nullable = true)
+	@Column(name = "EMAIL", nullable = false)
 	private String email;
 
 	/**
@@ -70,11 +80,44 @@ public class Pessoa implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DATA_CADASTRO", nullable = false)
 	private Date dataCadastro;
-
+	
+	@Column(name = "IS_PROSPECT", nullable = false)
+	private boolean prospect;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "PESSOA_ID")
+	private List<Endereco> enderecos;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "PESSOA_ID")
+	private List<Telefone> telefones;
+ 
 	// ------------------------------------------------------------------------------- //
 	
 	public Pessoa() {
 		this.dataCadastro = new Date(System.currentTimeMillis());
+	}
+	
+	public List<Endereco> addEndereco(Endereco endereco) throws ObjectAlreadyExistsException{
+		if(this.enderecos.contains(endereco)) throw new ObjectAlreadyExistsException("endereco.ja.cadastrado");
+		this.enderecos.add(endereco);
+		return this.enderecos;
+	}
+	
+	public List<Endereco> removeEndereco(Endereco endereco) throws NoResultException{
+		if(!this.enderecos.remove(endereco)) throw new NoResultException("endereco.nao.encontrado.impossivel.remocao");	
+		return this.enderecos;
+	}
+	
+	public List<Telefone> addEndereco(Telefone telefone) throws ObjectAlreadyExistsException{
+		if(this.telefones.contains(telefone)) throw new ObjectAlreadyExistsException("telefone.ja.cadastrado");
+		this.telefones.add(telefone);
+		return this.telefones;
+	}
+	
+	public List<Telefone> removeEndereco(Telefone telefone) throws NoResultException{
+		if(!this.telefones.remove(telefone)) throw new NoResultException("telefone.nao.encontrado.impossivel.remocao");	
+		return this.telefones;
 	}
 	
 	// ------------------------------------------------------------------------------- //
@@ -117,6 +160,30 @@ public class Pessoa implements Serializable {
 
 	public Date getDataCadastro() {
 		return dataCadastro;
+	}
+
+	public boolean isProspect() {
+		return prospect;
+	}
+
+	public void setProspect(boolean prospect) {
+		this.prospect = prospect;
+	}
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
+
+	public List<Telefone> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(List<Telefone> telefones) {
+		this.telefones = telefones;
 	}
 
 	@Override
