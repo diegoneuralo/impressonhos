@@ -14,15 +14,15 @@ import javax.persistence.Table;
 import br.com.impressonhos.enums.Const;
 
 @Entity
-@Table(name = "LOGRADOURO", schema = Const.SCHEMA)
+@Table(name = "TIPO_LOGRADOURO", schema = Const.SCHEMA)
 @NamedQueries({ 
 	@NamedQuery(
-			name = "Logradouro.getByAbreviatura", 
-			query = "from Logradouro l where trim(l.abreviatura) like trim('%?%')")
+			name = "TipoLogradouro.getByAbreviatura", 
+			query = "from TipoLogradouro l where trim(l.abreviatura) like trim('%?%')")
 	})
 public class TipoLogradouro implements Serializable {
 
-	private static final long serialVersionUID = -1503464372538643622L;
+	private static final long serialVersionUID = -1920822287242987013L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,8 +32,8 @@ public class TipoLogradouro implements Serializable {
 	@Column(name = "ABREVIATURA", length = 5, nullable=true)
 	private String abreviatura;
 	
-	@Column(name = "LOGRADOURO", length = 30, nullable=false)
-	private String logradouro;
+	@Column(name = "TIPO_LOGRADOURO", length = 30, nullable=false)
+	private String tipoLogradouro;
 
 	// ------------------------------------------------------------------------------- //
 	
@@ -49,12 +49,12 @@ public class TipoLogradouro implements Serializable {
 		this.abreviatura = abreviatura;
 	}
 
-	public String getLogradouro() {
-		return logradouro;
+	public String getTipoLogradouro() {
+		return tipoLogradouro;
 	}
 
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
+	public void setTipoLogradouro(String logradouro) {
+		this.tipoLogradouro = logradouro;
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class TipoLogradouro implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Logradouro [id=" + id + ", logradouro=" + logradouro + "]";
+		return "Logradouro [id=" + id + ", tipoLogradouro=" + tipoLogradouro + "]";
 	}
 	
 }

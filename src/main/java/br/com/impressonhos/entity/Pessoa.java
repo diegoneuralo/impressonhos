@@ -14,7 +14,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.NoResultException;
@@ -27,11 +26,6 @@ import javax.persistence.UniqueConstraint;
 import br.com.impressonhos.enums.Const;
 import br.com.impressonhos.enums.TipoPessoa;
 import br.com.impressonhos.util.exception.ObjectAlreadyExistsException;
-
-/**
- * @TODO Perguntar para o rafael como faço para "pegar" o endereço e o telefone de uma pessoa através
- * da própria entidade Pessoa - acho que é um @OneToMany - mas não tenho certeza de como funciona isso.
- */
 
 @Entity
 @Table(
@@ -84,12 +78,12 @@ public class Pessoa implements Serializable {
 	@Column(name = "IS_PROSPECT", nullable = false)
 	private boolean prospect;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "PESSOA_ID")
+	@OneToMany(mappedBy="pessoa", cascade = CascadeType.ALL)
+	//@JoinColumn(name = "PESSOA_ID")
 	private List<Endereco> enderecos;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "PESSOA_ID")
+	@OneToMany(mappedBy="pessoa", cascade = CascadeType.ALL)
+	//@JoinColumn(name = "PESSOA_ID")
 	private List<Telefone> telefones;
  
 	// ------------------------------------------------------------------------------- //

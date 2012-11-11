@@ -130,9 +130,11 @@ img.left {
 	font-size: 13px;
 }
 
-#wrapmenu {
+#wrap-menu {
 	margin: 0 auto;
-	width: 95%
+	height: 40px;
+	width: 95%;
+	margin-bottom: 10px; 
 }
 
 .login {

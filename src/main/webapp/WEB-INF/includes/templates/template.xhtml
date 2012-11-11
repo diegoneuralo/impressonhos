@@ -42,11 +42,13 @@
 			</div>
 
 			<div id="wrap-menu">
-				<ui:include src="/main/menu.xhtml" />
+				<ui:include src="/WEB-INF/includes/main/menu.xhtml" />
 			</div>
 		
 			<div id="main">
-				<ui:insert name="body"></ui:insert>
+				<ui:insert name="body">
+					<ui:include src="#{navigation.selectedIncludePath}" />
+				</ui:insert>
 			</div>		
 
 			<br></br>

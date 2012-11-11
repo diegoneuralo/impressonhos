@@ -3,10 +3,10 @@ package br.com.impressonhos.controller.mb;
 import java.io.IOException;
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Event;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -21,7 +21,9 @@ import org.picketlink.idm.impl.api.PasswordCredential;
 import org.picketlink.idm.impl.api.model.SimpleUser;
 
 import br.com.impressonhos.entity.User;
+import br.com.impressonhos.enums.Const;
 import br.com.impressonhos.service.UserService;
+import br.com.impressonhos.util.Services;
 
 @Named("authentication")
 @SessionScoped
@@ -36,7 +38,7 @@ public class AuthenticationMB extends BaseAuthenticator implements Authenticator
 	@Override
 	public void authenticate()
 	{
-		logger.info("Logging in " + credentials.getUsername());
+		logger.info("Tentativa de login: " + credentials.getUsername());
 		User user = userService.getUserByCredential(credentials.getUsername(), credentials.getPassword());
 		if (user != null && credentials.getCredential() instanceof PasswordCredential && 
 			user.getPassword().equals(((PasswordCredential) credentials.getCredential()).getValue())) 
@@ -45,7 +47,9 @@ public class AuthenticationMB extends BaseAuthenticator implements Authenticator
 			super.setStatus(AuthenticationStatus.SUCCESS);
 			identity.addRole(credentials.getUsername(), "USERS", "GROUP");
 			super.setUser(new SimpleUser(user.getLogin()));
-			redirectToViewId("/main/main.jsf");
+			
+			Services.sessionSetAttribute("SYS_TELA", Const.PRINCIPAL);
+			redirectToViewId(Const.HOME);
 			return;
 		}
 		setStatus(AuthenticationStatus.FAILURE);
@@ -76,8 +80,8 @@ public class AuthenticationMB extends BaseAuthenticator implements Authenticator
 		if (!isLoggedIn()) 
 		{
 			credentials.setUsername("");
-			redirectToViewId("/login.jsf");
 			addLoginErrorMessage("User not found!");
+			redirectToViewId("/login.jsf");
 		}
 	}
 
@@ -100,7 +104,7 @@ public class AuthenticationMB extends BaseAuthenticator implements Authenticator
 	{
 		FacesMessage message =  new FacesMessage(errorMessage);
 		message.setSeverity(severity);
-		FacesContext.getCurrentInstance().addMessage(componentId, message);		
+		FacesContext.getCurrentInstance().addMessage(componentId, message);	
 	}
 
 	private static final long serialVersionUID = 8944449513389432047L;

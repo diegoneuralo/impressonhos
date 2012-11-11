@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
 	version="1.0">
 
-	<persistence-unit name="impressonhos"><!-- transaction-type="JTA" -->
+	<persistence-unit name="impressonhos">
 	
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
@@ -13,24 +13,6 @@
 	
 		<!-- comment this when openshift is being used -->
 		<jta-data-source>java:jboss/datasources/postgresDS</jta-data-source> 
-
-		<class>br.com.impressonhos.entity.AgregadoEvento</class>
-		<class>br.com.impressonhos.entity.Cardapio</class>
-		<class>br.com.impressonhos.entity.ClienteEvento</class>
-		<class>br.com.impressonhos.entity.Contratante</class>
-		<class>br.com.impressonhos.entity.Contrato</class>
-		<class>br.com.impressonhos.entity.Convite</class>
-		<class>br.com.impressonhos.entity.Endereco</class>
-		<class>br.com.impressonhos.entity.Evento</class>
-		<class>br.com.impressonhos.entity.ItemEvento</class>
-		<class>br.com.impressonhos.entity.Local</class>
-		<class>br.com.impressonhos.entity.TipoLogradouro</class>
-		<class>br.com.impressonhos.entity.MaterialEvento</class>
-		<class>br.com.impressonhos.entity.ModeloConvite</class>
-		<class>br.com.impressonhos.entity.Pessoa</class>
-		<class>br.com.impressonhos.entity.Telefone</class>
-		<class>br.com.impressonhos.entity.Uf</class>
-		<class>br.com.impressonhos.entity.User</class>
 		
 		<properties>
 			<!-- never comment -->
