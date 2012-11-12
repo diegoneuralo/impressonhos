@@ -8,7 +8,6 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
-import br.com.impressonhos.enums.Const;
 import br.com.impressonhos.util.Services;
 
 @Named("navigation")

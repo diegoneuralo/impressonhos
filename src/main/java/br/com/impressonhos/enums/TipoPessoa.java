@@ -10,8 +10,8 @@ package br.com.impressonhos.enums;
  *
  */
 public enum TipoPessoa {
-	FISICA(0, "FÍSICA"),
-	JURIDICA(1, "JURÍDICA");
+	FISICA(0, "fisica"),
+	JURIDICA(1, "juridica");
 	
 	private Integer tipo;
 	private String descricao;

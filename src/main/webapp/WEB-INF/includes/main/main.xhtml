@@ -3,8 +3,12 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:h="http://java.sun.com/jsf/html">
-		<h:panelGroup id="panelPrincipal">
-			teste....
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:is="http://java.sun.com/jsf/composite/components">
+	<h:form id="main-form">
+		<h:panelGroup id="painel-principal">
+			<is:pessoa id="pessoa" entidadePessoa="#{main.pessoa}" tiposDePessoa="#{main.tiposDePessoa}"/>
+			<p:commandButton value="#{msg['gravar']}" action="#{main.gravar}" update=":main-form:painel-principal"/>
 		</h:panelGroup>
+	</h:form>
 </ui:composition>
