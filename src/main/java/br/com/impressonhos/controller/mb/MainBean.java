@@ -23,9 +23,17 @@ public class MainBean implements Serializable{
 		pessoa = new Pessoa();
 	}
 	
-	public void gravar(){
-		System.out.println("MainBean.gravar()");
+	public void save(){
+		System.out.println("MainBean.save()");
 		System.out.println(pessoa.getTipo().name());
+	}
+	
+	public void cancel(){
+		System.out.println("MainBean.cancel()");
+	}
+	
+	public void delete(){
+		System.out.println("MainBean.delete()");
 	}
 	
 	/* -- Getters and Setters */

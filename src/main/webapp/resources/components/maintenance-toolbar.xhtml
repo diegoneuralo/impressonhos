@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<cc:interface>
+		<cc:attribute name="id" default="maintenance-toolbar"/>
+   	     
+		<cc:attribute name="renderSave" 	default="true"/>
+		<cc:attribute name="disableSave"	default="false"/>
+		<cc:attribute name="saveLabel" 	default="gravar"/>
+		<cc:attribute name="saveTooltip" 	default="gravar.tooltip"/>
+		<cc:attribute name="saveOnClick" 	default=""/>
+		<cc:attribute name="saveAction"		method-signature="void actionSave()"/>
+		<cc:attribute name="saveUpdate" 	default="@this"/>
+			     
+		<cc:attribute name="renderDelete"	default="true" />
+		<cc:attribute name="disableDelete" default="false"/>
+		<cc:attribute name="deleteLabel" 	default="excluir"/>
+		<cc:attribute name="deleteTooltip" default="excluir.tooltip"/>
+		<cc:attribute name="deleteAction" 	method-signature="void actionDelete()"/>
+		<cc:attribute name="deleteUpdate" 	default="@this"/>
+		   	     
+		<cc:attribute name="renderCancel" 	default="true" />
+		<cc:attribute name="disableCancel" default="false"/>
+		<cc:attribute name="cancelLabel" 	default="cancelar"/>
+		<cc:attribute name="cancelTooltip" default="cancelar.tooltip"/>
+		<cc:attribute name="cancelOnClick" default=""/>
+		<cc:attribute name="cancelAction" 	method-signature="void actionCancel()"/>
+		<cc:attribute name="cancelUpdate" 	default="@this"/>	
+
+		<cc:attribute name="renderTitle" 	default="false" />
+		<cc:attribute name="title" />
+	</cc:interface>
+
+	<cc:implementation>
+		<p:confirmDialog 
+			id="toolbar-confirm-dialog"
+			modal="true"
+			message="#{msg['pergunta.excluir']}"
+			header="#{msg['confirmacao']}" 
+			severity="alert"
+			widgetVar="toolbarDialog">
+			<h:panelGroup id="toolbar-dialog-panel">
+				<p:commandButton
+					id="toolbar-btn-delete-executor"
+					value="#{msg['sim']}" 
+					immediate="true"
+					action="#{cc.attrs.deleteAction}" 
+					update="#{cc.attrs.deleteUpdate}"
+					onclick="toolbarDialog.hide()"/>
+				<p:commandButton 
+					value="#{msg['nao']}" 
+					onclick="toolbarDialog.hide();" 
+					type="button" />
+			</h:panelGroup>
+		</p:confirmDialog>
+	
+		<p:toolbar id="#{cc.attrs.id}" style="width: 98%;">
+			<p:toolbarGroup 
+				id="toolbar-buttons" 
+				align="left" 
+				style="width: 80%;">
+				
+				<p:commandButton 
+					id="toolbar-btn-cancel" 
+					action="#{cc.attrs.cancelAction}" 
+					value="#{msg[cc.attrs.cancelLabel]}" 
+					immediate="true" 
+					update="#{cc.attrs.cancelUpdate}" 
+					onclick="#{cc.attrs.cancelOnClick}"
+					icon="ui-icon-cancel"
+					process="@this"/>
+				<p:tooltip for="toolbar-btn-cancel">
+			 		<h:outputText styleClass="textoMenu" value="#{msg[cc.attrs.cancelTooltip]}" />
+			 	</p:tooltip>
+				 	
+				<p:separator />
+				<p:commandButton 
+					id="toolbar-btn-save" 
+					action="#{cc.attrs.saveAction}" 
+					value="#{msg[cc.attrs.saveLabel]}" 
+					update="#{cc.attrs.saveUpdate}" 
+					onclick="#{cc.attrs.saveOnClick}"
+					icon="ui-icon-disk"/>
+				<p:tooltip for="toolbar-btn-save">
+			 		<h:outputText styleClass="textoMenu" value="#{msg[cc.attrs.saveTooltip]}"/>
+			 	</p:tooltip>
+			 	
+			 	<p:separator />
+				<p:commandButton 
+					id="toolbar-btn-delete" 
+					type="button"
+					value="#{msg[cc.attrs.deleteLabel]}" 
+					onclick="toolbarDialog.show()"
+					icon="ui-icon-trash"/>
+				<p:tooltip for="toolbar-btn-delete">
+			 		<h:outputText styleClass="textoMenu" value="#{msg[cc.attrs.deleteTooltip]}"/>
+			 	</p:tooltip>
+				
+			</p:toolbarGroup>
+			
+			<p:toolbarGroup 
+				id="toolbar-title" 
+				align="left" 
+				rendered="#{cc.attrs.renderTitle}"
+				style="width: 20%;">
+				<h:outputText value="#{msg[cc.attrs.title]}"/>
+			</p:toolbarGroup>
+		</p:toolbar>
+		
+		<br/>
+	</cc:implementation>
+</html>

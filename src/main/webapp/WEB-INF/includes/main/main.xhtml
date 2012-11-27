@@ -7,8 +7,14 @@
 	xmlns:is="http://java.sun.com/jsf/composite/components">
 	<h:form id="main-form">
 		<h:panelGroup id="painel-principal">
+			<is:maintenance-toolbar
+				cancelAction="#{main.cancel}"
+				deleteAction="#{main.delete}"
+				saveAction="#{main.save}"
+				renderTitle="true"
+				title="prospects"/>
 			<is:pessoa id="pessoa" entidadePessoa="#{main.pessoa}" tiposDePessoa="#{main.tiposDePessoa}"/>
-			<p:commandButton value="#{msg['gravar']}" action="#{main.gravar}" update=":main-form:painel-principal"/>
+			<p:commandButton value="#{msg['gravar']}" action="#{main.save}" update=""/>
 		</h:panelGroup>
 	</h:form>
 </ui:composition>

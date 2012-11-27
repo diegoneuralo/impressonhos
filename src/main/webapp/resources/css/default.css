@@ -140,8 +140,19 @@ img.left {
 #wrap-menu {
 	margin: 0 auto;
 	height: 40px;
-	width: 95%;
+	width: 98%;
 	margin-bottom: 10px; 
+}
+
+#main {
+	padding-left: 13px;
+}
+
+.ui-menu, .ui-menu .ui-menu-child {
+	background: #C4C4C4 url("/impressonhos/javax.faces.resource/images/ui-bg_highlight-soft_100_c4c4c4_1x100.png.jsf?ln=primefaces-aristo") 50% 50% repeat-x;
+	background: #C4C4C4 linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+	background: #C4C4C4 -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.8)), to(rgba(255, 255, 255, 0)));
+	background: #C4C4C4 -moz-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
 }
 
 .login {
@@ -155,4 +166,8 @@ img.left {
 
 .login h2.title {
 	height: 30px;
+}
+
+.main-form:painel-principal{
+	width: 99%;
 }
