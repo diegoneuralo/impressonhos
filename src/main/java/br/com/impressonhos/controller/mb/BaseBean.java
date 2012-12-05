@@ -5,8 +5,15 @@ import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
-public class BaseBean implements Serializable{		
+import br.com.impressonhos.util.MessageBundleLoader;
+
+public class BaseBean implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
+	@Inject protected MessageBundleLoader mbl;
 
 	protected void addErrorMessage(String componentId, String errorMessage){
 		addMessage(componentId, errorMessage, FacesMessage.SEVERITY_ERROR);
@@ -29,6 +36,4 @@ public class BaseBean implements Serializable{
 		message.setSeverity(severity);
 		FacesContext.getCurrentInstance().addMessage(componentId, message);		
 	}
-	
-	private static final long serialVersionUID = 1L;
 }

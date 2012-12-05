@@ -10,7 +10,7 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 	<cc:interface>
-	     <cc:attribute name="entidadePessoa" />
+	     <cc:attribute name="entidade" />
 	     <cc:attribute name="tiposDePessoa" />
 	</cc:interface>
 
@@ -18,22 +18,22 @@
 		<h:panelGrid columns="4" cellpadding="3" cellspacing="3">
 			<h:outputText value="#{msg['nome']}"/>
 			<h:outputText value=":" />
-			<p:inputText id="nome" value="#{cc.attrs.entidadePessoa.nome}" required="true" label="#{msg['nome']}" style="width: 380px"/>
+			<p:inputText id="nome" value="#{cc.attrs.entidade.nome}" required="true" label="#{msg['nome']}" style="width: 380px"/>
 			<p:message for="nome"/>
 
 			<h:outputText value="#{msg['email']}"/>
 			<h:outputText value=":" />
-			<p:inputText id="email" value="#{cc.attrs.entidadePessoa.email}" required="true" label="#{msg['email']}" style="width: 380px"/>
+			<p:inputText id="email" value="#{cc.attrs.entidade.email}" required="true" label="#{msg['email']}" style="width: 380px"/>
 			<p:message for="email"/>
 
 			<h:outputText value="#{msg['rg']}"/>
 			<h:outputText value=":" />
-			<pe:inputNumber id="rg" value="#{cc.attrs.entidadePessoa.rg}" required="true" label="#{msg['rg']}" thousandSeparator="" decimalPlaces="0"/>
+			<pe:inputNumber id="rg" value="#{cc.attrs.entidade.rg}" required="true" label="#{msg['rg']}" thousandSeparator="" decimalPlaces="0"/>
 			<p:message for="rg"/>
 			
 			<h:outputText value="#{msg['pessoa']}"/>
 			<h:outputText value=":" />
-			<p:selectOneRadio id="tipo-pessoa" value="#{cc.attrs.entidadePessoa.tipo}" required="true" label="#{msg['pessoa']}">
+			<p:selectOneRadio id="tipo-pessoa" value="#{cc.attrs.entidade.tipo}" required="true" label="#{msg['pessoa']}">
 			  <f:selectItems value="#{cc.attrs.tiposDePessoa}" var="tipos" itemValue="#{tipos}" itemLabel="#{msg[tipos.descricao]}"/>
 			</p:selectOneRadio>
 			<p:message for="tipo-pessoa"/>

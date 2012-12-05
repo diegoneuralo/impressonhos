@@ -7,14 +7,19 @@
 	xmlns:is="http://java.sun.com/jsf/composite/components">
 	<h:form id="main-form">
 		<h:panelGroup id="painel-principal">
-			<is:maintenance-toolbar
-				cancelAction="#{main.cancel}"
-				deleteAction="#{main.delete}"
-				saveAction="#{main.save}"
-				renderTitle="true"
-				title="prospects"/>
-			<is:pessoa id="pessoa" entidadePessoa="#{main.pessoa}" tiposDePessoa="#{main.tiposDePessoa}"/>
-			<p:commandButton value="#{msg['gravar']}" action="#{main.save}" update=""/>
+			<p:panel header="#{msg['pessoa']}" style="width: 98%;">
+				<is:maintenance-toolbar
+					cancelAction="#{main.cancel}"
+					deleteAction="#{main.delete}"
+					saveAction="#{main.save}"/>
+				<is:pessoa id="pessoa" entidade="#{main.pessoa}" tiposDePessoa="#{main.tiposDePessoa}"/>
+				<is:endereco 
+					id="endereco" 
+					entidade="#{main.endereco}" 
+					tiposDeEndereco="#{main.tiposDeEndereco}" 
+					listaUf="#{main.listaUf}"
+					listaTipoLogradouro="#{main.listaTipoLogradouro}"/>
+			</p:panel>
 		</h:panelGroup>
 	</h:form>
 </ui:composition>

@@ -18,7 +18,10 @@ import br.com.impressonhos.enums.Const;
 @NamedQueries({ 
 	@NamedQuery(
 			name = "TipoLogradouro.getByAbreviatura", 
-			query = "from TipoLogradouro l where trim(l.abreviatura) like trim('%?%')")
+			query = "from TipoLogradouro l where trim(l.abreviatura) like trim('%?%')"),
+	@NamedQuery(
+			name = "TipoLogradouro.getAll", 
+			query = "from TipoLogradouro l")
 	})
 public class TipoLogradouro implements Serializable {
 

@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<cc:interface>
+	     <cc:attribute name="entidade" required="true"/>
+	     <cc:attribute name="tiposDeEndereco" required="true"/>
+   	     <cc:attribute name="listaUf" required="true"/>
+   	     <cc:attribute name="listaTipoLogradouro" required="true"/>
+	</cc:interface>
+
+	<cc:implementation>
+		<br/>
+		<p:panel header="#{msg['endereco']}" toggleable="true">
+			<h:panelGrid columns="4" cellpadding="3" cellspacing="3">
+				<h:outputText value="#{msg['tipo.endereco']}"/>
+				<h:outputText value=":" />
+				<p:selectOneMenu id="tipo-endereco" value="#{cc.attrs.entidade.tipoEndereco}" required="true" label="#{msg['tipo.endereco']}">
+				  <f:selectItems value="#{cc.attrs.tiposDeEndereco}" var="tiposEnd" itemValue="#{tiposEnd}" itemLabel="#{msg[tiposEnd.descricao]}"/>
+				</p:selectOneMenu>
+				<h:outputText/>
+			
+				<h:outputText value="#{msg['logradouro']}"/>
+				<h:outputText value=":" />
+				<h:panelGrid columns="2" cellpadding="3" cellspacing="3">
+					<p:selectOneMenu id="tipo-logradouro" value="#{cc.attrs.entidade.tipoLogradouro}" required="true" label="#{msg['tipo.logradouro']}">
+					  <f:selectItems value="#{cc.attrs.listaTipoLogradouro}"/>
+					</p:selectOneMenu>
+					<p:inputText 
+						id="logradouro" 
+						value="#{cc.attrs.entidade.logradouro}" 
+						required="true" 
+						label="#{msg['logradouro']}" 
+						style="width: 530px">
+						<f:validateLength minimum="2"/>
+					</p:inputText>
+				</h:panelGrid>
+	
+				<p:message for="logradouro"/>
+	
+				<h:outputText value="#{msg['numero']}"/>
+				<h:outputText value=":" />
+				<h:panelGrid columns="2" cellpadding="3" cellspacing="3">
+					<h:panelGrid columns="2" cellpadding="3" cellspacing="3">
+						<pe:inputNumber 
+							id="end-numero" 
+							value="#{cc.attrs.entidade.numero}" 
+							required="true" 
+							label="#{msg['numero']}" 
+							style="width: 80px"
+							thousandSeparator="." 
+							decimalSeparator=","
+							decimalPlaces="0">
+							<f:validateLongRange minimum="0"/>
+						</pe:inputNumber>
+						<h:panelGrid columns="2" cellpadding="3" cellspacing="3">
+							<p:tooltip for="end-numero">
+						 		<h:outputText styleClass="textoMenu" value="#{msg['zero.para.sem.numero']}"/>
+						 	</p:tooltip>
+							<p:message for="end-numero"/>
+						</h:panelGrid>
+					</h:panelGrid>
+					
+					<h:panelGrid columns="4" cellpadding="3" cellspacing="3">
+						<h:outputText value="#{msg['cep']}"/>
+						<h:outputText value=":" />
+						<p:inputMask 
+							id="cep" 
+							value="#{cc.attrs.entidade.cep}" 
+							required="true" 
+							label="#{msg['cep']}" 
+							style="width: 80px" 
+							mask="99.999-999"/>
+						<p:message for="cep"/>
+					</h:panelGrid>
+				</h:panelGrid>
+				<h:outputText/>
+				
+
+				<h:outputText value="#{msg['cidade']}"/>
+				<h:outputText value=":" />
+				<h:panelGrid columns="2" cellpadding="3" cellspacing="3">
+					<h:panelGrid columns="2" cellpadding="3" cellspacing="3">
+						<p:inputText id="cidade" value="#{cc.attrs.entidade.cidade}" required="true" label="#{msg['cidade']}"/>
+						<p:message for="cidade"/>
+					</h:panelGrid>
+					<h:panelGrid columns="4" cellpadding="3" cellspacing="3">
+						<h:outputText value="#{msg['uf']}"/>
+						<h:outputText value=":" />
+						<p:selectOneMenu id="uf" value="#{cc.attrs.entidade.uf}" required="true" label="#{msg['tipo.endereco']}">
+						  <f:selectItems value="#{cc.attrs.listaUf}"/>
+						</p:selectOneMenu>
+						<p:message for="uf"/>
+					</h:panelGrid>
+				</h:panelGrid>
+				
+			</h:panelGrid>
+		</p:panel>
+	</cc:implementation>
+</html>

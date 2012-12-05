@@ -12,10 +12,10 @@ package br.com.impressonhos.enums;
  *
  */
 public enum TipoEndereco {
-	RECEPTIVO(0, "RECEPTIVO"),
-	CERIMONIAL(1, "CERIMONIAL"),
-	RESIDENCIAL(2, "RESIDENCIAL"),
-	COMERCIAL(2, "COMERCIAL");
+	RECEPTIVO(0, "receptivo"),
+	CERIMONIAL(1, "cerimonial"),
+	RESIDENCIAL(2, "residencial"),
+	COMERCIAL(3, "comercial");
 	
 	private Integer tipo;
 	private String descricao;

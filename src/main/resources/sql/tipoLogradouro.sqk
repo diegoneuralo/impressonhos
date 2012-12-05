@@ -1,0 +1,25 @@
+INSERT INTO impressonhos.tipo_logradouro(
+            logradouro_id, abreviatura, tipo_logradouro)
+    VALUES 
+	(1, 'Al.', 'Alameda'),
+	(2, 'Av.', 'Avenida'),
+	(3, 'Bal.', 'Balneário'),
+	(4, 'Bl.', 'Bloco'),
+	(5, 'Ch.', 'Chácara'),
+	(6, 'Cj.', 'Conjunto'),
+	(7, 'Cond', 'Condomínio'),
+	(8, 'Est.', 'Estrada'),
+	(9, 'Faz.', 'Fazenda'),
+	(10, 'Gal.', 'Galeria'),
+	(11, 'Gja,', 'Granja'),
+	(12, 'Jd.', 'Jardim'),
+	(13, 'Lg.', 'Largo'),
+	(14, 'Lot.', 'Loteamento'),
+	(15, 'Pç.', 'Praça'),
+	(16, 'Pr.', 'Praia'),
+	(17, 'Prq.', 'Parque'),
+	(18, 'Q.', 'Quadra'),
+	(19, 'R.', 'Rua'),
+	(20, 'St.', 'Setor'),
+	(21, 'Tv.', 'Travessa'),
+	(22, 'Vl.', 'Vila');

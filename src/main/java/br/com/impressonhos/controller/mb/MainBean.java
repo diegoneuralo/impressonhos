@@ -1,26 +1,41 @@
 package br.com.impressonhos.controller.mb;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
+import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.impressonhos.entity.Endereco;
 import br.com.impressonhos.entity.Pessoa;
+import br.com.impressonhos.entity.TipoLogradouro;
+import br.com.impressonhos.entity.Uf;
+import br.com.impressonhos.enums.TipoEndereco;
 import br.com.impressonhos.enums.TipoPessoa;
+import br.com.impressonhos.service.TipoLogradouroService;
+import br.com.impressonhos.service.UfService;
 
 @Named("main")
 @ViewScoped
-public class MainBean implements Serializable{
+public class MainBean extends BaseBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private Pessoa pessoa;
+	@Inject private Pessoa pessoa;
+	@Inject private Endereco endereco;
+	@Inject private UfService ufService;
+	@Inject private TipoLogradouroService tipoLogradouroService;
+
+	List<SelectItem> listaUf;
+	List<SelectItem> listaTipoLogradouro;
 
 	@PostConstruct
 	public void construct(){
 		System.out.println("MainBean.construct()");
-		pessoa = new Pessoa();
 	}
 	
 	public void save(){
@@ -48,5 +63,37 @@ public class MainBean implements Serializable{
 
 	public TipoPessoa[] getTiposDePessoa() {
 		return TipoPessoa.values();
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
+	public TipoEndereco[] getTiposDeEndereco() {
+		return TipoEndereco.values();
+	}
+	
+	public List<SelectItem> getListaUf() {
+		if(listaUf == null){
+			listaUf = new ArrayList<SelectItem>();
+			listaUf.add(new SelectItem(null, mbl.getMessage("selecione.um.valor")));
+			for(Uf uf: ufService.findAll())
+				listaUf.add(new SelectItem(uf, uf.getEstado()));
+		}
+		return listaUf;
+	}
+	
+	public List<SelectItem> getListaTipoLogradouro() {
+		if(listaTipoLogradouro == null){
+			listaTipoLogradouro = new ArrayList<SelectItem>();
+			listaTipoLogradouro.add(new SelectItem(null, mbl.getMessage("selecione.um.valor")));
+			for(TipoLogradouro tl: tipoLogradouroService.findAll())
+				listaTipoLogradouro.add(new SelectItem(tl, tl.getTipoLogradouro()));
+		}
+		return listaTipoLogradouro;
 	}
 }
