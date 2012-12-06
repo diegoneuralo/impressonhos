@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<cc:interface>
+		<cc:attribute name="lista" />
+		<cc:attribute name="deleteAction" method-signature="void actionSave()"/>
+	</cc:interface>
+
+	<cc:implementation>
+		<p:confirmDialog 
+			id="lista-endereco-confirm-dialog"
+			modal="true"
+			message="#{msg['pergunta.excluir']}"
+			header="#{msg['confirmacao']}" 
+			severity="alert"
+			widgetVar="listaEnderecoDialog">
+			<h:panelGroup id="lista-endereco-dialog-panel">
+				<p:commandButton
+					id="lista-endereco-btn-delete-executor"
+					value="#{msg['sim']}" 
+					immediate="true"
+					action="#{cc.attrs.deleteAction}" 
+					update="@(lista-enderecos)"
+					onclick="listaEnderecoDialog.hide()"/>
+				<p:commandButton 
+					value="#{msg['nao']}" 
+					onclick="listaEnderecoDialog.hide();" 
+					type="button" />
+			</h:panelGroup>
+		</p:confirmDialog>
+		
+		<p:dataTable 
+			id="lista-enderecos"
+			emptyMessage="#{msg['sem.registros']}"
+			var="end"
+			style="width: 100%;">
+			
+			<p:column>
+				<h:outputText value="#{msg[end.tipoEndereco.descricao]}" />
+			</p:column>
+			
+			<p:column>
+				<h:outputText value="#{end.tipoLogradouro.abreviatura}" />
+			</p:column>
+
+			<p:column headerText="#{msg['logradouro']}">
+				<h:outputText value="#{end.logradouro}" />
+			</p:column>
+			
+			<p:column headerText="#{msg['numero']}">
+				<h:outputText value="#{end.numero}" />
+			</p:column>
+			
+			<p:column headerText="#{msg['cep']}">
+				<h:outputText value="#{end.cep}" />
+			</p:column>
+			
+			<p:column headerText="#{msg['cidade']}">
+				<h:outputText value="#{end.cidade}" />
+			</p:column>
+			
+			<p:column headerText="#{msg['uf']}">
+				<h:outputText value="#{end.uf.sigla}" />
+			</p:column>
+			
+			<p:column>
+				<p:commandButton 
+					id="lista-endereco-bnt-excluir"
+					type="button" value="#{msg['excluir']}"
+					oncomplete="listaEnderecoDialog.show()"/>
+			</p:column>
+		</p:dataTable>
+	</cc:implementation>
+</html>

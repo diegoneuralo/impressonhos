@@ -11,7 +11,7 @@ package br.com.impressonhos.enums;
  * @author riccardof
  *
  */
-public enum TipoEndereco {
+public enum TipoEndereco {	
 	RECEPTIVO(0, "receptivo"),
 	CERIMONIAL(1, "cerimonial"),
 	RESIDENCIAL(2, "residencial"),

@@ -10,19 +10,26 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 	<cc:interface>
-	     <cc:attribute name="entidade" required="true"/>
-	     <cc:attribute name="tiposDeEndereco" required="true"/>
-   	     <cc:attribute name="listaUf" required="true"/>
-   	     <cc:attribute name="listaTipoLogradouro" required="true"/>
+	    <cc:attribute name="entidade" required="true"/>
+	    <cc:attribute name="tiposDeEndereco" required="true"/>
+   	    <cc:attribute name="listaUf" required="true"/>
+   	    <cc:attribute name="listaTipoLogradouro" required="true"/>
+		<cc:attribute name="listaDeleteAction" method-signature="void actionSave()"/>
+		<cc:attribute name="exibirLista" default="true"/>
+		<cc:attribute name="lista"/>
 	</cc:interface>
 
-	<cc:implementation>
+	<cc:implementation xmlns:is="http://java.sun.com/jsf/composite/components">
 		<br/>
 		<p:panel header="#{msg['endereco']}" toggleable="true">
 			<h:panelGrid columns="4" cellpadding="3" cellspacing="3">
 				<h:outputText value="#{msg['tipo.endereco']}"/>
 				<h:outputText value=":" />
-				<p:selectOneMenu id="tipo-endereco" value="#{cc.attrs.entidade.tipoEndereco}" required="true" label="#{msg['tipo.endereco']}">
+				<p:selectOneMenu 
+					id="tipo-endereco" 
+					value="#{cc.attrs.entidade.tipoEndereco}" 
+					required="true" 
+					label="#{msg['tipo.endereco']}">
 				  <f:selectItems value="#{cc.attrs.tiposDeEndereco}" var="tiposEnd" itemValue="#{tiposEnd}" itemLabel="#{msg[tiposEnd.descricao]}"/>
 				</p:selectOneMenu>
 				<h:outputText/>
@@ -30,7 +37,12 @@
 				<h:outputText value="#{msg['logradouro']}"/>
 				<h:outputText value=":" />
 				<h:panelGrid columns="2" cellpadding="3" cellspacing="3">
-					<p:selectOneMenu id="tipo-logradouro" value="#{cc.attrs.entidade.tipoLogradouro}" required="true" label="#{msg['tipo.logradouro']}">
+					<p:selectOneMenu 
+						id="tipo-logradouro" 
+						value="#{cc.attrs.entidade.tipoLogradouro}" 
+						required="true" 
+						label="#{msg['tipo.logradouro']}"
+						converter="entityConverter">
 					  <f:selectItems value="#{cc.attrs.listaTipoLogradouro}"/>
 					</p:selectOneMenu>
 					<p:inputText 
@@ -94,7 +106,12 @@
 					<h:panelGrid columns="4" cellpadding="3" cellspacing="3">
 						<h:outputText value="#{msg['uf']}"/>
 						<h:outputText value=":" />
-						<p:selectOneMenu id="uf" value="#{cc.attrs.entidade.uf}" required="true" label="#{msg['tipo.endereco']}">
+						<p:selectOneMenu 
+							id="uf" 
+							value="#{cc.attrs.entidade.uf}" 
+							required="true" 
+							label="#{msg['tipo.endereco']}"
+							converter="entityConverter">
 						  <f:selectItems value="#{cc.attrs.listaUf}"/>
 						</p:selectOneMenu>
 						<p:message for="uf"/>
@@ -102,6 +119,13 @@
 				</h:panelGrid>
 				
 			</h:panelGrid>
+			
+			<br/>
+			<is:lista-enderecos
+				deleteAction="#{cc.attrs.listaDeleteAction}" 
+				rendered="#{cc.attrs.exibirLista}"
+				lista="#{cc.attrs.lista}"
+				id="enderecos"/>
 		</p:panel>
 	</cc:implementation>
 </html>
