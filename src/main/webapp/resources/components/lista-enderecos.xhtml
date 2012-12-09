@@ -11,7 +11,9 @@
 
 	<cc:interface>
 		<cc:attribute name="lista" />
-		<cc:attribute name="deleteAction" method-signature="void actionSave()"/>
+		<cc:attribute name="deleteAction" method-signature="void deleteAction()"/>
+		<cc:attribute name="addAction" method-signature="void addAction()"/>
+		<cc:attribute name="btnAddListConfs" default=":main-form:endereco:comp-endereco"/>
 	</cc:interface>
 
 	<cc:implementation>
@@ -37,6 +39,14 @@
 			</h:panelGroup>
 		</p:confirmDialog>
 		
+		<p:commandButton 
+			id="lista-endereco-btn-add-to-list"
+			value="#{msg['adicionar.endereco']}"
+			action="#{cc.attrs.addAction}"
+			process="#{cc.attrs.btnAddListConfs}"
+			update="#{cc.attrs.btnAddListConfs}"/>
+		<br/>
+		<br/>
 		<p:dataTable 
 			id="lista-enderecos"
 			emptyMessage="#{msg['sem.registros']}"

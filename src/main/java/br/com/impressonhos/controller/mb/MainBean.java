@@ -51,6 +51,14 @@ public class MainBean extends BaseBean implements Serializable{
 		System.out.println("MainBean.delete()");
 	}
 	
+	public void addEndereco(){
+		System.out.println("MainBean.addEndereco()");
+	}
+	
+	public void removeEndereco(){
+		System.out.println("MainBean.removeEndereco()");
+	}
+	
 	/* -- Getters and Setters */
 	
 	public Pessoa getPessoa() {

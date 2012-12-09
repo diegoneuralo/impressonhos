@@ -14,14 +14,16 @@
 	    <cc:attribute name="tiposDeEndereco" required="true"/>
    	    <cc:attribute name="listaUf" required="true"/>
    	    <cc:attribute name="listaTipoLogradouro" required="true"/>
-		<cc:attribute name="listaDeleteAction" method-signature="void actionSave()"/>
-		<cc:attribute name="exibirLista" default="true"/>
-		<cc:attribute name="lista"/>
+		<cc:attribute name="listaEnderecosDeleteAction" method-signature="void actionDelete()"/>
+		<cc:attribute name="listaEnderecosAddAction" method-signature="void actionAdd()"/>
+		<cc:attribute name="btnAddListConfs" default=":main-form:endereco:comp-endereco"/>
+		<cc:attribute name="exibirListaEnderecos" default="true"/>
+		<cc:attribute name="listaEnderecos"/>
 	</cc:interface>
 
 	<cc:implementation xmlns:is="http://java.sun.com/jsf/composite/components">
 		<br/>
-		<p:panel header="#{msg['endereco']}" toggleable="true">
+		<p:panel id="comp-endereco" header="#{msg['endereco']}" toggleable="true">
 			<h:panelGrid columns="4" cellpadding="3" cellspacing="3">
 				<h:outputText value="#{msg['tipo.endereco']}"/>
 				<h:outputText value=":" />
@@ -36,7 +38,7 @@
 			
 				<h:outputText value="#{msg['logradouro']}"/>
 				<h:outputText value=":" />
-				<h:panelGrid columns="2" cellpadding="3" cellspacing="3">
+				<h:panelGrid columns="3" cellpadding="3" cellspacing="3">
 					<p:selectOneMenu 
 						id="tipo-logradouro" 
 						value="#{cc.attrs.entidade.tipoLogradouro}" 
@@ -53,9 +55,9 @@
 						style="width: 530px">
 						<f:validateLength minimum="2"/>
 					</p:inputText>
+					<p:message for="logradouro"/>
 				</h:panelGrid>
-	
-				<p:message for="logradouro"/>
+				<h:outputText/>
 	
 				<h:outputText value="#{msg['numero']}"/>
 				<h:outputText value=":" />
@@ -122,9 +124,11 @@
 			
 			<br/>
 			<is:lista-enderecos
-				deleteAction="#{cc.attrs.listaDeleteAction}" 
-				rendered="#{cc.attrs.exibirLista}"
-				lista="#{cc.attrs.lista}"
+				deleteAction="#{cc.attrs.listaEnderecosDeleteAction}" 
+				addAction="#{cc.attrs.listaEnderecosAddAction}"
+				btnAddListConfs="#{cc.attrs.btnAddListConfs}"
+				rendered="#{cc.attrs.exibirListaEnderecos}"
+				lista="#{cc.attrs.listaEnderecos}"
 				id="enderecos"/>
 		</p:panel>
 	</cc:implementation>
