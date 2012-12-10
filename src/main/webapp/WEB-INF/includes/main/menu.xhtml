@@ -7,28 +7,45 @@
 
 	<h:form id="formMenu" prependId="false">
 		<p:menubar>
+			<p:menuitem
+				immediate="true"
+				value="#{msg['home']}"
+				action="#{navigation.changeMainPath}"
+				ajax="false"
+				icon="ui-icon-home">
+				<f:param name="navigationPath" value="#{const.principal}"/>
+			</p:menuitem>
 			<p:submenu label="#{msg['clientes']}" icon="ui-icon-person">
-					<p:menuitem
-						immediate="true"
-						value="#{msg['novo.prospect']}" 
-						url="#" />
-					<p:menuitem
-						immediate="true"
-						value="#{msg['listar.prospects']}"
-						url="#" />
-					<p:separator/>
-					<p:menuitem
-						immediate="true"
-						value="#{msg['novo.cliente']}"
-						url="#" />
-					<p:menuitem
-						immediate="true"
-						value="#{msg['buscar.cliente']}"
-						url="#" />	
-					<p:menuitem
-						immediate="true"
-						value="#{msg['listar.clientes']}"
-						url="#" />
+				<p:menuitem
+					immediate="true"
+					value="#{msg['novo.prospect']}" 
+					url="#" />
+				<p:menuitem
+					immediate="true"
+					value="#{msg['listar.prospects']}"
+					url="#" />
+				<p:separator/>
+				<p:menuitem
+					immediate="true"
+					value="#{msg['novo.cliente']}"
+					url="#" />
+				<p:menuitem
+					immediate="true"
+					value="#{msg['buscar.cliente']}"
+					url="#" />	
+				<p:menuitem
+					immediate="true"
+					value="#{msg['listar.clientes']}"
+					url="#" />
+			</p:submenu>
+			<p:submenu label="#{msg['tabelas']}" icon="ui-icon-note">
+				<p:menuitem
+					immediate="true"
+					value="#{msg['modelos.convites']}"
+					action="#{navigation.changeMainPath}"
+					ajax="false">
+					<f:param name="navigationPath" value="#{const.modelosConvites}"/>
+				</p:menuitem>
 			</p:submenu>
 		</p:menubar>
 	</h:form>

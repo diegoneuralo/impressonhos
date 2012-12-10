@@ -1,5 +1,8 @@
 package br.com.impressonhos.enums;
 
+import javax.inject.Named;
+
+@Named("const")
 public final class Const {
 	
 	/**
@@ -10,7 +13,7 @@ public final class Const {
 	/**
 	 * path defaul das paginas
 	 */
-	public static final String PAGES_PATH = "/WEB-INF/includes/";
+	public static final String PAGES_PATH = "/WEB-INF/includes/pages/";
 	
 	/**
 	 * página de login do sistema
@@ -25,7 +28,20 @@ public final class Const {
 	/**
 	 * página principal do sistema 
 	 */
-	public static final String PRINCIPAL = PAGES_PATH + "main/main.xhtml";
+	public static final String PRINCIPAL = "/WEB-INF/includes/main/main.xhtml";
+	
+	/**
+	 * Página de cadastro de modelos de convites
+	 */
+	public static final String MODELOS_CONVITES = PAGES_PATH + "modeloConvite/modelo-convite.xhtml";
+
+	public String getPrincipal(){
+		return PRINCIPAL;
+	}
+	
+	public String getModelosConvites() {
+		return MODELOS_CONVITES;
+	}
 	
 	/**
 	 * página de criação dos projetos 

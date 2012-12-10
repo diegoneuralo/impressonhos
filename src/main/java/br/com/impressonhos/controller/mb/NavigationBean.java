@@ -45,4 +45,10 @@ public class NavigationBean implements Serializable{
 		Services.sessionSetAttribute("SYS_TELA", selectedIncludePath );
 		this.selectedIncludePath = selectedIncludePath;
 	}
+	
+	public void changeMainPath(){
+		String path = (String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("navigationPath");
+		setSelectedIncludePath(path);
+		System.out.println(getSelectedIncludePath());
+	}
 }
