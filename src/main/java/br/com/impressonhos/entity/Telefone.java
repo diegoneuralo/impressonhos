@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import br.com.impressonhos.enums.Const;
 import br.com.impressonhos.enums.TipoTelefone;
@@ -27,7 +28,7 @@ import br.com.impressonhos.enums.TipoTelefone;
 	})
 public class Telefone implements Serializable {
 
-	private static final long serialVersionUID = 303092565208772363L;
+	private static final long serialVersionUID = -4104712014406159968L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,6 +52,8 @@ public class Telefone implements Serializable {
 	@JoinColumn(name = "PESSOA_ID", referencedColumnName = "PESSOA_ID", nullable=false)	
 	private Pessoa pessoa;
 
+	@Transient
+	private String maskedPhone;
 	// ------------------------------------------------------------------------------- //
 	
 	public Long getId() {
@@ -95,6 +98,19 @@ public class Telefone implements Serializable {
 
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
+	}
+	
+	public String getMaskedPhone() {
+		return maskedPhone;
+	}
+
+	public void setMaskedPhone(String maskedPhone) {
+		this.maskedPhone = maskedPhone;
+		this.codArea = maskedPhone.substring(1, 3);
+		this.telefone = Integer.parseInt(maskedPhone.substring(4).trim().replace("-", ""));
+		System.out.println("Telefone.setMaskedPhone()");
+		System.out.println(" - codArea: "+this.codArea);
+		System.out.println(" - telefone: "+this.telefone);
 	}
 
 	@Override

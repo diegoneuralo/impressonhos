@@ -21,8 +21,15 @@
 					listaUf="#{main.listaUf}"
 					listaTipoLogradouro="#{main.listaTipoLogradouro}"
 					listaEnderecosAddAction="#{main.addEndereco}"
-					btnAddListConfs=":main-form:endereco:comp-endereco"
-					listaEnderecosDeleteAction="#{main.removeEndereco}"/>
+					listaEnderecosDeleteAction="#{main.removeEndereco}"
+					btnAddListConfs=":main-form:endereco:comp-endereco"/>
+				<is:telefone
+					id="telefone"
+					entidade="#{main.telefone}"
+					tiposDeTelefone="#{main.tiposDeTelefone}"
+					listaTelefonesAddAction="#{main.addTelefone()}"
+					listaTelefonesDeleteAction="#{main.removeTelefone()}"
+					btnAddListConfs=":main-form:telefone:comp-telefone"/>
 			</p:panel>
 		</h:panelGroup>
 	</h:form>

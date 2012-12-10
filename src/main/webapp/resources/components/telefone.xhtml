@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<cc:interface>
+		<cc:attribute name="entidade" />
+		<cc:attribute name="tiposDeTelefone" />
+		<cc:attribute name="listaTelefonesDeleteAction" method-signature="void actionDelete()"/>
+		<cc:attribute name="listaTelefonesAddAction" method-signature="void actionAdd()"/>
+		<cc:attribute name="btnAddListConfs" default=":main-form:telefone:comp-telefone"/>
+		<cc:attribute name="exibirListaTelefones" default="true"/>
+		<cc:attribute name="listaTelefones"/>
+	</cc:interface>
+
+	<cc:implementation xmlns:is="http://java.sun.com/jsf/composite/components">
+		<br/>
+		<h:outputScript library="js" name="jquery.mask.js"/>
+		<p:panel id="comp-telefone" header="#{msg['telefones']}" toggleable="true">
+			<h:panelGrid columns="4" cellpadding="3" cellspacing="3">
+				<h:outputText value="#{msg['tipo.telefone']}"/>
+				<h:outputText value=":" />
+				<p:selectOneMenu id="tipo-telefone" value="#{cc.attrs.entidade.tipo}" required="true" label="#{msg['tipo.telefone']}">
+				  <f:selectItems value="#{cc.attrs.tiposDeTelefone}" var="tipos" itemValue="#{tipos}" itemLabel="#{msg[tipos.descricao]}"/>
+				</p:selectOneMenu>
+				<p:message for="tipo-telefone"/>
+			
+				
+				<h:outputText value="#{msg['telefone']}"/>
+				<h:outputText value=":" />
+				<p:inputText
+					id="novo-telefone" 
+					value="#{cc.attrs.entidade.maskedPhone}" 
+					required="true" 
+					label="#{msg['telefone']}" 
+					style="width: 120px;"
+					styleClass="phone_number"/>
+				<p:message for="novo-telefone"/>
+			</h:panelGrid>
+			
+			<br/>
+			<is:lista-telefones
+				deleteAction="#{cc.attrs.listaTelefonesDeleteAction}" 
+				addAction="#{cc.attrs.listaTelefonesAddAction}"
+				btnAddListConfs="#{cc.attrs.btnAddListConfs}"
+				rendered="#{cc.attrs.exibirListaTelefones}"
+				lista="#{cc.attrs.listaTelefones}"
+				id="telefones"/>
+		</p:panel>
+		<h:outputScript>function phoneMask(){$('.phone_number').mask('(00) 0000-0000', {onKeyPress: function(phone, e, currentField, options){ var new_sp_phone = phone.match(/^(\(11\) 9(5[0-9]|6[0-9]|7[01234569]|8[0-9]|9[0-9])[0-9]{1})/g); new_sp_phone ? $(currentField).mask('(00) 00000-0000', options) : $(currentField).mask('(00) 0000-0000', options) } });}; phoneMask();</h:outputScript>
+	</cc:implementation>
+</html>

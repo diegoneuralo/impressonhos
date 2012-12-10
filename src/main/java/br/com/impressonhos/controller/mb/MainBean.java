@@ -12,10 +12,12 @@ import javax.inject.Named;
 
 import br.com.impressonhos.entity.Endereco;
 import br.com.impressonhos.entity.Pessoa;
+import br.com.impressonhos.entity.Telefone;
 import br.com.impressonhos.entity.TipoLogradouro;
 import br.com.impressonhos.entity.Uf;
 import br.com.impressonhos.enums.TipoEndereco;
 import br.com.impressonhos.enums.TipoPessoa;
+import br.com.impressonhos.enums.TipoTelefone;
 import br.com.impressonhos.service.TipoLogradouroService;
 import br.com.impressonhos.service.UfService;
 
@@ -27,6 +29,7 @@ public class MainBean extends BaseBean implements Serializable{
 	
 	@Inject private Pessoa pessoa;
 	@Inject private Endereco endereco;
+	@Inject private Telefone telefone;
 	@Inject private UfService ufService;
 	@Inject private TipoLogradouroService tipoLogradouroService;
 
@@ -57,6 +60,14 @@ public class MainBean extends BaseBean implements Serializable{
 	
 	public void removeEndereco(){
 		System.out.println("MainBean.removeEndereco()");
+	}
+	
+	public void addTelefone(){
+		System.out.println("MainBean.addTelefone()");
+	}
+	
+	public void removeTelefone(){
+		System.out.println("MainBean.removeTelefone()");
 	}
 	
 	/* -- Getters and Setters */
@@ -103,5 +114,17 @@ public class MainBean extends BaseBean implements Serializable{
 				listaTipoLogradouro.add(new SelectItem(tl, tl.getTipoLogradouro()));
 		}
 		return listaTipoLogradouro;
+	}
+	
+	public Telefone getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(Telefone telefone) {
+		this.telefone = telefone;
+	}
+	
+	public TipoTelefone[] getTiposDeTelefone() {
+		return TipoTelefone.values();
 	}
 }

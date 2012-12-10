@@ -11,10 +11,10 @@ package br.com.impressonhos.enums;
  *
  */
 public enum TipoTelefone {
-	RESIDENCIAL(0, "RESIDENCIAL"),
-	CELULAR(1, "CELULAR"),
-	COMERCIAL(2, "COMERCIAL"),
-	RECADOS(2, "RECADOS");
+	RESIDENCIAL(0, "residencial"),
+	CELULAR(1, "celular"),
+	COMERCIAL(2, "comercial"),
+	RECADOS(2, "recados");
 	
 	private Integer tipo;
 	private String descricao;
