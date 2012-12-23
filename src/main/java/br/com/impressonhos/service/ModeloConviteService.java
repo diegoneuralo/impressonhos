@@ -20,7 +20,6 @@ public class ModeloConviteService extends PersistenceUtil implements Serializabl
 	@Inject private Event<ExceptionToCatch> exception;
 	
 	public ModeloConvite save(ModeloConvite modeloConvite){
-		System.out.println("ModeloConviteService.save()");
 		try
 		{
 			modeloConvite = modeloConvite.getId() == null || modeloConvite.getId().equals(new Long(0)) ? super.persist(modeloConvite) : super.merge(modeloConvite);

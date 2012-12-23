@@ -46,6 +46,13 @@
 					ajax="false">
 					<f:param name="navigationPath" value="#{const.modelosConvites}"/>
 				</p:menuitem>
+				<p:menuitem
+					immediate="true"
+					value="#{msg['tipos.papel']}"
+					action="#{navigation.changeMainPath}"
+					ajax="false">
+					<f:param name="navigationPath" value="#{const.tiposPapelConvites}"/>
+				</p:menuitem>
 			</p:submenu>
 		</p:menubar>
 	</h:form>

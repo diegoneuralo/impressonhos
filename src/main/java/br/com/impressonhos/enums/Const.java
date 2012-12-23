@@ -34,6 +34,11 @@ public final class Const {
 	 * Página de cadastro de modelos de convites
 	 */
 	public static final String MODELOS_CONVITES = PAGES_PATH + "modeloConvite/modelo-convite.xhtml";
+	
+	/**
+	 * Página de cadastro de tipos de papel
+	 */
+	public static final String TIPOS_PAPEL_CONVITES = PAGES_PATH + "tipoPapel/tipo-papel-convite.xhtml";
 
 	public String getPrincipal(){
 		return PRINCIPAL;
@@ -43,25 +48,7 @@ public final class Const {
 		return MODELOS_CONVITES;
 	}
 	
-	/**
-	 * página de criação dos projetos 
-	 *//*
-	public static final String ADD_PROJECT = "/pages/add_project.jsf?faces-redirect=true";
-	
-	*//**
-	 * página de vizualização dos projetos 
-	 *//*
-	public static final String LIST_PROJECT = "/pages/list_project.jsf?faces-redirect=true";
-	
-	*//**
-	 * página de criação de sprints 
-	 *//*	
-	public static final String ADD_SPRINT = "/pages/project/add_sprint.jsf?faces-redirect=true";
-	
-	*//**
-	 * página de vizualização dos sprints 
-	 *//*	
-	public static final String LIST_SPRINT = "/pages/project/list_sprint.jsf?faces-redirect=true";
-*/
-	
+	public String getTiposPapelConvites() {
+		return TIPOS_PAPEL_CONVITES;
+	}
 }

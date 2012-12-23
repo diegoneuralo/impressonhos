@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<cc:interface>
+		<cc:attribute name="entidade" />
+		<cc:attribute name="listaDeleteAction" method-signature="void actionDelete()"/>
+		<cc:attribute name="listaAddAction" method-signature="void actionAdd()"/>
+		<cc:attribute name="btnAddListConfs" default=":main-form:endereco:comp-endereco"/>
+		<cc:attribute name="exibirLista" default="true"/>
+		<cc:attribute name="lista"/>
+		<cc:attribute name="label" default="tipo.papel"/>
+	</cc:interface>
+
+	<cc:implementation xmlns:is="http://java.sun.com/jsf/composite/components">
+		<p:panel id="comp-tipo-papel" header="#{msg[cc.attrs.label]}" toggleable="true">
+			<h:panelGrid columns="4" cellpadding="3" cellspacing="3">
+				<h:outputText value="#{msg['tipo']}"/>
+				<h:outputText value=":" />
+				<p:inputText id="tipo-papel" value="#{cc.attrs.entidade.tipo}" required="true" label="#{msg['tipo']}" style="width: 380px"/>
+				<p:message for="tipo-papel"/>
+			</h:panelGrid>
+		
+			<br/>
+			<is:lista-tipo-papel-convite
+				deleteAction="#{cc.attrs.listaDeleteAction}" 
+				addAction="#{cc.attrs.listaAddAction}"
+				btnAddListConfs="#{cc.attrs.btnAddListConfs}"
+				rendered="#{cc.attrs.exibirLista}"
+				lista="#{cc.attrs.lista}"
+				id="lista-tipo-papel"/>
+		</p:panel>
+	</cc:implementation>
+</html>

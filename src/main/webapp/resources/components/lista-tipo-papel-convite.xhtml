@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<cc:interface>
+		<cc:attribute name="lista" />
+		<cc:attribute name="entidade" />
+		<cc:attribute name="deleteAction" method-signature="void deleteAction()"/>
+		<cc:attribute name="deleteUpdate" default="@this"/>
+		<cc:attribute name="addAction" method-signature="void addAction()"/>
+		<cc:attribute name="editAction" method-signature="void editAction()"/>
+		<cc:attribute name="editUpdate" default="@this"/>
+		<cc:attribute name="exibirBtnAdd" default="true"/>
+		<cc:attribute name="btnAddListConfs" default=":main-form:tipo-papel:comp-tipo-papel"/>
+		<cc:attribute name="renderTitle" dafault="false"/>
+	</cc:interface>
+
+	<cc:implementation>
+		<p:confirmDialog 
+			id="lista-tipo-papel-confirm-dialog"
+			modal="true"
+			message="#{msg['pergunta.excluir']}"
+			header="#{msg['confirmacao']}" 
+			severity="alert"
+			widgetVar="listaTipoPapelDialog">
+			<h:panelGroup id="lista-tipo-papel-dialog-panel">
+				<p:commandButton
+					id="lista-tipo-papel-btn-delete-executor"
+					value="#{msg['sim']}" 
+					immediate="true"
+					action="#{cc.attrs.deleteAction}" 
+					update="#{cc.attrs.deleteUpdate}:lista-tipos-papel"
+					onclick="listaTipoPapelDialog.hide()"/>
+				<p:commandButton 
+					value="#{msg['nao']}" 
+					onclick="listaTipoPapelDialog.hide();" 
+					type="button" />
+			</h:panelGroup>
+		</p:confirmDialog>
+		
+		<h:panelGroup rendered="#{cc.attrs.exibirBtnAdd}">
+			<p:commandButton 
+				id="lista-tipo-papel-btn-add-to-list"
+				value="#{msg['adicionar.lista']}"
+				action="#{cc.attrs.addAction}"
+				process="#{cc.attrs.btnAddListConfs}"
+				update="#{cc.attrs.btnAddListConfs}"/>
+			<br/>
+			<br/>
+		</h:panelGroup>
+		
+		<p:dataTable 
+			id="lista-tipos-papel"
+			emptyMessage="#{msg['sem.registros']}"
+			value="#{cc.attrs.lista}"
+			var="tipoPap"
+			style="width: 490px;">
+			<f:facet name="header">
+				<h:outputText rendered="#{cc.attrs.renderTitle}" value="#{msg['tipos.papel']}" />
+			</f:facet>
+			
+			<p:column headerText="#{msg['tipo']}" style="width: 200px;">
+				<h:outputText value="#{tipoPap.tipo}" />
+			</p:column>
+			
+			<p:column style="width: 120px; text-align: center;">
+				<p:commandButton 
+					id="lista-tipo-papel-bnt-editar"
+					value="#{msg['editar']}"
+					action="#{cc.attrs.editAction}"
+					update="#{cc.attrs.editUpdate}">
+					<f:setPropertyActionListener target="#{cc.attrs.entidade}" value="#{tipoPap}"/>
+				</p:commandButton>
+			</p:column>
+			
+			<p:column style="width: 120px; text-align: center;">
+				<p:commandButton 
+					id="lista-tipo-papel-bnt-excluir"
+					value="#{msg['excluir']}"
+					oncomplete="listaTipoPapelDialog.show()">
+					<f:setPropertyActionListener target="#{cc.attrs.entidade}" value="#{tipoPap}"/>
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+	</cc:implementation>
+</html>
