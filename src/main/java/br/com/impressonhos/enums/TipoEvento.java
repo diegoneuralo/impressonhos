@@ -11,9 +11,9 @@ package br.com.impressonhos.enums;
  *
  */
 public enum TipoEvento {
-	CASAMENTO(0, "CASAMENTO"),
-	CORPORATIVO(1, "CORPORATIVO"),
-	FESTA_15_ANOS(2, "FESTA DE 15 ANOS");
+	CASAMENTO(0, "casamento"),
+	CORPORATIVO(1, "corporativo"),
+	FESTA_15_ANOS(2, "festa.15.anos");
 	
 	private Integer tipo;
 	private String descricao;

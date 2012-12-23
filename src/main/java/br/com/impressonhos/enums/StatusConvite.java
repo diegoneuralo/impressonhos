@@ -12,10 +12,10 @@ package br.com.impressonhos.enums;
  *
  */
 public enum StatusConvite {
-	AGUARDANDO_ITENS(0, "AGUARDANDO ITENS"),
-	EM_PRODUCAO(1, "EM PRODUÇÃO"),
-	PRODUZIDO(2, "PRODUZIDO"),
-	ENVIADO(3, "ENVIADO");
+	AGUARDANDO_ITENS(0, "aguardando.itens"),
+	EM_PRODUCAO(1, "em.producao"),
+	PRODUZIDO(2, "produzido"),
+	ENVIADO(3, "enviado");
 	
 	private Integer tipo;
 	private String descricao;

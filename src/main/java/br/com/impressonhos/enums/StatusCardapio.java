@@ -12,10 +12,10 @@ package br.com.impressonhos.enums;
  *
  */
 public enum StatusCardapio {
-	AGUARDANDO_INFOS(0, "AGUARDANDO INFORMAÇÕES"),
-	EM_PRODUCAO(1, "EM_PRODUÇÃO"),
-	PRODUZIDO(2, "PRODUZIDO"),
-	ENVIADO(3, "ENVIADO");
+	AGUARDANDO_INFOS(0, "aguardando.informacoes"),
+	EM_PRODUCAO(1, "em.producao"),
+	PRODUZIDO(2, "produzido"),
+	ENVIADO(3, "enviado");
 	
 	private Integer tipo;
 	private String descricao;

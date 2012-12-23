@@ -12,15 +12,15 @@ package br.com.impressonhos.enums;
  *
  */
 public enum TipoClienteEvento {
-	ANIVERSARIANTE(0, "ANIVERSARIANTE"),
-	MAE_ANIVERSARIANTE(1, "MÃE ANIVERSARIANTE"),
-	PAI_ANIVERSARIANTE(2, "PAI ANIVERSARIANTE"),
-	NOIVA(3, "NOIVA"),
-	MAE_NOIVA(4, "MÃE NOIVA"),
-	PAI_NOIVA(5, "PAI NOIVA"),
-	NOIVO(6, "NOIVO"),
-	MAE_NOIVO(7, "MÃE NOIVO"),
-	PAI_NOIVO(8, "PAI NOIVO");
+	ANIVERSARIANTE(0, "aniversariante"),
+	MAE_ANIVERSARIANTE(1, "mae.aniversariante"),
+	PAI_ANIVERSARIANTE(2, "pai.aniversariante"),
+	NOIVA(3, "noiva"),
+	MAE_NOIVA(4, "mae.noiva"),
+	PAI_NOIVA(5, "pai.noiva"),
+	NOIVO(6, "noivo"),
+	MAE_NOIVO(7, "mae.noivo"),
+	PAI_NOIVO(8, "pai.noivo");
 	
 	private Integer tipo;
 	private String descricao;
