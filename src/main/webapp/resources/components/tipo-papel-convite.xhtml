@@ -27,15 +27,6 @@
 				<p:inputText id="tipo-papel" value="#{cc.attrs.entidade.tipo}" required="true" label="#{msg['tipo']}" style="width: 380px"/>
 				<p:message for="tipo-papel"/>
 			</h:panelGrid>
-		
-			<br/>
-			<is:lista-tipo-papel-convite
-				deleteAction="#{cc.attrs.listaDeleteAction}" 
-				addAction="#{cc.attrs.listaAddAction}"
-				btnAddListConfs="#{cc.attrs.btnAddListConfs}"
-				rendered="#{cc.attrs.exibirLista}"
-				lista="#{cc.attrs.lista}"
-				id="lista-tipo-papel"/>
 		</p:panel>
 	</cc:implementation>
 </html>
