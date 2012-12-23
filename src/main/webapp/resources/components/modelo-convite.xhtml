@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<cc:interface>
+		<cc:attribute name="entidade" />
+		<cc:attribute name="listaModelosConviteDeleteAction" method-signature="void actionDelete()"/>
+		<cc:attribute name="listaModelosConviteAddAction" method-signature="void actionAdd()"/>
+		<cc:attribute name="btnAddListConfs" default=":main-form:endereco:comp-endereco"/>
+		<cc:attribute name="exibirListaModelosConvite" default="true"/>
+		<cc:attribute name="listaModelosConvite"/>
+		<cc:attribute name="label" default="modelo.convite"/>
+	</cc:interface>
+
+	<cc:implementation xmlns:is="http://java.sun.com/jsf/composite/components">
+		<p:panel id="comp-modelo-convite" header="#{msg[cc.attrs.label]}" toggleable="true">
+			<h:panelGrid columns="4" cellpadding="3" cellspacing="3">
+				<h:outputText value="#{msg['nome']}"/>
+				<h:outputText value=":" />
+				<p:inputText id="nome-modelo-convite" value="#{cc.attrs.entidade.nome}" required="true" label="#{msg['nome']}" style="width: 380px"/>
+				<p:message for="nome-modelo-convite"/>
+	
+				<h:outputText value="#{msg['descricao']}"/>
+				<h:outputText value=":" />
+				<p:inputTextarea 
+					id="descricao-modelo-convite"
+					value="#{cc.attrs.entidade.descricao}" 
+					counter="descricao-modelo-convite-counter" 
+					maxlength="255" 
+					label="#{msg['descricao']}"
+					counterTemplate="{0} #{msg['caracteres.restantes']}"
+					style="width: 380px">
+					<f:validateLength minimum="10" maximum="255"/>
+				</p:inputTextarea>
+				<p:message for="descricao-modelo-convite"/>
+	
+				<h:outputText/>
+				<h:outputText/>
+				<h:outputText id="descricao-modelo-convite-counter" />
+			</h:panelGrid>
+		
+			<br/>
+			<is:lista-modelos-convite
+				deleteAction="#{cc.attrs.listaModelosConviteDeleteAction}" 
+				addAction="#{cc.attrs.listaModelosConviteAddAction}"
+				btnAddListConfs="#{cc.attrs.btnAddListConfs}"
+				rendered="#{cc.attrs.exibirListaModelosConvite}"
+				lista="#{cc.attrs.listaModelosConvite}"
+				id="enderecos"/>
+		</p:panel>
+	</cc:implementation>
+</html>

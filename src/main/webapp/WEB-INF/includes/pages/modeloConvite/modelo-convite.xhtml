@@ -7,7 +7,40 @@
 	xmlns:is="http://java.sun.com/jsf/composite/components">
 	<h:form id="main-form">
 		<h:panelGroup id="painel-principal">
-			<p:panel header="#{msg['modelos.convites']}">
+			<p:panel header="#{msg['cadastro.modelos.convites']}">
+				<is:maintenance-toolbar
+					newAction="#{inviteModel.newRecord()}"
+					cancelAction="#{inviteModel.cancel}"
+					deleteAction="#{inviteModel.deleteRecord()}"
+					saveAction="#{inviteModel.saveRecord()}"
+					
+					newUpdate=":main-form:painel-principal"
+					cancelUpdate=":main-form:painel-principal"
+					saveUpdate=":main-form:painel-principal"
+
+					renderNew="#{inviteModel.step eq 0}"
+					renderCancel="#{inviteModel.step eq 1}"
+					renderDelete="#{inviteModel.step eq 1 and inviteModel.modeloConvite.id ne null}"
+					renderSave="#{inviteModel.step eq 1}"/>
+					
+				<is:lista-modelos-convite
+					id="lista-modelos-convite"
+					entidade="#{inviteModel.modeloConvite}"
+					deleteAction="#{inviteModel.deleteRecord()}"
+					deleteUpdate=":main-form:lista-modelos-convite"
+					editAction="#{inviteModel.editRecord()}"
+					editUpdate=":main-form:painel-principal"
+					rendered="#{inviteModel.step eq 0}"
+					renderTitle="true"
+					exibirBtnAdd="false"
+					lista="#{inviteModel.listaModeloConvite}"/>
+					
+				<is:modelo-convite 
+					id="modelo-convite"
+					entidade="#{inviteModel.modeloConvite}"
+					exibirListaModelosConvite="false"
+					label="novo.modelo.convite"
+					rendered="#{inviteModel.step eq 1}"/>
 			</p:panel>
 		</h:panelGroup>
 	</h:form>

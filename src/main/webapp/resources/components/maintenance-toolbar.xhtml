@@ -11,27 +11,35 @@
 
 	<cc:interface>
 		<cc:attribute name="id" default="maintenance-toolbar"/>
-   	     
+   	    
+   	    <cc:attribute name="renderNew" 		default="false"/>
+		<cc:attribute name="disableNew"		default="false"/>
+		<cc:attribute name="newLabel" 		default="novo.registro"/>
+		<cc:attribute name="newTooltip" 	default="novo.registro.tooltip"/>
+		<cc:attribute name="newOnClick" 	default=""/>
+		<cc:attribute name="newAction"		method-signature="void actionNew()"/>
+		<cc:attribute name="newUpdate" 		default="@this"/> 
+   	    
 		<cc:attribute name="renderSave" 	default="true"/>
 		<cc:attribute name="disableSave"	default="false"/>
-		<cc:attribute name="saveLabel" 	default="gravar"/>
+		<cc:attribute name="saveLabel" 		default="gravar"/>
 		<cc:attribute name="saveTooltip" 	default="gravar.tooltip"/>
 		<cc:attribute name="saveOnClick" 	default=""/>
 		<cc:attribute name="saveAction"		method-signature="void actionSave()"/>
 		<cc:attribute name="saveUpdate" 	default="@this"/>
 			     
 		<cc:attribute name="renderDelete"	default="true" />
-		<cc:attribute name="disableDelete" default="false"/>
+		<cc:attribute name="disableDelete"	default="false"/>
 		<cc:attribute name="deleteLabel" 	default="excluir"/>
-		<cc:attribute name="deleteTooltip" default="excluir.tooltip"/>
+		<cc:attribute name="deleteTooltip"	default="excluir.tooltip"/>
 		<cc:attribute name="deleteAction" 	method-signature="void actionDelete()"/>
 		<cc:attribute name="deleteUpdate" 	default="@this"/>
 		   	     
 		<cc:attribute name="renderCancel" 	default="true" />
-		<cc:attribute name="disableCancel" default="false"/>
+		<cc:attribute name="disableCancel"	default="false"/>
 		<cc:attribute name="cancelLabel" 	default="cancelar"/>
-		<cc:attribute name="cancelTooltip" default="cancelar.tooltip"/>
-		<cc:attribute name="cancelOnClick" default=""/>
+		<cc:attribute name="cancelTooltip"	default="cancelar.tooltip"/>
+		<cc:attribute name="cancelOnClick"	default=""/>
 		<cc:attribute name="cancelAction" 	method-signature="void actionCancel()"/>
 		<cc:attribute name="cancelUpdate" 	default="@this"/>	
 
@@ -69,6 +77,21 @@
 				style="width: 80%;">
 				
 				<p:commandButton 
+					id="toolbar-btn-new-record" 
+					action="#{cc.attrs.newAction}" 
+					value="#{msg[cc.attrs.newLabel]}" 
+					immediate="true" 
+					update="#{cc.attrs.newUpdate}" 
+					onclick="#{cc.attrs.newOnClick}"
+					icon="ui-icon-plus"
+					process="@this"
+					rendered="#{cc.attrs.renderNew}"
+					disabled="#{cc.attrs.disableNew}"/>
+				<pe:tooltip rendered="#{cc.attrs.renderNew}" for="toolbar-btn-new-record">
+			 		<h:outputText styleClass="textoMenu" value="#{msg[cc.attrs.newTooltip]}" />
+			 	</pe:tooltip>
+				
+				<p:commandButton 
 					id="toolbar-btn-cancel" 
 					action="#{cc.attrs.cancelAction}" 
 					value="#{msg[cc.attrs.cancelLabel]}" 
@@ -76,33 +99,39 @@
 					update="#{cc.attrs.cancelUpdate}" 
 					onclick="#{cc.attrs.cancelOnClick}"
 					icon="ui-icon-cancel"
-					process="@this"/>
-				<p:tooltip for="toolbar-btn-cancel">
+					process="@this"
+					rendered="#{cc.attrs.renderCancel}"
+					disabled="#{cc.attrs.disableCancel}"/>
+				<pe:tooltip rendered="#{cc.attrs.renderCancel}" for="toolbar-btn-cancel">
 			 		<h:outputText styleClass="textoMenu" value="#{msg[cc.attrs.cancelTooltip]}" />
-			 	</p:tooltip>
+			 	</pe:tooltip>
 				 	
-				<p:separator />
+				<p:separator rendered="#{cc.attrs.renderSave}"/>
 				<p:commandButton 
 					id="toolbar-btn-save" 
 					action="#{cc.attrs.saveAction}" 
 					value="#{msg[cc.attrs.saveLabel]}" 
 					update="#{cc.attrs.saveUpdate}" 
 					onclick="#{cc.attrs.saveOnClick}"
-					icon="ui-icon-disk"/>
-				<p:tooltip for="toolbar-btn-save">
+					icon="ui-icon-disk"
+					rendered="#{cc.attrs.renderSave}"
+					disabled="#{cc.attrs.disableSave}"/>
+				<pe:tooltip rendered="#{cc.attrs.renderSave}" for="toolbar-btn-save">
 			 		<h:outputText styleClass="textoMenu" value="#{msg[cc.attrs.saveTooltip]}"/>
-			 	</p:tooltip>
+			 	</pe:tooltip>
 			 	
-			 	<p:separator />
+			 	<p:separator rendered="#{cc.attrs.renderDelete}"/>
 				<p:commandButton 
 					id="toolbar-btn-delete" 
 					type="button"
 					value="#{msg[cc.attrs.deleteLabel]}" 
 					onclick="toolbarDialog.show()"
-					icon="ui-icon-trash"/>
-				<p:tooltip for="toolbar-btn-delete">
+					icon="ui-icon-trash"
+					rendered="#{cc.attrs.renderDelete}"
+					disabled="#{cc.attrs.disableDelete}"/>
+				<pe:tooltip rendered="#{cc.attrs.renderDelete}" for="toolbar-btn-delete">
 			 		<h:outputText styleClass="textoMenu" value="#{msg[cc.attrs.deleteTooltip]}"/>
-			 	</p:tooltip>
+			 	</pe:tooltip>
 				
 			</p:toolbarGroup>
 			

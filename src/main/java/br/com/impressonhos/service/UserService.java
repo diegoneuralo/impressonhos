@@ -20,7 +20,7 @@ public class UserService extends PersistenceUtil implements Serializable {
 	{
 		try
 		{
-			super.create(user);			
+			super.persist(user);			
 		}
 		catch (PersistenceException pe)
 		{
@@ -32,7 +32,7 @@ public class UserService extends PersistenceUtil implements Serializable {
 	{
 		try
 		{
-			super.save(user);				
+			super.merge(user);				
 		}
 		catch (PersistenceException pe)
 		{

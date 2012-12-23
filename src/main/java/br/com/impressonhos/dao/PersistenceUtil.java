@@ -10,47 +10,51 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
-public abstract class PersistenceUtil implements Serializable
-{
+public abstract class PersistenceUtil implements Serializable {
+	
+	private static final long serialVersionUID = 9086155535198321727L;
+	
 	@Inject protected EntityManager getEntityManager;
 
-	protected <T> void create(final T entity)
-	{
+	protected <T> T persist(final T entity){
 		getEntityManager.persist(entity);
+		getEntityManager.refresh(entity);
+		
+		return entity;
 	}
 
-	protected <T> void delete(final T entity) throws NoResultException
-	{
+	protected <T> void remove(final T entity) throws NoResultException{
 		getEntityManager.remove(entity);
 	}
+	
+	protected <T> void removeById(final T entity, final Long id) throws NoResultException{
+		getEntityManager.remove(getEntityManager.getReference(entity.getClass(), id)); 
+	}
 
-	protected <T> void save(final T entity)
-	{
+	protected <T> T merge(final T entity){
 		if (getEntityManager == null)
 		{
 			throw new IllegalStateException("Must initialize EntityManager before using Services!");
 		}
 		getEntityManager.merge(entity);
+		return entity;
 	}
 
-	protected <T> long count(final Class<T> type)
-	{
+	protected <T> long count(final Class<T> type){
 		CriteriaBuilder cb = getEntityManager.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		cq.select(cb.count(cq.from(type)));
 		return getEntityManager.createQuery(cq).getSingleResult();
 	}
 	
-	protected <T> List<T> findAll(final Class<T> type)
-	{
+	protected <T> List<T> findAll(final Class<T> type){
 		CriteriaQuery<T> query = getEntityManager.getCriteriaBuilder().createQuery(type);
 		query.from(type);
 		return getEntityManager.createQuery(query).getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <T> T findById(final Class<T> type, final Integer id) throws NoResultException
-	{
+	protected <T> T findById(final Class<T> type, final Long id) throws NoResultException{
 		Class<?> clazz = getObjectClass(type);
 		T result = (T) getEntityManager.find(clazz, id);
 		if (result == null)
@@ -61,44 +65,42 @@ public abstract class PersistenceUtil implements Serializable
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <T> T findUniqueByNamedQuery(final String namedQueryName) throws NoResultException
-	{
+	protected <T> T findUniqueByNamedQuery(final String namedQueryName) throws NoResultException{
 		return (T) getEntityManager.createNamedQuery(namedQueryName).getSingleResult();
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <T> T findUniqueByNamedQuery(final String namedQueryName, final Object...params) throws NoResultException
-	{
+	protected <T> T findUniqueByNamedQuery(final String namedQueryName, final Object...params) throws NoResultException{
 		Query query = getEntityManager.createNamedQuery(namedQueryName);
 		int i = 1;
-		for (Object p : params)
-		{
+		
+		for (Object p : params){
 			query.setParameter(i++, p);
 		}
+		
 		return (T) query.getSingleResult();
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected <T> List<T> findByNamedQuery(final String namedQueryName)
-	{
+	protected <T> List<T> findByNamedQuery(final String namedQueryName){
 		return getEntityManager.createNamedQuery(namedQueryName).getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <T> List<T> findByNamedQuery(final String namedQueryName, final Object... params)
-	{
+	protected <T> List<T> findByNamedQuery(final String namedQueryName, final Object... params){
 		Query query = getEntityManager.createNamedQuery(namedQueryName);
 		int i = 1;
-		for (Object o : params)
-		{
+		
+		for (Object o : params){
 			query.setParameter(i++, "%" + o + "%");
 		}
+		
 		return query.getResultList();
 	}
 	
-	protected Class<?> getObjectClass(final Object type) throws IllegalArgumentException
-	{
+	protected Class<?> getObjectClass(final Object type) throws IllegalArgumentException{
 		Class<?> clazz = null;
+		
 		if (type == null) {
 			throw new IllegalArgumentException("Null has no type. You must pass an Object");
 		} else if (type instanceof Class<?>) {
@@ -106,9 +108,7 @@ public abstract class PersistenceUtil implements Serializable
 		} else {
 			clazz = type.getClass();
 		}
+		
 		return clazz;
 	}
-
-	private static final long serialVersionUID = 2827209442002107588L;
-
 }

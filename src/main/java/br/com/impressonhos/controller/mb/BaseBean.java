@@ -14,6 +14,8 @@ public class BaseBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Inject protected MessageBundleLoader mbl;
+	
+	protected Integer step = 0; 
 
 	protected void addErrorMessage(String componentId, String errorMessage){
 		addMessage(componentId, errorMessage, FacesMessage.SEVERITY_ERROR);
@@ -36,4 +38,16 @@ public class BaseBean implements Serializable{
 		message.setSeverity(severity);
 		FacesContext.getCurrentInstance().addMessage(componentId, message);		
 	}
+
+	// -- Getters and Setter
+	
+	public Integer getStep() {
+		return step;
+	}
+
+	public void setStep(Integer step) {
+		this.step = step;
+	}
+	
+	
 }

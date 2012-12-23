@@ -171,3 +171,13 @@ img.left {
 .main-form:painel-principal{
 	width: 99%;
 }
+
+div.datatable-inner-row{
+	padding: 5px 5px 5px 45px;
+}
+
+h2.datatable-inner-row-title{
+	font-weight: bold; 
+	font-size: 11pt; 
+	margin-bottom: 5px;
+}
