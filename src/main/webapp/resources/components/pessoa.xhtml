@@ -12,37 +12,38 @@
 	<cc:interface>
 	     <cc:attribute name="entidade" />
 	     <cc:attribute name="tiposDePessoa" />
+	     <cc:attribute name="updateCpfCnpj" default="@this"/>
 	</cc:interface>
 
 	<cc:implementation>
-		<p:panel id="comp-pessoa" header="#{msg['pessoa']}" toggleable="true">
-			<h:panelGrid columns="4" cellpadding="3" cellspacing="3">
-				<h:outputText value="#{msg['nome']}"/>
-				<h:outputText value=":" />
-				<p:inputText id="nome" value="#{cc.attrs.entidade.nome}" required="true" label="#{msg['nome']}" style="width: 380px"/>
-				<p:message for="nome"/>
-	
-				<h:outputText value="#{msg['email']}"/>
-				<h:outputText value=":" />
-				<p:inputText id="email" value="#{cc.attrs.entidade.email}" required="true" label="#{msg['email']}" style="width: 380px"/>
-				<p:message for="email"/>
-	
-				<h:outputText value="#{msg['rg']}"/>
-				<h:outputText value=":" />
-				<pe:inputNumber id="rg" value="#{cc.attrs.entidade.rg}" required="true" label="#{msg['rg']}" thousandSeparator="" decimalPlaces="0"/>
-				<p:message for="rg"/>
-				
-				<h:outputText value="#{msg['pessoa']}"/>
-				<h:outputText value=":" />
-				<p:selectOneRadio id="tipo-pessoa" value="#{cc.attrs.entidade.tipo}" required="true" label="#{msg['pessoa']}">
-				  <f:selectItems value="#{cc.attrs.tiposDePessoa}" var="tipos" itemValue="#{tipos}" itemLabel="#{msg[tipos.descricao]}"/>
-				</p:selectOneRadio>
-				<p:message for="tipo-pessoa"/>
-			</h:panelGrid>
-			<h:outputScript>
-			// correção do estilo dos input radio que não possuem distancia especificada entre os pares de elementos de cada input (key/value)
-			x=1; $('#main-form\\:pessoa\\:tipo-pessoa tbody td').each(function(){if(x%3==0) {$(this).css('width','26px').children('div').css('margin-left','10px'); } x++;})
-			</h:outputScript>
-		</p:panel>
+		
+		<h:panelGrid columns="4" cellpadding="3" cellspacing="3">
+			<h:outputText value="#{msg['nome']}"/>
+			<h:outputText value=":" />
+			<p:inputText id="nome" value="#{cc.attrs.entidade.nome}" required="true" label="#{msg['nome']}" style="width: 380px"/>
+			<p:message for="nome"/>
+
+			<h:outputText value="#{msg['email']}"/>
+			<h:outputText value=":" />
+			<p:inputText id="email" value="#{cc.attrs.entidade.email}" required="true" label="#{msg['email']}" style="width: 380px"/>
+			<p:message for="email"/>
+
+			<h:outputText value="#{msg['rg']}"/>
+			<h:outputText value=":" />
+			<pe:inputNumber id="rg" value="#{cc.attrs.entidade.rg}" required="true" label="#{msg['rg']}" thousandSeparator="" decimalPlaces="0"/>
+			<p:message for="rg"/>
+			
+			<h:outputText value="#{msg['pessoa']}"/>
+			<h:outputText value=":" />
+			<p:selectOneRadio id="tipo-pessoa" value="#{cc.attrs.entidade.tipo}" required="true" label="#{msg['pessoa']}">
+			  <f:selectItems value="#{cc.attrs.tiposDePessoa}" var="tipos" itemValue="#{tipos}" itemLabel="#{msg[tipos.descricao]}"/>
+			  <p:ajax process="@this" update="#{cc.attrs.updateCpfCnpj}"/>
+			</p:selectOneRadio>
+			<p:message for="tipo-pessoa"/>
+		</h:panelGrid>
+		<h:outputScript>
+		// correção do estilo dos input radio que não possuem distancia especificada entre os pares de elementos de cada input (key/value)
+		x=1; $('#main-form\\:pessoa\\:tipo-pessoa tbody td').each(function(){if(x%3==0) {$(this).css('width','26px').children('div').css('margin-left','10px'); } x++;})
+		</h:outputScript>
 	</cc:implementation>
 </html>

@@ -8,7 +8,6 @@
 	<ui:define name="body">
 		<h:panelGroup id="panelPrincipal">
 			<h:form prependId="false" rendered="#{not identity.loggedIn}">
-				<p:growl id="growl" life="5000" showSummary="true" showDetail="false" />
 				<div class="login">
 					<h2 class="title"><h:outputText value="#{msg['area.restrita']}" /></h2>
 					<div class="dotted-line">.</div>

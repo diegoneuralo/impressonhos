@@ -13,7 +13,7 @@ import org.jboss.solder.exception.control.ExceptionToCatch;
 import br.com.impressonhos.dao.PersistenceUtil;
 import br.com.impressonhos.entity.TipoPapel;
 
-public class TipoPapelConviteService extends PersistenceUtil implements Serializable {
+public class TipoPapelService extends PersistenceUtil implements Serializable {
 	
 	private static final long serialVersionUID = 2586000639319261161L;
 	
@@ -32,15 +32,16 @@ public class TipoPapelConviteService extends PersistenceUtil implements Serializ
 		return tipoPapel;
 	}
 	
-	public void remove(TipoPapel tipoPapel){
-		try
-		{
+	public boolean remove(TipoPapel tipoPapel){
+		boolean isRemoved = true;
+		try {
 			super.removeById(tipoPapel, tipoPapel.getId());				
+		} catch (PersistenceException pe) {
+			exception.fire(new ExceptionToCatch(pe));
+			isRemoved = false;
 		}
-		catch (PersistenceException pe)
-		{
-			exception.fire(new ExceptionToCatch(pe));	
-		}
+		
+		return isRemoved;
 	} 
 	
 	public TipoPapel getTipoPapelConviteById(Long id) {

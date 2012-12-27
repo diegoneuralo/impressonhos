@@ -1,0 +1,46 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:is="http://java.sun.com/jsf/composite/components">
+	<h:form id="main-form">
+		<h:panelGroup id="painel-principal">
+			<p:panel header="#{msg['cadastro.tipos.papel.convite']}">
+				<is:maintenance-toolbar
+					newAction="#{invitePaper.newRecord()}"
+					cancelAction="#{invitePaper.cancel}"
+					deleteAction="#{invitePaper.deleteRecord()}"
+					saveAction="#{invitePaper.saveRecord()}"
+					
+					newUpdate=":main-form:painel-principal"
+					cancelUpdate=":main-form:painel-principal"
+					saveUpdate=":main-form:painel-principal"
+
+					renderNew="#{invitePaper.step eq 0}"
+					renderCancel="#{invitePaper.step eq 1}"
+					renderDelete="#{invitePaper.step eq 1 and invitePaper.tipoPapel.id ne null}"
+					renderSave="#{invitePaper.step eq 1}"/>
+					
+				<is:lista-tipo-papel
+					id="lista-tipos-papel"
+					entidade="#{invitePaper.tipoPapel}"
+					deleteAction="#{invitePaper.deleteRecord()}"
+					deleteUpdate=":main-form:lista-tipos-papel"
+					editAction="#{invitePaper.editRecord()}"
+					editUpdate=":main-form:painel-principal"
+					rendered="#{invitePaper.step eq 0}"
+					renderTitle="true"
+					exibirBtnAdd="false"
+					lista="#{invitePaper.listaTipoPapel}"/>
+					
+				<is:tipo-papel
+					id="tipo-papel"
+					entidade="#{invitePaper.tipoPapel}"
+					label="#{invitePaper.label}"
+					rendered="#{invitePaper.step eq 1}"/>
+			</p:panel>
+		</h:panelGroup>
+	</h:form>
+</ui:composition>

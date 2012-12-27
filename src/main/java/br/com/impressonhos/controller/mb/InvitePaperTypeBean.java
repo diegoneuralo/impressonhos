@@ -8,8 +8,8 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.impressonhos.entity.TipoPapelConvite;
-import br.com.impressonhos.service.TipoPapelConviteService;
+import br.com.impressonhos.entity.TipoPapel;
+import br.com.impressonhos.service.TipoPapelService;
 
 @Named("invitePaper")
 @ViewScoped
@@ -17,20 +17,20 @@ public class InvitePaperTypeBean extends BaseBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Inject private TipoPapelConvite tipoPapel;
-	@Inject private TipoPapelConviteService tipoPapelService;
+	@Inject private TipoPapel tipoPapel;
+	@Inject private TipoPapelService tipoPapelService;
 	
-	List<TipoPapelConvite> listaTipoPapelConvite;
+	List<TipoPapel> listaTipoPapel;
 
 	@PostConstruct
 	public void construct(){
 		System.out.println("InvitePaperTypeBean.construct()");
-		listaTipoPapelConvite = tipoPapelService.findAll();
+		listaTipoPapel = tipoPapelService.findAll();
 	}
 	
 	public void newRecord(){
 		System.out.println("InvitePaperTypeBean.newRecord()");
-		tipoPapel = new TipoPapelConvite();
+		tipoPapel = new TipoPapel();
 		this.step = 1;
 	}
 	
@@ -43,12 +43,16 @@ public class InvitePaperTypeBean extends BaseBean implements Serializable{
 		System.out.println("InvitePaperTypeBean.saveRecord()");
 		
 		tipoPapel = tipoPapelService.save(tipoPapel);
-		listaTipoPapelConvite.add(tipoPapel); 
-		System.out.println(listaTipoPapelConvite);
-		
-		addInfoMessage(mbl.getMessage("gravacao.sucesso"));
-		
-		this.step = 0;
+		if(tipoPapel != null){
+			if(!listaTipoPapel.contains(tipoPapel))
+				listaTipoPapel.add(tipoPapel);
+			
+			this.step = 0;
+			
+			growl.addInfoMessage("gravacao.sucesso");
+		} else {
+			growl.addErrorMessage("gravacao.erro");
+		}
 	}
 	
 	public void cancel(){
@@ -60,29 +64,36 @@ public class InvitePaperTypeBean extends BaseBean implements Serializable{
 		System.out.println("InvitePaperTypeBean.deleteRecord()");
 		System.out.println(tipoPapel);
 		
-		tipoPapelService.remove(tipoPapel);
-		listaTipoPapelConvite.remove(tipoPapel);
-		
-		addInfoMessage("remocao.sucesso");
+		if(tipoPapelService.remove(tipoPapel)){
+			listaTipoPapel.remove(tipoPapel);
+			
+			growl.addInfoMessage("remocao.sucesso");
+		} else {
+			growl.addErrorMessage("remocao.erro");
+		}
 		
 		this.step = 0;
 	}
 
 	/* -- Getters and Setters */
 	
-	public TipoPapelConvite getTipoPapelConvite() {
+	public TipoPapel getTipoPapel() {
 		return tipoPapel;
 	}
 
-	public void setTipoPapelConvite(TipoPapelConvite tipoPapel) {
+	public void setTipoPapel(TipoPapel tipoPapel) {
 		this.tipoPapel = tipoPapel;
 	}
 
-	public List<TipoPapelConvite> getListaTipoPapelConvite() {
-		return listaTipoPapelConvite;
+	public List<TipoPapel> getListaTipoPapel() {
+		return listaTipoPapel;
 	}
 
-	public void setListaTipoPapelConvite(List<TipoPapelConvite> listaTipoPapelConvite) {
-		this.listaTipoPapelConvite = listaTipoPapelConvite;
+	public void setListaTipoPapel(List<TipoPapel> listaTipoPapel) {
+		this.listaTipoPapel = listaTipoPapel;
+	}
+	
+	public String getLabel() {
+		return tipoPapel.getId().equals(new Long(0)) ? "novo.tipo.papel" : "tipo.papel.editar";
 	}
 }

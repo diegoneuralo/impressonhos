@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<cc:interface>
+		<cc:attribute name="entidade" />
+		<cc:attribute name="label" default="contratante"/>
+		<cc:attribute name="tiposDePessoa"/>
+		<cc:attribute name="updateCpfCnpj"/>
+	</cc:interface>
+
+	<cc:implementation xmlns:is="http://java.sun.com/jsf/composite/components">
+		<p:panel id="comp-contratante" header="#{msg[cc.attrs.label]}" toggleable="true">
+			<is:pessoa 
+				id="pessoa" 
+				entidade="#{cc.attrs.entidade.pessoa}" 
+				tiposDePessoa="#{cc.attrs.tiposDePessoa}" 
+				updateCpfCnpj="#{cc.attrs.updateCpfCnpj}"/>
+			<h:panelGrid columns="4" cellpadding="3" cellspacing="3">
+				<h:outputText 
+					rendered="#{cc.attrs.entidade.pessoa.tipo.toString() eq 'fisica'}" 
+					value="#{msg['cpf']}"/>
+				<h:outputText 
+					rendered="#{cc.attrs.entidade.pessoa.tipo.toString() eq 'fisica'}" 
+					value=":" />
+				<p:inputMask 
+					id="cpf" 
+					mask="999.999.999-99" 
+					value="#{cc.attrs.entidade.cpfCnpj}" 
+					required="#{cc.attrs.entidade.pessoa.tipo.toString() eq 'fisica'}" 
+					rendered="#{cc.attrs.entidade.pessoa.tipo.toString() eq 'fisica'}"
+					label="#{msg['cpf']}" style="width: 90px"/>
+				<p:message 
+					rendered="#{cc.attrs.entidade.pessoa.tipo.toString() eq 'fisica'}" 
+					for="cpf"/>
+				
+				<h:outputText 
+					rendered="#{cc.attrs.entidade.pessoa.tipo.toString() eq 'juridica'}" 
+					value="#{msg['cnpj']}"/>
+				<h:outputText 
+					rendered="#{cc.attrs.entidade.pessoa.tipo.toString() eq 'juridica'}" 
+					value=":" />
+				<p:inputMask 
+					id="cnpj" 
+					mask="99.999.999/9999-99" 
+					value="#{cc.attrs.entidade.cpfCnpj}" 
+					required="#{cc.attrs.entidade.pessoa.tipo.toString() eq 'juridica'}" 
+					rendered="#{cc.attrs.entidade.pessoa.tipo.toString() eq 'juridica'}"
+					label="#{msg['cnpj']}" 
+					style="width: 115px"/>
+				<p:message 
+					rendered="#{cc.attrs.entidade.pessoa.tipo.toString() eq 'juridica'}" 
+					for="cnpj"/>
+
+				<h:outputText value="#{msg['como.chegou']}"/>
+				<h:outputText value=":" />
+				<p:inputTextarea 
+					id="como-chegou"
+					value="#{cc.attrs.entidade.comoChegou}" 
+					counter="como-chegou-counter" 
+					maxlength="255" 
+					label="#{msg['como.chegou']}"
+					counterTemplate="{0} #{msg['caracteres.restantes']}"
+					style="width: 380px">
+					<f:validateLength minimum="10" maximum="255"/>
+				</p:inputTextarea>
+				<p:message for="como-chegou"/>
+	
+				<h:outputText/>
+				<h:outputText/>
+				<h:outputText id="como-chegou-counter"/>
+			</h:panelGrid>
+		</p:panel>
+	</cc:implementation>
+</html>

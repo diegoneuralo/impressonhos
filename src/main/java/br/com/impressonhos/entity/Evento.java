@@ -29,7 +29,7 @@ import br.com.impressonhos.enums.TipoEvento;
 		name = "EVENTO", 
 		schema = Const.SCHEMA, 
 		uniqueConstraints = { 
-				@UniqueConstraint(columnNames = { "CONTRATANTE_ID", "LOCAL_ID", "DATA_EVENTO" }) 
+				@UniqueConstraint(columnNames = { "CONTRATANTE_ID", "DATA_EVENTO" }) 
 			})
 @NamedQueries({ 
 	@NamedQuery(
@@ -53,7 +53,7 @@ public class Evento implements Serializable {
 	private TipoEvento tipo;
 	
 	@ManyToOne
-	@JoinColumn(name = "LOCAL_ID", referencedColumnName = "LOCAL_ID", nullable=false)	
+	@JoinColumn(name = "LOCAL_ID", referencedColumnName = "LOCAL_ID", nullable=true)	
 	private Local local;
 	
 	@ManyToOne

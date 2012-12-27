@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<cc:interface>
+		<cc:attribute name="entidade" />
+		<cc:attribute name="label" default="tipo.papel"/>
+	</cc:interface>
+
+	<cc:implementation xmlns:is="http://java.sun.com/jsf/composite/components">
+		<p:panel id="comp-tipo-papel" header="#{msg[cc.attrs.label]}" toggleable="true">
+			<h:panelGrid columns="4" cellpadding="3" cellspacing="3">
+				<h:outputText value="#{msg['tipo']}"/>
+				<h:outputText value=":" />
+				<p:inputText id="tipo-papel" value="#{cc.attrs.entidade.tipo}" required="true" label="#{msg['tipo']}" style="width: 380px"/>
+				<p:message for="tipo-papel"/>
+			</h:panelGrid>
+		</p:panel>
+	</cc:implementation>
+</html>

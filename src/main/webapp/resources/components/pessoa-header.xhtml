@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<cc:interface>
+	     <cc:attribute name="entidade" />
+	     <cc:attribute name="tiposDePessoa" />
+	</cc:interface>
+
+	<cc:implementation xmlns:is="http://java.sun.com/jsf/composite/components">
+		<p:panel id="comp-pessoa" header="#{msg['pessoa']}" toggleable="true">
+			<is:pessoa id="pessoa" entidade="#{cc.attrs.entidade}" tiposDePessoa="#{cc.attrs.tiposDePessoa}"/>	
+		</p:panel>
+	</cc:implementation>
+</html>

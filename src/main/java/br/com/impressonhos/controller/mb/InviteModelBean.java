@@ -46,9 +46,9 @@ public class InviteModelBean extends BaseBean implements Serializable{
 		listaModeloConvite.add(modeloConvite); 
 		System.out.println(listaModeloConvite);
 		
-		addInfoMessage(mbl.getMessage("gravacao.sucesso"));
-		
 		this.step = 0;
+		
+		growl.addInfoMessage("gravacao.sucesso");
 	}
 	
 	public void cancel(){
@@ -63,9 +63,9 @@ public class InviteModelBean extends BaseBean implements Serializable{
 		modeloConviteService.remove(modeloConvite);
 		listaModeloConvite.remove(modeloConvite);
 		
-		addInfoMessage("remocao.sucesso");
-		
 		this.step = 0;
+		
+		growl.addInfoMessage("remocao.sucesso");
 	}
 
 	/* -- Getters and Setters */
@@ -84,5 +84,9 @@ public class InviteModelBean extends BaseBean implements Serializable{
 
 	public void setListaModeloConvite(List<ModeloConvite> listaModeloConvite) {
 		this.listaModeloConvite = listaModeloConvite;
+	}
+
+	public String getLabel() {
+		return modeloConvite.getId().equals(new Long(0)) ? "novo.modelo.convite" : "modelo.convite.editar";
 	}
 }

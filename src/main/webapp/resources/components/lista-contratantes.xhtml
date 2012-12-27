@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<cc:interface>
+		<cc:attribute name="lista" />
+		<cc:attribute name="entidade" />
+		<cc:attribute name="deleteAction" method-signature="void deleteAction()"/>
+		<cc:attribute name="deleteUpdate" default="@this"/>
+		<cc:attribute name="addAction" method-signature="void addAction()"/>
+		<cc:attribute name="editAction" method-signature="void editAction()"/>
+		<cc:attribute name="editUpdate" default="@this"/>
+		<cc:attribute name="seeContractsAction" method-signature="void seeContractsAction()"/>
+		<cc:attribute name="seeContractsUpdate" default="@this"/>
+		<cc:attribute name="exibirBtnAdd" default="true"/>
+		<cc:attribute name="btnAddListConfs" default=":main-form:contratante:comp-contratante"/>
+		<cc:attribute name="renderTitle" dafault="false"/>
+	</cc:interface>
+
+	<cc:implementation>
+		<p:confirmDialog 
+			id="lista-contratante-confirm-dialog"
+			modal="true"
+			message="#{msg['pergunta.excluir']}"
+			header="#{msg['confirmacao']}" 
+			severity="alert"
+			widgetVar="listaContratanteDialog">
+			<h:panelGroup id="lista-contratante-dialog-panel">
+				<p:commandButton
+					id="lista-contratante-btn-delete-executor"
+					value="#{msg['sim']}" 
+					immediate="true"
+					action="#{cc.attrs.deleteAction}" 
+					update="#{cc.attrs.deleteUpdate}:lista-contratantes"
+					onclick="listaContratanteDialog.hide()"/>
+				<p:commandButton 
+					value="#{msg['nao']}" 
+					onclick="listaContratanteDialog.hide();" 
+					type="button" />
+			</h:panelGroup>
+		</p:confirmDialog>
+		<p:dialog
+			id="contratante-dialog-contratos"
+			maximizable="false"
+			closable="true"
+			minimizable="false"
+			position="center"
+			widgetVar="verContratosDialog">
+			contratos aqui....
+		</p:dialog>
+		<h:panelGroup rendered="#{cc.attrs.exibirBtnAdd}">
+			<p:commandButton 
+				id="lista-contratante-btn-add-to-list"
+				value="#{msg['adicionar.lista']}"
+				action="#{cc.attrs.addAction}"
+				process="#{cc.attrs.btnAddListConfs}"
+				update="#{cc.attrs.btnAddListConfs}"/>
+			<br/>
+			<br/>
+		</h:panelGroup>
+		
+		<p:dataTable 
+			id="lista-contratantes"
+			emptyMessage="#{msg['sem.registros']}"
+			value="#{cc.attrs.lista}"
+			var="cont"
+			style="width: 740px;">
+			<f:facet name="header">
+				<h:outputText rendered="#{cc.attrs.renderTitle}" value="#{msg['contratantes']}" />
+			</f:facet>
+			
+			<p:column headerText="#{msg['nome']}" style="width: 200px;">
+				<h:outputText value="#{cont.pessoa.nome}" />
+			</p:column>
+			
+			<p:column headerText="#{msg['cpf']}" style="width: 130px;">
+				<h:outputText value="#{cont.cpf}" />
+			</p:column>
+			
+			<p:column style="width: 120px; text-align: center;">
+				<p:commandButton 
+					id="lista-contratantes-bnt-ver-contratos"
+					value="#{msg['ver.contratos']}"
+					action="#{cc.attrs.seeContractsAction}"
+					update="#{cc.attrs.seeContractsUpdate}"
+					oncomplete="verContratosDialog.show()">
+					<f:setPropertyActionListener target="#{cc.attrs.entidade}" value="#{cont}"/>
+				</p:commandButton>
+			</p:column>
+			
+			<p:column style="width: 120px; text-align: center;">
+				<p:commandButton 
+					id="lista-contratantes-bnt-editar"
+					value="#{msg['editar']}"
+					action="#{cc.attrs.editAction}"
+					update="#{cc.attrs.editUpdate}">
+					<f:setPropertyActionListener target="#{cc.attrs.entidade}" value="#{tipoPap}"/>
+				</p:commandButton>
+			</p:column>
+			
+			<p:column style="width: 120px; text-align: center;">
+				<p:commandButton 
+					id="lista-contratantes-bnt-excluir"
+					value="#{msg['excluir']}"
+					oncomplete="listaContratanteDialog.show()">
+					<f:setPropertyActionListener target="#{cc.attrs.entidade}" value="#{tipoPap}"/>
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+	</cc:implementation>
+</html>

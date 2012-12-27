@@ -1,0 +1,50 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:is="http://java.sun.com/jsf/composite/components">
+	<h:form id="main-form">
+		<h:panelGroup id="painel-principal">
+			<p:panel header="#{msg['cadastro.contratantes']}">
+				<is:maintenance-toolbar
+					newAction="#{hirer.newRecord()}"
+					cancelAction="#{hirer.cancel}"
+					deleteAction="#{hirer.deleteRecord()}"
+					saveAction="#{hirer.saveRecord()}"
+					
+					newUpdate=":main-form:painel-principal"
+					cancelUpdate=":main-form:painel-principal"
+					saveUpdate=":main-form:painel-principal"
+
+					renderNew="#{hirer.step eq 0}"
+					renderCancel="#{hirer.step eq 1}"
+					renderDelete="#{hirer.step eq 1 and invitePaper.tipoPapel.id ne null}"
+					renderSave="#{hirer.step eq 1}"/>
+					
+				<is:lista-contratantes
+					id="lista-contratantes"
+					entidade="#{hirer.contratante}"
+					deleteAction="#{hirer.deleteRecord()}"
+					deleteUpdate=":main-form:lista-contratantes"
+					editAction="#{hirer.editRecord()}"
+					editUpdate=":main-form:painel-principal"
+					seeContractsAction="#{hirer.seeContracts()}"
+					seeContractsUpdate=":main-form:lista-contratantes:contratante-dialog-contratos"
+					rendered="#{hirer.step eq 0}"
+					renderTitle="true"
+					exibirBtnAdd="false"
+					lista="#{hirer.listaContratante}"/>
+					
+				<is:contratante
+					id="contratante"
+					entidade="#{hirer.contratante}"
+					label="#{hirer.label}"
+					updateCpfCnpj=":main-form:contratante:comp-contratante:"
+					tiposDePessoa="#{hirer.tiposDePessoa}"
+					rendered="#{hirer.step eq 1}"/>
+			</p:panel>
+		</h:panelGroup>
+	</h:form>
+</ui:composition>
