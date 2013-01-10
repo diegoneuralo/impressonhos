@@ -17,7 +17,7 @@ public class InvitePaperTypeBean extends BaseBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Inject private TipoPapel tipoPapel;
+	private TipoPapel tipoPapel;
 	@Inject private TipoPapelService tipoPapelService;
 	
 	List<TipoPapel> listaTipoPapel;

@@ -28,19 +28,16 @@ public class GrowlBean implements Serializable{
 	
 	/** Se o Growl deve permanecer "grudado" na tela, aguardando ate interacao do usuario 
 	 */
-	@SuppressWarnings("unused")
-	private Boolean sticky = true;
+	private Boolean sticky = false;
 	
 	/**
 	 * Tempo em que o Growl permanecera exibido antes do mesmo se fechar na tela do usuario
 	 */
-	@SuppressWarnings("unused")
 	private Integer lifeTime = 5000;
 	
 	/**
 	 * Controle da exibicao do detalhe da mensagem
 	 */
-	@SuppressWarnings("unused")
 	private Boolean showDetail = false;
 	
 	public void addInfoMessage(String infoMessage){
@@ -123,12 +120,24 @@ public class GrowlBean implements Serializable{
 	public void setSticky(Boolean sticky) {
 		this.sticky = sticky;
 	}
+	
+	public Boolean getSticky() {
+		return this.sticky;
+	}
 
 	public void setLifeTime(Integer lifeTime) {
 		this.lifeTime = lifeTime;
 	}
+	
+	public Integer getLifeTime() {
+		return this.lifeTime;
+	}
 
 	public void setShowDetail(Boolean showDetail) {
 		this.showDetail = showDetail;
+	}
+	
+	public Boolean getShowDetail() {
+		return this.showDetail;
 	}
 }

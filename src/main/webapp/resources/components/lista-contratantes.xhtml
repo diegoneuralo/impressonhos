@@ -80,8 +80,8 @@
 				<h:outputText value="#{cont.pessoa.nome}" />
 			</p:column>
 			
-			<p:column headerText="#{msg['cpf']}" style="width: 130px;">
-				<h:outputText value="#{cont.cpf}" />
+			<p:column headerText="#{msg['cpf.cnpj']}" style="width: 130px;">
+				<h:outputText value="#{cont.cpfCnpj}" />
 			</p:column>
 			
 			<p:column style="width: 120px; text-align: center;">
@@ -101,7 +101,7 @@
 					value="#{msg['editar']}"
 					action="#{cc.attrs.editAction}"
 					update="#{cc.attrs.editUpdate}">
-					<f:setPropertyActionListener target="#{cc.attrs.entidade}" value="#{tipoPap}"/>
+					<f:setPropertyActionListener target="#{cc.attrs.entidade}" value="#{cont}"/>
 				</p:commandButton>
 			</p:column>
 			
@@ -110,7 +110,7 @@
 					id="lista-contratantes-bnt-excluir"
 					value="#{msg['excluir']}"
 					oncomplete="listaContratanteDialog.show()">
-					<f:setPropertyActionListener target="#{cc.attrs.entidade}" value="#{tipoPap}"/>
+					<f:setPropertyActionListener target="#{cc.attrs.entidade}" value="#{cont}"/>
 				</p:commandButton>
 			</p:column>
 		</p:dataTable>

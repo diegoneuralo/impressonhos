@@ -12,6 +12,7 @@ import br.com.impressonhos.entity.Contratante;
 import br.com.impressonhos.entity.Pessoa;
 import br.com.impressonhos.enums.TipoPessoa;
 import br.com.impressonhos.service.ContratanteService;
+import br.com.impressonhos.service.PessoaService;
 
 @Named("hirer")
 @ViewScoped
@@ -19,16 +20,17 @@ public class HirerBean extends BaseBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Inject private Pessoa	pessoa;
-	@Inject private Contratante contratante;
+	private Pessoa	pessoa;
+	private Contratante contratante;
 	@Inject private ContratanteService contratanteService;
+	@Inject private PessoaService pessoaService;
 	
 	List<Contratante> listaContratante;
 
 	@PostConstruct
 	public void construct(){
 		System.out.println("HirerBean.construct()");
-		contratante.setPessoa(pessoa);
+		listaContratante = contratanteService.findAll();
 	}
 	
 	public void newRecord(){
@@ -46,8 +48,10 @@ public class HirerBean extends BaseBean implements Serializable{
 	
 	public void saveRecord(){
 		System.out.println("HirerBean.saveRecord()");
-		
+
+		pessoa = pessoaService.save(pessoa);
 		contratante = contratanteService.save(contratante);
+
 		if(contratante != null){
 			if(!listaContratante.contains(contratante))
 				listaContratante.add(contratante);
@@ -107,6 +111,7 @@ public class HirerBean extends BaseBean implements Serializable{
 	}
 	
 	public String getLabel() {
-		return contratante.getId().equals(new Long(0)) ? "novo.contratante" : "contratante.editar";
+		return contratante.getId().equals(new Long(0)) || contratante.getId() == null ? "novo.registro" : "editar.registro";
 	}
 }
+

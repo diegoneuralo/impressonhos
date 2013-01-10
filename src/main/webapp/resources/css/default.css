@@ -181,3 +181,6 @@ h2.datatable-inner-row-title{
 	font-size: 11pt; 
 	margin-bottom: 5px;
 }
+.ui-selectmanycheckbox label, .ui-selectoneradio label {
+	margin-right: 5px;	
+}

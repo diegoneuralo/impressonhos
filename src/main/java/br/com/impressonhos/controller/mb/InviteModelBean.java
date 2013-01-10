@@ -17,7 +17,7 @@ public class InviteModelBean extends BaseBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Inject private ModeloConvite modeloConvite;
+	private ModeloConvite modeloConvite;
 	@Inject private ModeloConviteService modeloConviteService;
 	
 	List<ModeloConvite> listaModeloConvite;

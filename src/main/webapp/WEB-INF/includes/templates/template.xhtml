@@ -46,7 +46,11 @@
 			</div>
 		
 			<div id="main">
-				<p:growl id="growl"/>
+				<p:growl 
+					id="growl"
+					sticky="#{growl.sticky}"
+					life="#{growl.lifeTime}"
+					showDetail="#{growl.showDetail}"/>
 				<ui:insert name="body">
 					<ui:include src="#{navigation.selectedIncludePath}" />
 				</ui:insert>

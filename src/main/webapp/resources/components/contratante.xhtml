@@ -18,12 +18,12 @@
 
 	<cc:implementation xmlns:is="http://java.sun.com/jsf/composite/components">
 		<p:panel id="comp-contratante" header="#{msg[cc.attrs.label]}" toggleable="true">
-			<is:pessoa 
+			<is:pessoa
 				id="pessoa" 
 				entidade="#{cc.attrs.entidade.pessoa}" 
 				tiposDePessoa="#{cc.attrs.tiposDePessoa}" 
-				updateCpfCnpj="#{cc.attrs.updateCpfCnpj}"/>
-			<h:panelGrid columns="4" cellpadding="3" cellspacing="3">
+				updateCpfCnpj="#{cc.attrs.updateCpfCnpj}:cpfCnpj"/>
+			<h:panelGrid columns="4" cellpadding="3" cellspacing="3" id="cpfCnpj">
 				<h:outputText 
 					rendered="#{cc.attrs.entidade.pessoa.tipo.toString() eq 'fisica'}" 
 					value="#{msg['cpf']}"/>
@@ -58,7 +58,9 @@
 				<p:message 
 					rendered="#{cc.attrs.entidade.pessoa.tipo.toString() eq 'juridica'}" 
 					for="cnpj"/>
-
+			</h:panelGrid>
+			
+			<h:panelGrid columns="4" cellpadding="3" cellspacing="3">
 				<h:outputText value="#{msg['como.chegou']}"/>
 				<h:outputText value=":" />
 				<p:inputTextarea 

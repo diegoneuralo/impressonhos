@@ -2,7 +2,6 @@ package br.com.impressonhos.entity;
 
 import java.io.Serializable;	
 
-import org.hibernate.annotations.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,8 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Cascade;
 
 import br.com.impressonhos.enums.Const;
 
@@ -44,7 +41,6 @@ public class Contratante implements Serializable {
 	private String comoChegou;
 	
 	@ManyToOne
-	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "PESSOA_ID", referencedColumnName = "PESSOA_ID", nullable=false)	
 	private Pessoa pessoa;
 
@@ -102,7 +98,7 @@ public class Contratante implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Contratante [id=" + id + "]";
+		return "Contratante [id=" + id + "]\n" + pessoa;
 	}
 	
 }
