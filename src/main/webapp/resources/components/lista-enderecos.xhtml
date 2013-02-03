@@ -52,18 +52,14 @@
 			emptyMessage="#{msg['sem.registros']}"
 			var="end"
 			value="#{cc.attrs.lista}"
-			style="width: 100%;">
+			style="width: 100%; text-align: center;">
 			
-			<p:column>
+			<p:column headerText="#{msg[tipo.endereco]}">
 				<h:outputText value="#{msg[end.tipoEndereco.descricao]}" />
-			</p:column>
-			
-			<p:column>
-				<h:outputText value="#{end.tipoLogradouro.abreviatura}" />
 			</p:column>
 
 			<p:column headerText="#{msg['logradouro']}">
-				<h:outputText value="#{end.logradouro}" />
+				<h:outputText value="#{end.tipoLogradouro.tipoLogradouro} #{end.logradouro}" />
 			</p:column>
 			
 			<p:column headerText="#{msg['numero']}">

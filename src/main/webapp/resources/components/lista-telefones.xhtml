@@ -54,10 +54,10 @@
 			emptyMessage="#{msg['sem.registros']}"
 			var="tel"
 			value="#{cc.attrs.lista}"
-			style="width: 490px;">
+			style="width: 490px; text-align: center;">
 			
 			<p:column headerText="#{msg['tipo.telefone']}" style="width: 130px;">
-				<h:outputText value="#{msg[tel.tipoTelefone.descricao]}" />
+				<h:outputText value="#{msg[tel.tipo.descricao]}" />
 			</p:column>
 			
 			<p:column headerText="#{msg['cod.area']}" style="width: 94px;">

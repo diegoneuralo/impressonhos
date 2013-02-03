@@ -184,3 +184,7 @@ h2.datatable-inner-row-title{
 .ui-selectmanycheckbox label, .ui-selectoneradio label {
 	margin-right: 5px;	
 }
+
+.center{
+	text-align: center;
+}

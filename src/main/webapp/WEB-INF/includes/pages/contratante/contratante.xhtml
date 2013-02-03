@@ -20,7 +20,7 @@
 
 					renderNew="#{hirer.step eq 0}"
 					renderCancel="#{hirer.step eq 1}"
-					renderDelete="#{hirer.step eq 1 and invitePaper.tipoPapel.id ne null}"
+					renderDelete="#{hirer.step eq 1 and hirer.contratante.id ne null}"
 					renderSave="#{hirer.step eq 1}"/>
 					
 				<is:lista-contratantes
@@ -43,7 +43,21 @@
 					label="#{hirer.label}"
 					updateCpfCnpj=":main-form:contratante"
 					tiposDePessoa="#{hirer.tiposDePessoa}"
-					rendered="#{hirer.step eq 1}"/>
+					rendered="#{hirer.step eq 1}"
+
+					entidadeEndereco="#{hirer.endereco}"
+					tiposDeEndereco="#{hirer.tiposDeEndereco}"
+					listaEnderecos="#{hirer.listaEnderecos}"
+					listaEnderecosAddAction="#{hirer.addEndereco()}"
+					listaEnderecosDeleteAction="#{hirer.removeEndereco()}"
+					listaUf="#{hirer.listaUf}"
+
+					entidadeTelefone="#{hirer.telefone}"
+					listaTelefones="#{hirer.listaTelefones}"
+					listaTelefonesAddAction="#{hirer.addTelefone()}"
+					listaTelefonesDeleteAction="#{hirer.removeTelefone()}"
+					listaTipoLogradouro="#{hirer.listaTipoLogradouro}"
+					tiposDeTelefone="#{hirer.tiposDeTelefone}"/>
 			</p:panel>
 		</h:panelGroup>
 	</h:form>

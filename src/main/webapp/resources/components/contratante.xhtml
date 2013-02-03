@@ -14,6 +14,20 @@
 		<cc:attribute name="label" default="contratante"/>
 		<cc:attribute name="tiposDePessoa"/>
 		<cc:attribute name="updateCpfCnpj"/>
+		
+		<cc:attribute name="entidadeEndereco" />
+		<cc:attribute name="tiposDeEndereco" />
+		<cc:attribute name="listaUf" />
+		<cc:attribute name="listaEnderecos" />
+		<cc:attribute name="listaTipoLogradouro" />
+		<cc:attribute name="listaEnderecosAddAction" method-signature="void actionAdd()"/>
+		<cc:attribute name="listaEnderecosDeleteAction" method-signature="void actionDelete()"/>
+		
+		<cc:attribute name="entidadeTelefone" />
+		<cc:attribute name="tiposDeTelefone" />
+		<cc:attribute name="listaTelefones" />
+		<cc:attribute name="listaTelefonesAddAction" method-signature="void actionAdd()"/>
+		<cc:attribute name="listaTelefonesDeleteAction" method-signature="void actionDelete()"/>
 	</cc:interface>
 
 	<cc:implementation xmlns:is="http://java.sun.com/jsf/composite/components">
@@ -79,6 +93,26 @@
 				<h:outputText/>
 				<h:outputText id="como-chegou-counter"/>
 			</h:panelGrid>
+			
+			<is:endereco 
+				id="endereco" 
+				entidade="#{cc.attrs.entidadeEndereco}" 
+				tiposDeEndereco="#{cc.attrs.tiposDeEndereco}" 
+				listaUf="#{cc.attrs.listaUf}"
+				listaTipoLogradouro="#{cc.attrs.listaTipoLogradouro}"
+				listaEnderecosAddAction="#{cc.attrs.listaEnderecosAddAction}"
+				listaEnderecosDeleteAction="#{cc.attrs.listaEnderecosDeleteAction}"
+				listaEnderecos="#{cc.attrs.listaEnderecos}"
+				btnAddListConfs=":main-form:contratante:endereco:comp-endereco"/>
+					
+			<is:telefone
+				id="telefone"
+				entidade="#{cc.attrs.entidadeTelefone}"
+				tiposDeTelefone="#{cc.attrs.tiposDeTelefone}"
+				listaTelefonesAddAction="#{cc.attrs.listaTelefonesAddAction}"
+				listaTelefonesDeleteAction="#{cc.attrs.listaEnderecosDeleteAction}"
+				listaTelefones="#{cc.attrs.listaTelefones}"
+				btnAddListConfs=":main-form:contratante:telefone:comp-telefone"/>
 		</p:panel>
 	</cc:implementation>
 </html>

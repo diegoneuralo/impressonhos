@@ -2,6 +2,7 @@ package br.com.impressonhos.entity;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +22,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.Cascade;
 
 import br.com.impressonhos.enums.Const;
 import br.com.impressonhos.enums.TipoPessoa;
@@ -46,8 +49,8 @@ import br.com.impressonhos.util.exception.ObjectAlreadyExistsException;
 			query = "from Pessoa p where trim(p.email) like trim('%?%')")
 	})
 public class Pessoa implements Serializable {
-	
-	private static final long serialVersionUID = 3279306335617207095L;
+
+	private static final long serialVersionUID = -6448849752271059382L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -77,11 +80,13 @@ public class Pessoa implements Serializable {
 	@Column(name = "IS_PROSPECT", nullable = false)
 	private boolean prospect;
 	
-	@OneToMany(mappedBy="pessoa", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="pessoa")
+	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	//@JoinColumn(name = "PESSOA_ID")
 	private List<Endereco> enderecos;
 	
-	@OneToMany(mappedBy="pessoa", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="pessoa", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	//@JoinColumn(name = "PESSOA_ID")
 	private List<Telefone> telefones;
  
@@ -92,6 +97,7 @@ public class Pessoa implements Serializable {
 	}
 	
 	public List<Endereco> addEndereco(Endereco endereco) throws ObjectAlreadyExistsException{
+		if(this.enderecos == null) enderecos = new ArrayList<Endereco>();
 		if(this.enderecos.contains(endereco)) throw new ObjectAlreadyExistsException("endereco.ja.cadastrado");
 		this.enderecos.add(endereco);
 		return this.enderecos;
@@ -102,13 +108,14 @@ public class Pessoa implements Serializable {
 		return this.enderecos;
 	}
 	
-	public List<Telefone> addEndereco(Telefone telefone) throws ObjectAlreadyExistsException{
+	public List<Telefone> addTelefone(Telefone telefone) throws ObjectAlreadyExistsException{
+		if(this.telefones == null) telefones = new ArrayList<Telefone>();
 		if(this.telefones.contains(telefone)) throw new ObjectAlreadyExistsException("telefone.ja.cadastrado");
 		this.telefones.add(telefone);
 		return this.telefones;
 	}
 	
-	public List<Telefone> removeEndereco(Telefone telefone) throws NoResultException{
+	public List<Telefone> removeTelefone(Telefone telefone) throws NoResultException{
 		if(!this.telefones.remove(telefone)) throw new NoResultException("telefone.nao.encontrado.impossivel.remocao");	
 		return this.telefones;
 	}
